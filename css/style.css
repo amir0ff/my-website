@@ -2,7 +2,7 @@ html, html a {
     text-rendering: optimizeLegibility !important;
     -webkit-font-smoothing: antialiased !important;
     -moz-osx-font-smoothing: grayscale !important;
-    text-shadow: 10px 1px 1px rgba(0,0,0,0.004) !important;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.004) !important;
 }
 body {
 	font-family: 'Open Sans', sans-serif;
@@ -29,11 +29,15 @@ body {
 }
 #home .home-text h1 {
 	font-family: "Open Sans", sans-serif;
-	font-weight: 300;
+	font-weight: 600;
 	font-size: 4.8em;
+	display: inline;
+	/*background: rgba(0, 0, 0, 0.78) !important;
+	box-shadow: 6px 0 0 rgba(0, 0, 0, 0.78),-6px 0 0 rgba(0, 0, 0, 0.78);
+	border-radius: 3px;*/
 	text-transform: uppercase;
 	color: #fff;
-	line-height: 0.8;
+	/*line-height: 75px;*/
 	background: none;
 	letter-spacing: normal;
 }
