@@ -142,12 +142,13 @@ article {
 .navbar .nav > li > a {
 	padding: 2px;
 	margin: 13px;
-	font-size: 1.2em;
+	font-size: 1.1em;
 	font-weight: 400;
 	font-family: 'Roboto', sans-serif;
 	padding-bottom: 0px;
 	color: white !important;
 	text-decoration: none !important;
+	text-transform: uppercase;
 }
 
 .navbar .nav > li > a:before {
@@ -413,8 +414,8 @@ article {
 }
 
 #contact #social i {
-	color: #474747;
-	margin: 0 5px;
+	color: #202020;
+	margin: -5px 5px;
 	-webkit-transition: all 0.2s ease-in-out;
 	-moz-transition: all 0.2s ease-in-out;
 	-ms-transition: all 0.2s ease-in-out;
@@ -422,9 +423,47 @@ article {
 	transition: all 0.2s ease-in-out;
 }
 
-#contact #social i:hover, #contact #social a:focus {
-	color: #777;
+/* Social network icons hover efect colors */
+#contact #social i.fa-facebook-square:hover, #contact #social a.fa-facebook-square:focus {
+	color: #3B5998 !important;
 }
+
+#contact #social i.fa-twitter-square:hover, #contact #social a.fa-twitter-square:focus {
+	color: #55acee !important;
+}
+
+#contact #social i.fa-soundcloud:hover, #contact #social a.fa-soundcloud:focus {
+	color: #ff3a00 !important;
+}
+
+#contact #social i.fa-linkedin-square:hover, #contact #social a.fa-linkedin-square:focus {
+	color: #0976B4 !important;
+}
+
+#contact #social i.fa-google-plus-square:hover, #contact #social a.fa-google-plus-square:focus {
+	color: #dd4b39 !important;
+}
+
+#contact #social i.fa-github-square:hover, #contact #social a.fa-github-square:focus {
+	color: #4183C4 !important;
+}
+
+#contact #social i.fa-instagram:hover, #contact #social a.fa-instagram:focus {
+	color: #3F729B !important;
+}
+
+#contact #social i.fa-vimeo-square:hover, #contact #social a.fa-vimeo-square:focus {
+	color: #1ab7ea !important;
+}
+
+#contact #social i.fa-youtube:hover, #contact #social a.fa-youtube:focus {
+	color: #CD201F !important;
+}
+
+#contact #social i.fa-dribbble:hover, #contact #social a.fa-dribbble:focus {
+	color: #EA4C89 !important;
+}
+
 
 #contact h2 {
 	margin-bottom: 60px;
