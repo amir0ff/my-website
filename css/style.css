@@ -448,6 +448,10 @@ article {
 	color: #4183C4 !important;
 }
 
+#contact #social i.fa-stack-overflow:hover, #contact #social a.fa-stack-overflow:focus {
+	color: #fe7a15 !important;
+}
+
 #contact #social i.fa-instagram:hover, #contact #social a.fa-instagram:focus {
 	color: #3F729B !important;
 }
