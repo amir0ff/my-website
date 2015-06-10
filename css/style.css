@@ -803,6 +803,8 @@ footer .row {
   background-color: #0D0D0D;
   opacity: 1;
 }
+
+	/* Custom scrollbar for Google Chrome*/
 	::-webkit-scrollbar-thumb:vertical {
 		width: 10px; background: #181818;
 		}
