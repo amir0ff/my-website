@@ -235,6 +235,7 @@ $( document ).ready(function() {
       canScroll = false;
       $('.navbar').animate({'padding-top': "30px"}, 500);
       $('.navbar').css('background', 'none');
+      $('.navbar').css('box-shadow', 'none');
       $('.navbar').css('border-color', 'transparent');
       $('html, body').animate({
         scrollTop: 0
@@ -254,6 +255,7 @@ $( document ).ready(function() {
       {
         $('.navbar').animate({'padding-top': "30px"}, 500);
         $('.navbar').css('background', 'none');
+        $('.navbar').css('box-shadow', 'none');
         $('.navbar').css('border-color', 'transparent');
       }
       canScroll = false;
