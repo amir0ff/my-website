@@ -222,7 +222,6 @@ $( document ).ready(function() {
       $('.navbar').animate({'padding-top': "0px"}, 500);
       $('.navbar').css('background', '#0D0D0D');
       $('.navbar').css('box-shadow', '0px 1px 2px #020202');
-      $('.navbar').css('border-top', '3px solid #FFFFFF');
       $('html, body').animate({
           scrollTop: $("#profile").offset().top - $(".navbar").height() + 5
         }, 500, function () {

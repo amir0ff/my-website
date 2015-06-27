@@ -21,7 +21,7 @@ body {
 }
 
 #home {
-   background-image: url("../img/background5.jpg");
+   background-image: url("../img/background2.jpg");
    width: 100%;
    height: 100%;
    background-size: cover;
@@ -29,7 +29,7 @@ body {
 }
 #home .home-text h1 {
 	font-family: "Open Sans", sans-serif;
-	font-weight: 600;
+	font-weight: 700;
 	font-size: 4.8em;
 	display: inline;
 	/*background: rgba(0, 0, 0, 0.78) !important;
@@ -136,7 +136,7 @@ article {
 
 .navbar .nav > li > a, .navbar .navbar-header .navbar-brand { 
 	color: #fff;
-	text-shadow: -3px 1px 0px #0D0D0D !important;
+	text-shadow: -2px 1px 1px #0D0D0D !important;
 } 
 
 .navbar .nav > li > a {
@@ -565,7 +565,7 @@ footer .row {
 		background: none;
 	}
 	#home {
-		background-image: url("../img/background5.jpg");
+		background-image: url("../img/background2.jpg");
         width: 100%;
         background-size: cover;
         background-position: center;
@@ -644,7 +644,7 @@ footer .row {
 	}
 
 	#home {
-		background-image: url("../img/background5.jpg");
+		background-image: url("../img/background2.jpg");
         width: 100%;
         background-size: cover;
         background-position: center;
@@ -688,7 +688,7 @@ footer .row {
 }
 @media(min-width:992px) and (max-width: 1199px) {
 	#home {
-		background-image: url("../img/background5.jpg");
+		background-image: url("../img/background2.jpg");
         width: 100%;
         background-size: cover;
         background-position: center;
