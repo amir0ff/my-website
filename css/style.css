@@ -29,14 +29,14 @@ body {
 }
 #home .home-text h1 {
 	font-family: "Open Sans", sans-serif;
-	font-weight: 700;
+	font-weight: 800;
 	font-size: 4.8em;
 	display: inline;
 	/*background: rgba(0, 0, 0, 0.78) !important;
 	box-shadow: 6px 0 0 rgba(0, 0, 0, 0.78),-6px 0 0 rgba(0, 0, 0, 0.78);
 	border-radius: 3px;*/
 	text-transform: uppercase;
-	color: #fff;
+	color: #F5F5F5;
 	/*line-height: 75px;*/
 	background: none;
 	letter-spacing: normal;
