@@ -136,14 +136,14 @@ article {
 
 .navbar .nav > li > a, .navbar .navbar-header .navbar-brand { 
 	color: #fff;
-	text-shadow: -2px 1px 1px #0D0D0D !important;
+	text-shadow: 1px 2px 1px #0D0D0D !important;
 } 
 
 .navbar .nav > li > a {
 	padding: 2px;
 	margin: 13px;
 	font-size: 1.1em;
-	font-weight: 400;
+	font-weight: 500;
 	font-family: 'Roboto', sans-serif;
 	padding-bottom: 0px;
 	color: white !important;
