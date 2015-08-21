@@ -92,6 +92,10 @@ article {
 	direction: rtl;
 }
 
+.info {
+	width: 51% !important;
+}
+
 .row {
 	margin-right: 0px;
 	margin-left: 0px;
