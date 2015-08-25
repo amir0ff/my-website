@@ -92,9 +92,6 @@ article {
 	direction: rtl;
 }
 
-.info {
-	width: 51% !important;
-}
 
 .row {
 	margin-right: 0px;
@@ -120,6 +117,7 @@ article {
 
 .navbar {
 	font-family: 'Open Sans', sans-serif;
+	padding-top: 30px;
 	color: #fff;
 	background: none;
 	border-color: transparent;
