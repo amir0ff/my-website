@@ -135,6 +135,7 @@ article {
 .navbar .nav > li > a, .navbar .navbar-header .navbar-brand { 
 	color: #fff;
 	text-shadow: 1px 2px 1px #0D0D0D !important;
+	margin-top: 5px;
 } 
 
 .navbar .nav > li > a {
@@ -183,7 +184,8 @@ article {
 } 
 
 .nav.navbar-nav.navbar-right {
-	margin-top: 0;
+	margin-top: 5;
+	margin-right: -70px;
 }
 
 /* Article in landing viewport */
