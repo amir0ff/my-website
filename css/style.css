@@ -197,9 +197,9 @@ article {
 }
 
 #home .home-text {
-	width: 1170px;
-	margin: 0px auto;
-	padding-top: 14%;
+	width: 100%;
+	padding-left: 50px;
+	padding-top: 16%;
 }
 .home-text-wrapper {
 	border-top-color: rgb(13, 13, 13);
