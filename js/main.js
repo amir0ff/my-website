@@ -60,7 +60,6 @@ $(function() {
           // for desktops, we play with the nav bar padding
           if (newScroll < ($("#profile").offset().top - $(".navbar").height() -150))
           {
-            $('.navbar').animate({'padding-top': "30px"}, 500);
             $('.navbar').css('background', 'none');
             $('.navbar').css('border-color', 'transparent');
           }
@@ -232,7 +231,6 @@ $( document ).ready(function() {
     else if ((canScroll) && ( currentScroll > 0) && ($(window).scrollTop() < ($("#profile").offset().top - $(".navbar").height() -150)))
     {
       canScroll = false;
-      $('.navbar').animate({'padding-top': "30px"}, 500);
       $('.navbar').css('background', 'none');
       $('.navbar').css('box-shadow', 'none');
       $('.navbar').css('border-color', 'transparent');
@@ -252,7 +250,6 @@ $( document ).ready(function() {
       e.preventDefault();
       if (!(smallDevice.matches || Modernizr.touch))
       {
-        $('.navbar').animate({'padding-top': "30px"}, 500);
         $('.navbar').css('background', 'none');
         $('.navbar').css('box-shadow', 'none');
         $('.navbar').css('border-color', 'transparent');
