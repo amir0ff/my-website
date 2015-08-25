@@ -130,11 +130,13 @@ article {
 	font-size: 2.5em;
 	font-family: 'Damion', cursive;
 	font-weight: 400;
+	margin-left: -70px;
 } 
 
 .navbar .nav > li > a, .navbar .navbar-header .navbar-brand { 
 	color: #fff;
 	text-shadow: 1px 2px 1px #0D0D0D !important;
+	margin-left: -70px;
 } 
 
 .navbar .nav > li > a {
