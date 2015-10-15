@@ -92,8 +92,10 @@ article {
 	direction: rtl;
 }
 
-.info-block {
-	width: 51% !important;
+@media(min-width:992px){
+	.info-block {
+		width: 51% !important;
+	}
 }
 .row {
 	margin-right: 0px;
