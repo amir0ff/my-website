@@ -2,12 +2,9 @@
 var currentScroll   = 0;
 var canScroll       = true; // if false, blocks browser from scrolling - used for non-touch devices and desktops (touch devices ignore this)
 var smallDevice     = window.matchMedia("only screen and (max-width: 760px)");
-var circlesAnimated = false;
 var designs1Shown   = false;
 var designs2Shown   = false;
 var designs3Shown   = false;
-var skills1Shown    = false;
-var skills2Shown    = false;
 
 
 function isElementInViewport (el) {
@@ -25,20 +22,6 @@ function isElementInViewport (el) {
         rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /*or $(window).height() */
         rect.right <= (window.innerWidth || document.documentElement.clientWidth) /*or $(window).width() */
     );
-}
-
-function animateCircles () {
-    $('.knowledge-circle').circliful({      
-        dimension: 25,
-        width: 4,
-        fgcolor: "rgb(13, 13, 13)",
-        bgcolor: "#D9D9D9",
-        fill: "#ddd",
-    });
-} 
-
-function getRandomInt (min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 // function to smooth scroll to elements on link clicks
@@ -153,26 +136,10 @@ $( document ).ready(function() {
 
       designs3Shown = true;
       $('#showcase-row-3').css('opacity', 1);
-
-      skills1Shown = true;
-      $('#skills-1').css('opacity', 1);
-
-      skills2Shown = true;
-      $('#skills-2').css('opacity', 1);
   }
 
 
   $(window).scroll(function(e) {
-
-    // animate knowledge circles when they're in the viewport
-    if (!circlesAnimated && isElementInViewport($('.knowledge-circle')) ) {
-        circlesAnimated = true;
-
-        if (Modernizr.canvas)
-        {
-          animateCircles();
-        }       
-    }
 
     // do not auto scroll for mobile
     if (smallDevice.matches || Modernizr.touch) {
@@ -202,16 +169,6 @@ $( document ).ready(function() {
     if (!designs3Shown && isElementInViewport($('#showcase-row-3 img'))) {
         designs3Shown = true;
         $('#showcase-row-3').animate({opacity: 1}, 1000);
-    }
-
-    if (!skills1Shown && isElementInViewport($('#skills-1 li'))) {
-        skills1Shown = true;
-        $('#skills-1').animate({opacity: 1}, 1000);
-    }
-
-    if (!skills2Shown && isElementInViewport($('#skills-2 img'))) {
-        skills2Shown = true;
-        $('#skills-2').animate({opacity: 1}, 1000);
     }
 
 
