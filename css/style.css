@@ -352,7 +352,7 @@ article {
 	font-size: 16px;
 }
 
-.img-circle{
+.img-circle {
 	box-shadow: 1px 1px 2px #020202;
 }
 
@@ -710,13 +710,13 @@ footer .row {
 	    vertical-align:middle;
 	}
 	#designs, #info {
-		padding: 75px 0px 100px 0px;
+		padding: 170px 0px 100px 0px;
 	}
 	#profile {
 		padding: 100px 0px 150px 0px;
 	}
 	#contact {
-		padding: 180px 0px 20px 0px;
+		padding: 170px 0px 20px 0px;
 	}	
 	#info-text {
 		padding: 0 20px;
