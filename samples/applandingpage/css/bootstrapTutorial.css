@@ -1,0 +1,61 @@
+    html, body {
+        text-rendering: optimizeLegibility !important;
+        -webkit-font-smoothing: antialiased !important;
+    }
+.navbar-brand {
+    font-size: 1.8em;
+}
+#topContainer {
+    background-image: url(../img/background-blur.jpg);
+    height: 400px;
+    width: 100%;
+    background-size: cover;
+}
+#topRow {
+    margin-top: 100px;
+    text-align: center;
+}
+#topRow h1 {
+    font-size: 300%;
+    text-shadow: 2px 2px 8px black;
+    color: white;
+}
+p .lead {
+	font-weight: 600;
+}
+#topRow p {
+    color: white;
+    text-shadow: 2px 2px 8px black;
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 400;
+}
+#emailSignup {
+    margin-top: 50px;
+}
+.bold {
+    font-weight: bold;
+}
+.marginTop {
+    margin-top: 40px;
+    font-weight: bold;
+}
+.center {
+    text-align: center;
+}
+.title {
+    margin-top: 100px;
+    font-size: 300%;
+}
+#footer {
+    background-color: #222222;
+    text-shadow: 2px 2px 8px black;
+    padding-top: 70px;
+    width: 100%;
+    color: white;
+}
+.marginBottom {
+    margin-bottom: 30px;
+}
+.appstoreImage {
+    width: 250px;
+}
