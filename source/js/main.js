@@ -97,7 +97,7 @@ $( document ).ready(function() {
     else
     {
       $('#spinner').fadeIn().css("display","inline-block");
-      $.post( "backend/send.php", { name: theName, email: theEmail, message: theMessage } )
+      $.post( "php/send.php", { name: theName, email: theEmail, message: theMessage } )
       .done(function( data ) {
 
         $('#form-container').fadeOut("slow", function() {
