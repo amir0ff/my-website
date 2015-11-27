@@ -169,7 +169,7 @@ gulp.task('browsersync', function() {
 gulp.task('default', ['html', 'images', 'sass', 'js', 'browsersync'], function() {
 
   // Print Build Type
-  console.log(pkg.name + ' ' + pkg.version + ', ' + (devBuild ? 'development' : 'production') + ' build');
+  console.log(pkg.name + ' "' + pkg.description + '" v' + pkg.version + ', ' + (devBuild ? 'development' : 'production') + ' build');
 
   // Check Dependencies Versions
   ncu.run({

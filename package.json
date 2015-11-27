@@ -17,7 +17,7 @@
     "gulp-imagemin": "^2.4.0",
     "gulp-newer": "^1.1.0",
     "gulp-pleeease": "^2.0.2",
-    "gulp-preprocess": "^1.2.0",
+    "gulp-preprocess": "^2.0.0",
     "gulp-sass": "^2.1.0",
     "gulp-sizediff": "0.0.2",
     "gulp-strip-debug": "^1.1.0",
