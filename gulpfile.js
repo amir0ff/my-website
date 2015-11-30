@@ -22,7 +22,7 @@ var devBuild = ((process.env.NODE_ENV || 'development').trim().toLowerCase() !==
   // Files Locations
   source = 'source/',
   build = 'build/',
-  node_modules = 'node_modules/'
+  node_modules = 'node_modules/',
 
 npm = {
     jquery: node_modules + 'jquery/dist/jquery.js',
@@ -116,8 +116,8 @@ gulp.task('images', function() {
 // Build CSS Files
 gulp.task('sass', function() {
   return gulp.src(css.src)
-    .pipe(sass(css.sassOpts))
     .pipe(sizediff.start())
+    .pipe(sass(css.sassOpts))
     .pipe(pleeease(css.pleeeaseOpts))
     .pipe(sizediff.stop({
       title: 'CSS Compression'
@@ -176,7 +176,7 @@ gulp.task('default', ['html', 'images', 'sass', 'js', 'browsersync'], function()
       packageFile: 'package.json'
     })
     .then(function(upgraded) {
-      if (Object.keys(upgraded).length == 0) {
+      if (Object.keys(upgraded).length === 0) {
         console.log('All npm dependencies are up to date!');
       } else {
         console.log('The following npm dependencies need updates "ncu -a":', upgraded);
