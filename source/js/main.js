@@ -6,6 +6,11 @@ var designs2Shown   = false;
 var designs3Shown   = false;
 
 
+// Bootstrap's Tooltip JS
+  $(function() {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+
 function isElementInViewport (el) {
 
     //special bonus for those using jQuery
