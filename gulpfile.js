@@ -30,12 +30,12 @@ npm = {
     modernizr: 'source/js/modernizr.js'
   },
   images = {
-    src: source + 'images/*.*',
+    src: source + 'images/**/*.*',
     bld: build + 'images/'
   },
 
   css = {
-    src: source + 'scss/*.scss',
+    src: source + 'scss/**/*.scss',
     watch: [source + 'scss/**/*'],
     bld: build + 'css/',
     sassOpts: {
