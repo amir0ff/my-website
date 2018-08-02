@@ -1,5 +1,5 @@
 // Include Gulp.js and Plugins
-var gulp = require('gulp'),
+let gulp = require('gulp'),
   newer = require('gulp-newer'),
   htmlclean = require('gulp-htmlclean'),
   imagemin = require('gulp-imagemin'),
@@ -17,7 +17,7 @@ var gulp = require('gulp'),
 
 
 // Check Build Environment
-var devBuild = ((process.env.NODE_ENV || 'development').trim().toLowerCase() !== 'production'),
+let devBuild = ((process.env.NODE_ENV || 'development').trim().toLowerCase() !== 'production'),
 
   // Files Locations
   source = 'source/',
@@ -71,7 +71,7 @@ npm = {
 
   html = {
     src: source + '*.html',
-    watch: [source + '*.html', source + 'template/**/*'],
+    watch: [source + '*.html'],
     bld: build,
     context: {
       devBuild: devBuild,
@@ -87,7 +87,7 @@ gulp.task('cleanup', function() {
 
 // HTML Compression
 gulp.task('html', function() {
-  var page = gulp.src(html.src).pipe(preprocess({
+  let page = gulp.src(html.src).pipe(preprocess({
     context: html.context
   }));
   if (!devBuild) {

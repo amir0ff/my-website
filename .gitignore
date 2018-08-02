@@ -1,7 +1,6 @@
 # --------------------
 # OSX Files
 # --------------------
-.DS_Store
 .AppleDouble
 .LSOverride
 Icon
@@ -33,7 +32,6 @@ Icon
 nbproject/private/
 build/
 nbbuild/
-dist/
 nbdist/
 nbactions.xml
 nb-configuration.xml
@@ -59,7 +57,6 @@ bower_components
 # --------------------
 # App Files
 # --------------------
-data/
 tests/results/**
 modules/public/
 modules/views/
@@ -72,3 +69,4 @@ modules/views/
 # vim Files
 # --------------------
 *.swp
+package-lock.json
