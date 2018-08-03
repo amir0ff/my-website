@@ -1,23 +1,22 @@
 // Include Gulp.js and Plugins
-let gulp = require('gulp'),
-    newer = require('gulp-newer'),
-    htmlclean = require('gulp-htmlclean'),
-    imagemin = require('gulp-imagemin'),
-    sizediff = require('gulp-sizediff'),
-    preprocess = require('gulp-preprocess'),
-    sass = require('gulp-sass'),
-    pleeease = require('gulp-pleeease'),
-    stripdebug = require('gulp-strip-debug'),
-    uglify = require('gulp-uglify'),
-    concat = require('gulp-concat'),
-    browsersync = require('browser-sync'),
-    ncu = require('npm-check-updates'),
-    del = require('del'),
-    pkg = require('./package.json');
-
+let gulp = require('gulp');
+let newer = require('gulp-newer');
+let htmlclean = require('gulp-htmlclean');
+let imagemin = require('gulp-imagemin');
+let sizediff = require('gulp-sizediff');
+let preprocess = require('gulp-preprocess');
+let sass = require('gulp-sass');
+let pleeease = require('gulp-pleeease');
+let stripdebug = require('gulp-strip-debug');
+let terser = require('gulp-terser');
+let concat = require('gulp-concat');
+let browsersync = require('browser-sync');
+let ncu = require('npm-check-updates');
+let del = require('del');
+let pkg = require('./package.json');
 
 // Check Build Environment
-let devBuild = ((process.env.NODE_ENV || 'development').trim().toLowerCase() !== 'production'),
+let devBuild = false,
 
     // Files Locations
     source = 'source/',
@@ -152,7 +151,7 @@ gulp.task('js', function () {
             .pipe(concat('main.min.js'))
             .pipe(sizediff.start())
             .pipe(stripdebug())
-            .pipe(uglify())
+            .pipe(terser())
             .pipe(sizediff.stop({
                 title: 'JavaScript Compression'
             }))
