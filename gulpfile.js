@@ -16,7 +16,7 @@ let del = require('del');
 let pkg = require('./package.json');
 
 // Check Build Environment
-let devBuild = false,
+let devBuild = true,
 
     // Files Locations
     source = 'source/',
@@ -174,7 +174,7 @@ gulp.task('default', ['html', 'images', 'sass', 'js', 'browsersync'], function (
     ncu.run({
         packageFile: 'package.json'
     })
-        .then(function (upgraded) {
+        .then((upgraded) => {
             if (Object.keys(upgraded).length === 0) {
                 console.log('All npm dependencies are up to date!');
             } else {
