@@ -2,21 +2,21 @@
 @import url(//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800);
 @import url(//fonts.googleapis.com/css?family=Roboto:300,400,500);
 @import url(//fonts.googleapis.com/css?family=Damion);
-
 // Importing CSS Module Dependencies
 @import url(//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css);
 @import url(//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css);
 
 html, html a {
-    text-rendering: optimizeLegibility !important;
-    -webkit-font-smoothing: antialiased !important;
-    -moz-osx-font-smoothing: grayscale !important;
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.004) !important;
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004) !important;
 }
+
 body {
-	font-family: 'Open Sans', sans-serif;
-	background-color: #141414;
-	color: #ffffff;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #141414;
+  color: #ffffff;
 }
 
 ::selection {
@@ -30,141 +30,153 @@ body {
 }
 
 #home {
-   background-image: url("../images/background6.jpg");
-   width: 100%;
-   height: 100vh;
-   background-size: cover;
-   background-position: center;
+  background-image: url("../images/background6.jpg");
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
 }
+
 #home .home-text h1 {
-	font-family: "Open Sans", sans-serif;
-	font-weight: 800;
-	font-size: 4.8em;
-	display: inline;
-	/*background: rgba(0, 0, 0, 0.78) !important;
-	box-shadow: 6px 0 0 rgba(0, 0, 0, 0.78),-6px 0 0 rgba(0, 0, 0, 0.78);
-	border-radius: 3px;*/
-	text-transform: uppercase;
-	color: #ffffff;
-	/*line-height: 75px;*/
-	background: none;
-	letter-spacing: normal;
-	text-shadow: 0px 0px 1px #0D0D0D !important;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 800;
+  font-size: 4.8em;
+  display: inline;
+  /*background: rgba(0, 0, 0, 0.78) !important;
+  box-shadow: 6px 0 0 rgba(0, 0, 0, 0.78),-6px 0 0 rgba(0, 0, 0, 0.78);
+  border-radius: 3px;*/
+  text-transform: uppercase;
+  color: #ffffff;
+  /*line-height: 75px;*/
+  background: none;
+  letter-spacing: normal;
+  text-shadow: 0px 0px 1px #0D0D0D !important;
 }
+
 header {
-	margin-left: 30%;
-	margin-top: 1%;
+  margin-left: 30%;
+  margin-top: 1%;
 }
 
 h1, h2, h3 {
-	font-weight: 500;
+  font-weight: 500;
 }
 
 h1, h2, h4, h5, h6 {
-	font-style: normal;
-	text-transform: uppercase;
-	letter-spacing: 3px;
-	font-weight: 300;
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 300;
 }
+
 h3 {
-	font-style: normal;
-	letter-spacing: 3px;
-	font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  letter-spacing: 3px;
+  font-family: 'Roboto', sans-serif;
 }
+
 article {
-	padding: 30px 0px 0px 0px;
+  padding: 30px 0px 0px 0px;
 }
 
-@media screen and (max-width:421px) {
-	.social {
-		font-size: 11px !important;
-	}
+@media screen and (max-width: 421px) {
+  .social {
+    font-size: 11px !important;
+  }
 }
+
 .justify {
-	text-align: justify;
-}
-.borderradius {
-	-webkit-border-radius: 6px;
-	-moz-border-radius: 6px;
-	border-radius: 6px;
-}
-.red-heart {
-    color: #FB866A;
-}
-.smallfooter {
-	font-size: 100% !important;
-}
-.pgp {
-	margin-top: 5px !important;
-	font-size: 16px !important;
-  width: 83px;
-}
-.text-right {
-	direction: rtl;
+  text-align: justify;
 }
 
-@media(min-width:992px){
-	.info-block {
-		width: 51% !important;
-	}
+.borderradius {
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
 }
+
+.red-heart {
+  color: #FB866A;
+}
+
+.smallfooter {
+  font-size: 100% !important;
+}
+
+.pgp {
+  margin-top: 5px !important;
+  font-size: 16px !important;
+  width: 100%;
+}
+
+.text-right {
+  direction: rtl;
+}
+
+@media(min-width: 992px) {
+  .info-block {
+    width: 51% !important;
+  }
+}
+
 .row {
-	margin-right: 0px;
-	margin-left: 0px;
-	font-size: 14px;
-	letter-spacing: 1px;
-	line-height: 1.8em;
-	font-weight: 300;
+  margin-right: 0px;
+  margin-left: 0px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  line-height: 1.8em;
+  font-weight: 300;
 }
 
 .fade-to-white {
-	display: inline-block;
+  display: inline-block;
 }
 
 .fade-to-white img {
-	width: 190px;
-	height: 190px;
-	margin: 0;
+  width: 190px;
+  height: 190px;
+  margin: 0;
 }
-
 
 /* Navigation bar */
 
 .navbar {
-	font-family: 'Open Sans', sans-serif;
-	padding-top: 30px;
-	color: #fff;
-	background: none;
-	border-color: transparent;
-    box-shadow:none;
-	min-width: 300px;
+  font-family: 'Open Sans', sans-serif;
+  padding-top: 30px;
+  color: #fff;
+  background: none;
+  border-color: transparent;
+  box-shadow: none;
+  min-width: 300px;
 }
+
 @media (min-width: 768px) {
-		.navbar .navbar-header .navbar-brand {
-		margin-left: 10px;
-	}
+  .navbar .navbar-header .navbar-brand {
+    margin-left: 10px;
+  }
 }
+
 .navbar .navbar-header .navbar-brand {
-	font-size: 2.5em;
-	font-family: 'Damion', cursive;
-	font-weight: 400;
+  font-size: 2.5em;
+  font-family: 'Damion', cursive;
+  font-weight: 400;
 }
 
 .navbar .nav > li > a, .navbar .navbar-header .navbar-brand {
-	color: #fff;
-	text-shadow: 1px 2px 1px #0D0D0D !important;
+  color: #fff;
+  text-shadow: 1px 2px 1px #0D0D0D !important;
 }
 
 .navbar .nav > li > a {
-	padding: 2px;
-	margin: 13px;
-	font-size: 1.1em;
-	font-weight: 500;
-	font-family: 'Roboto', sans-serif;
-	padding-bottom: 0px;
-	color: white !important;
-	text-decoration: none !important;
-	text-transform: uppercase;
+  padding: 2px;
+  margin: 13px;
+  font-size: 1.1em;
+  font-weight: 500;
+  font-family: 'Roboto', sans-serif;
+  padding-bottom: 0px;
+  color: white !important;
+  text-decoration: none !important;
+  text-transform: uppercase;
 }
 
 .navbar .nav > li > a:before {
@@ -183,7 +195,7 @@ article {
 }
 
 .navbar .nav > li > a:hover {
-	color: white;
+  color: white;
 }
 
 .navbar .nav > li > a:hover:before {
@@ -194,187 +206,186 @@ article {
 }
 
 .navbar .nav > li > a:focus {
-	color: white;
+  color: white;
 }
 
 .nav.navbar-nav.navbar-right {
-	margin-top: 0;
+  margin-top: 0;
 }
 
 /* Article in landing viewport */
 
 #home {
-	font-family: 'Open Sans',Helvetica,Arial,sans-serif;
-	min-height: 700px;
-	position: relative;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  min-height: 700px;
+  position: relative;
 }
 
 #home .home-text {
-	width: 1170px;
-	margin: 0px auto;
-	padding-top: 14%;
-	padding-left: 15px;
+  width: 1170px;
+  margin: 0px auto;
+  padding-top: 14%;
+  padding-left: 15px;
 
 }
+
 .home-text-wrapper {
-	border-top-color: rgb(13, 13, 13);
+  border-top-color: rgb(13, 13, 13);
 }
 
 .home-text-wrapper:after {
-	top: 100%;
-	left: 50%;
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
-	border-color: rgba(0, 0, 0, 0);
-	border-top-color: inherit;
-	border-width: 30px;
-	margin-left: -30px;
+  top: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(0, 0, 0, 0);
+  border-top-color: inherit;
+  border-width: 30px;
+  margin-left: -30px;
 }
-
 
 /* Article giving a brief overview of myself */
 
 #profile {
-	background: #141414;
-	margin: 20% 0 0 0;
-	position: relative;
+  background: #141414;
+  margin: 20% 0 0 0;
+  position: relative;
 }
 
 #profile:after {
-	top: 100%;
-	left: 50%;
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
-	border-color: rgba(0, 0, 0, 0);
-	border-top-color: #141414;
-	border-width: 30px;
-	margin-left: -30px;
-	z-index: 1;
+  top: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(0, 0, 0, 0);
+  border-top-color: #141414;
+  border-width: 30px;
+  margin-left: -30px;
+  z-index: 1;
 }
 
 #profile .row {
-	margin-top: 50px;
-	color: #D9D9D9;
-	font-size: 1.2em;
+  margin-top: 50px;
+  color: #D9D9D9;
+  font-size: 1.2em;
 }
 
 #profile .row .col-md-3 {
-	margin-top: 15px;
-	margin-bottom: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 /* Article showcasing some of my designs */
 
 #designs {
-	background: #202020;
-	margin: 0;
-	position: relative;
+  background: #202020;
+  margin: 0;
+  position: relative;
 }
 
 #designs:after {
-	top: 100%;
-	left: 50%;
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
-	border-color: rgba(0, 0, 0, 0);
-	border-top-color: #202020;
-	border-width: 30px;
-	margin-left: -30px;
-	z-index: 1;
+  top: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(0, 0, 0, 0);
+  border-top-color: #202020;
+  border-width: 30px;
+  margin-left: -30px;
+  z-index: 1;
 }
 
 #designs .row {
-	margin-top: 50px;
-	color: #D9D9D9;
-	font-size: 1.2em;
+  margin-top: 50px;
+  color: #D9D9D9;
+  font-size: 1.2em;
 }
 
 #showcase-row-1, #showcase-row-2, #showcase-row-3 {
-	opacity: 0;
+  opacity: 0;
 }
 
-
 #designs .row a {
-	text-decoration: none;
-	color: #fff;
-	font-weight: 400;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 400;
 }
 
 #designs .row a:hover {
-	text-decoration: underline;
+  text-decoration: underline;
 }
 
 /* Article with more personal info about me */
 
 #info {
-	background: #141414;
-	margin: 0;
-	position: relative;
+  background: #141414;
+  margin: 0;
+  position: relative;
 }
 
 #info:after {
-	top: 100%;
-	left: 50%;
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
-	border-color: rgba(0, 0, 0, 0);
-	border-top-color: #141414;
-	border-width: 30px;
-	margin-left: -30px;
-	z-index: 1;
+  top: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(0, 0, 0, 0);
+  border-top-color: #141414;
+  border-width: 30px;
+  margin-left: -30px;
+  z-index: 1;
 }
 
 #info .row {
-	margin: 50px 0;
-	color: #D9D9D9;
-	font-size: 1.2em;
-	width: 100%;
+  margin: 50px 0;
+  color: #D9D9D9;
+  font-size: 1.2em;
+  width: 100%;
 }
 
 #info-map {
-	width: 70%;
-	text-align: center;
-	margin: 0 auto 40px auto;
+  width: 70%;
+  text-align: center;
+  margin: 0 auto 40px auto;
 }
 
 #info-map img {
-	width: 100%;
-	max-width: 569px;
-	opacity: 0.8;
+  width: 100%;
+  max-width: 569px;
+  opacity: 0.8;
 }
 
 /* Article giving links to social media / email / fun stuff */
 
 #contact {
-	color: #333;
-	background-color: #EDEDED;
-	margin: 0;
-	position: relative;
+  color: #333;
+  background-color: #EDEDED;
+  margin: 0;
+  position: relative;
 }
 
 #contact input, #contact textarea {
-	width: 100%;
-	font-size: 16px;
+  width: 100%;
+  font-size: 16px;
 }
 
 .img-circle {
-	box-shadow: 1px 1px 2px #020202;
+  box-shadow: 1px 1px 2px #020202;
 }
 
 .blackNwhite img {
@@ -387,369 +398,376 @@ article {
   -webkit-transition: all 0.2s ease-in;
   transition: all 0.2s ease-in;
 }
+
 .blackNwhite:hover img {
   filter: url("data:image/svg+xml;utf8,<svg xmlns='//www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0'/></filter></svg>#grayscale");
   -webkit-filter: none;
   filter: none;
 }
+
 #contact textarea {
-	height: 200px;
+  height: 200px;
 }
+
 #contact #spinner {
-	margin: 0 10px;
-	color: #828587;
-	display: none;
+  margin: 0 10px;
+  color: #828587;
+  display: none;
 }
+
 #contact #success {
-	display: none;
+  display: none;
 }
 
 #contact .error {
-	display: none;
+  display: none;
 }
 
 #contact #social {
-	margin-top: 80px;
-	margin-bottom: 50px;
+  margin-top: 80px;
+  margin-bottom: 50px;
 }
 
 #contact #social i {
-	color: #202020;
-	margin: -5px 5px;
-	-webkit-transition: all 0.2s ease-in-out;
-	-moz-transition: all 0.2s ease-in-out;
-	-ms-transition: all 0.2s ease-in-out;
-	-o-transition: all 0.2s ease-in-out;
-	transition: all 0.2s ease-in-out;
+  color: #202020;
+  margin: -5px 5px;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 /* Social network icons hover efect colors */
 #contact #social i.fa-facebook-square:hover, #contact #social a.fa-facebook-square:focus {
-	color: #3B5998 !important;
+  color: #3B5998 !important;
 }
 
 #contact #social i.fa-twitter-square:hover, #contact #social a.fa-twitter-square:focus {
-	color: #55acee !important;
+  color: #55acee !important;
 }
 
 #contact #social i.fa-soundcloud:hover, #contact #social a.fa-soundcloud:focus {
-	color: #ff3a00 !important;
+  color: #ff3a00 !important;
 }
 
 #contact #social i.fa-linkedin-square:hover, #contact #social a.fa-linkedin-square:focus {
-	color: #0976B4 !important;
+  color: #0976B4 !important;
 }
 
 #contact #social i.fa-google-plus-square:hover, #contact #social a.fa-google-plus-square:focus {
-	color: #dd4b39 !important;
+  color: #dd4b39 !important;
 }
 
 #contact #social i.fa-github-square:hover, #contact #social a.fa-github-square:focus {
-	color: #4183C4 !important;
+  color: #4183C4 !important;
 }
 
 #contact #social i.fa-stack-overflow:hover, #contact #social a.fa-stack-overflow:focus {
-	color: #fe7a15 !important;
+  color: #fe7a15 !important;
 }
 
 #contact #social i.fa-instagram:hover, #contact #social a.fa-instagram:focus {
-	color: #3F729B !important;
+  color: #3F729B !important;
 }
 
 #contact #social i.fa-vimeo-square:hover, #contact #social a.fa-vimeo-square:focus {
-	color: #1ab7ea !important;
+  color: #1ab7ea !important;
 }
 
 #contact #social i.fa-youtube:hover, #contact #social a.fa-youtube:focus {
-	color: #CD201F !important;
+  color: #CD201F !important;
 }
 
 #contact #social i.fa-dribbble:hover, #contact #social a.fa-dribbble:focus {
-	color: #EA4C89 !important;
+  color: #EA4C89 !important;
 }
 
-
 #contact h2 {
-	margin-bottom: 60px;
+  margin-bottom: 60px;
 }
 
 #contact .row {
-	margin: 30px 0px;
+  margin: 30px 0px;
 }
 
 .list-div {
-	display: inline-block;
+  display: inline-block;
 }
 
 .keep-together {
-	white-space: pre;
-	display: inline-block;
-	margin-right: 30px;
+  white-space: pre;
+  display: inline-block;
+  margin-right: 30px;
 }
 
 /* Footer - last line of text */
 
 footer .row {
-	color: #8C8C8C;
-	margin: 40px;
+  color: #8C8C8C;
+  margin: 40px;
 }
 
 /* Media queries begin */
-@media(max-width:992px) {
-	.navbar-fixed-top {
-		position: static;
-		margin-bottom: 0;
-	}
-	#home {
-		margin-top: -70px;
-		z-index: -1;
-	}
-	.round-image {
-		max-width: 160px;
-		max-height: 160px;
-		margin: 0;
-	}
-	.fade-to-white {
-		margin: 0;
-		max-width: 340px;
-		max-height: 340px;
-	}
-	#designs .container {
-		padding-left: 0;
-		padding-right: 0;
-	}
-	.col-sm-5, .col-sm-7 {
-		margin-bottom: 40px;
-		padding-left: 0;
-		padding-right: 0;
-	}
+@media(max-width: 992px) {
+  .navbar-fixed-top {
+    position: static;
+    margin-bottom: 0;
+  }
+  #home {
+    margin-top: -70px;
+    z-index: -1;
+  }
+  .round-image {
+    max-width: 160px;
+    max-height: 160px;
+    margin: 0;
+  }
+  .fade-to-white {
+    margin: 0;
+    max-width: 340px;
+    max-height: 340px;
+  }
+  #designs .container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .col-sm-5, .col-sm-7 {
+    margin-bottom: 40px;
+    padding-left: 0;
+    padding-right: 0;
+  }
 
-	#designs .image-container {
-		margin-top: 30px;
-	}
+  #designs .image-container {
+    margin-top: 30px;
+  }
 
-	#designs .col-sm-5 {
-		text-align: center !important;
-		margin-bottom: 0;
-	}
+  #designs .col-sm-5 {
+    text-align: center !important;
+    margin-bottom: 0;
+  }
 }
 
-@media(max-width:767px) {
+@media(max-width: 767px) {
 
-	h2 {
-		font-size: 20px;
-	}
-	.navbar {
-		padding: 10px;
-	}
-	.navbar-default .navbar-toggle .icon-bar {
-		background-color: #fff;
-	}
-	.navbar ul {
-		background: rgb(13, 13, 13);
-		border-radius: 5px;
-	}
-	.navbar .nav > li > a {
-		text-align: center;
-		border-bottom: none;
-	}
-	.navbar .nav > li > a:hover {
-		color: white;
-		text-decoration: underline;
-		border-bottom: none;
-	}
-	.navbar-collapse {
-		border: 0;
-	}
-	.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
-		background: none;
-	}
-	#home {
-		background-image: url("../images/background6.jpg");
-        width: 100%;
-        background-size: cover;
-        background-position: center;
-		min-height: 400px;
-		height: 70%;
-		position: relative;
-	}
-	#home .home-text {
-		width: 80%;
-		padding-top: 35%;
-		padding-left: 0px;
-		padding-right: 0px;
-	}
-	#home .home-text h1 {
-		font-size: 1.4em;
-		font-weight: 400;
-	}
-	.myFace {
-		height: 120px;
-	}
-	.col-md-3, .col-md-4, .col-md-6 {
-		padding: 10px 20px;
-	}
-	/* These I want centered for text-lowercase resolution devices, but aligned differently for larger devices */
-	/* Todo: make less gross */
-	.col-md-4.text-right, .col-md-4.text-left, .col-md-3.text-right, .col-md-3.text-left {
-		text-align: center;
-	}
-	.col-xs-2 {
-		padding-right: 5px;
-		padding-left: 5px;
-	}
-	#profile .row, #designs .row, #info .row {
-		font-size: 1.2em;
-	}
-	#designs, #info {
-		padding: 60px 0px;
-	}
-	#profile {
-		padding: 60px 0px;
-	}
-	#contact {
-		padding: 80px 0px 10px 0px;
-	}
-	#contact input, #contact textarea {
-		font-size: 1.2em;
-	}
-	.image-container {
-		text-align: center;
-	}
-	#designs .row {
-		margin-top: 0;
-	}
-	#designs h2 {
-		margin-bottom: 30px;
-	}
+  h2 {
+    font-size: 20px;
+  }
+  .navbar {
+    padding: 10px;
+  }
+  .navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff;
+  }
+  .navbar ul {
+    background: rgb(13, 13, 13);
+    border-radius: 5px;
+  }
+  .navbar .nav > li > a {
+    text-align: center;
+    border-bottom: none;
+  }
+  .navbar .nav > li > a:hover {
+    color: white;
+    text-decoration: underline;
+    border-bottom: none;
+  }
+  .navbar-collapse {
+    border: 0;
+  }
+  .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+    background: none;
+  }
+  #home {
+    background-image: url("../images/background6.jpg");
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    min-height: 400px;
+    height: 70%;
+    position: relative;
+  }
+  #home .home-text {
+    width: 80%;
+    padding-top: 35%;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  #home .home-text h1 {
+    font-size: 1.4em;
+    font-weight: 400;
+  }
+  .myFace {
+    height: 120px;
+  }
+  .col-md-3, .col-md-4, .col-md-6 {
+    padding: 10px 20px;
+  }
+  /* These I want centered for text-lowercase resolution devices, but aligned differently for larger devices */
+  /* Todo: make less gross */
+  .col-md-4.text-right, .col-md-4.text-left, .col-md-3.text-right, .col-md-3.text-left {
+    text-align: center;
+  }
+  .col-xs-2 {
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+  #profile .row, #designs .row, #info .row {
+    font-size: 1.2em;
+  }
+  #designs, #info {
+    padding: 60px 0px;
+  }
+  #profile {
+    padding: 60px 0px;
+  }
+  #contact {
+    padding: 80px 0px 10px 0px;
+  }
+  #contact input, #contact textarea {
+    font-size: 1.2em;
+  }
+  .image-container {
+    text-align: center;
+  }
+  #designs .row {
+    margin-top: 0;
+  }
+  #designs h2 {
+    margin-bottom: 30px;
+  }
 }
-@media(max-width:400px) {
-	.list-div {
-		text-align: left;
-		padding-left: 20%;
-	}
-}
-@media(min-width:768px) and (max-width: 991px) {
-	.round-image {
-		width: 300px;
-		height: 300px;
-	}
-	.fade-to-white {
-		padding: 0;
-		width: 100px;
-		height: 100px;
-	}
 
-	#home {
-		background-image: url("../images/background6.jpg");
-        width: 100%;
-        background-size: cover;
-        background-position: center;
-		min-height: 600px;
-		height: 80%;
-		position: relative;
-	}
-	#home .home-text {
-		width: 750px;
-		padding-top: 22%;
-	}
-	#home .home-text h1 {
-		font-size: 4em;
-	}
-	.myFace {
-		height: 150px;
-	}
-	.col-md-3, .col-md-4 {
-		padding: 10px 200px;
-	}
-	/* These I want centered for low resolution devices, but aligned differently for larger devices */
-	/* Todo: make less gross */
-	.col-md-4.text-right:not(.submit), .col-md-4.text-left, .col-md-3.text-right, .col-md-3.text-left {
-		text-align: center;
-	}
-	#profile .row, #designs .row, #info .row {
-		font-size: 1.2em;
-	}
-	#designs, #info {
-		padding: 80px 0px;
-	}
-	#profile {
-		padding: 80px 0px;
-	}
-	#contact {
-		padding: 100px 0px 20px 0px;
-	}
+@media(max-width: 400px) {
+  .list-div {
+    text-align: left;
+    padding-left: 20%;
+  }
 }
-@media(min-width:992px) and (max-width: 1199px) {
-	#home {
-		background-image: url("../images/background6.jpg");
-        width: 100%;
-        background-size: cover;
-        background-position: center;
-		min-height: 700px;
-		height: 80%;
-		position: relative;
-	}
-	#home .home-text {
-		width: 970px;
-		padding-top: 22%;
-	}
-	#home .home-text h1 {
-		font-size: 4em;
-	}
-	.myFace {
-		height: 150px;
-	}
-	#profile .row, #designs .row, #info .row {
-		font-size: 1.2em;
-	}
-	.v-center-container {
-	    display:table !important;
-	    height: 300px;
-	}
-	.v-center {
-	    display:table-cell;
-	    vertical-align:middle;
-	}
-	#designs, #info {
-		padding: 80px 0px;
-	}
-	#profile {
-		padding: 80px 0px;
-	}
-	#contact {
-		padding: 100px 0px 20px 0px;
-	}
+
+@media(min-width: 768px) and (max-width: 991px) {
+  .round-image {
+    width: 300px;
+    height: 300px;
+  }
+  .fade-to-white {
+    padding: 0;
+    width: 100px;
+    height: 100px;
+  }
+
+  #home {
+    background-image: url("../images/background6.jpg");
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    min-height: 600px;
+    height: 80%;
+    position: relative;
+  }
+  #home .home-text {
+    width: 750px;
+    padding-top: 22%;
+  }
+  #home .home-text h1 {
+    font-size: 4em;
+  }
+  .myFace {
+    height: 150px;
+  }
+  .col-md-3, .col-md-4 {
+    padding: 10px 200px;
+  }
+  /* These I want centered for low resolution devices, but aligned differently for larger devices */
+  /* Todo: make less gross */
+  .col-md-4.text-right:not(.submit), .col-md-4.text-left, .col-md-3.text-right, .col-md-3.text-left {
+    text-align: center;
+  }
+  #profile .row, #designs .row, #info .row {
+    font-size: 1.2em;
+  }
+  #designs, #info {
+    padding: 80px 0px;
+  }
+  #profile {
+    padding: 80px 0px;
+  }
+  #contact {
+    padding: 100px 0px 20px 0px;
+  }
 }
+
+@media(min-width: 992px) and (max-width: 1199px) {
+  #home {
+    background-image: url("../images/background6.jpg");
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    min-height: 700px;
+    height: 80%;
+    position: relative;
+  }
+  #home .home-text {
+    width: 970px;
+    padding-top: 22%;
+  }
+  #home .home-text h1 {
+    font-size: 4em;
+  }
+  .myFace {
+    height: 150px;
+  }
+  #profile .row, #designs .row, #info .row {
+    font-size: 1.2em;
+  }
+  .v-center-container {
+    display: table !important;
+    height: 300px;
+  }
+  .v-center {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  #designs, #info {
+    padding: 80px 0px;
+  }
+  #profile {
+    padding: 80px 0px;
+  }
+  #contact {
+    padding: 100px 0px 20px 0px;
+  }
+}
+
 @media(min-width: 1200px) {
-	.v-center-container {
-	    display:table !important;
-	    height: 350px;
-	}
-	.v-center {
-	    display:table-cell;
-	    vertical-align:middle;
-	}
-	#designs, #info {
-		padding: 100px 0px 100px 0px;
-	}
-	#profile {
-		padding: 100px 0px 150px 0px;
-	}
-	#contact {
-		padding: 100px 0px 20px 0px;
-	}
-	#info-text {
-		padding: 0 20px;
-	}
+  .v-center-container {
+    display: table !important;
+    height: 350px;
+  }
+  .v-center {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  #designs, #info {
+    padding: 100px 0px 100px 0px;
+  }
+  #profile {
+    padding: 100px 0px 150px 0px;
+  }
+  #contact {
+    padding: 100px 0px 20px 0px;
+  }
+  #info-text {
+    padding: 0 20px;
+  }
 }
 
 @media screen and (min-aspect-ratio: 12/9) and (max-aspect-ratio: 20/9) and (min-width: 1200px) {
-	#home .home-text-wrapper {
-		width: 100%;
-		min-height: 700px;
-		height: 80%;
-	}
+  #home .home-text-wrapper {
+    width: 100%;
+    min-height: 700px;
+    height: 80%;
+  }
 }
 
 /*** Back to top CSS ***/
@@ -773,32 +791,41 @@ footer .row {
   -moz-transition: opacity .3s 0s, visibility 0s .3s;
   transition: opacity .3s 0s, visibility 0s .3s;
 }
+
 .cd-top.cd-is-visible, .cd-top.cd-fade-out, .no-touch .cd-top:hover {
   -webkit-transition: opacity .3s 0s, visibility 0s 0s;
   -moz-transition: opacity .3s 0s, visibility 0s 0s;
   transition: opacity .3s 0s, visibility 0s 0s;
 }
+
 .cd-top.cd-is-visible {
   /* the button becomes visible */
   visibility: visible;
   opacity: 1;
 }
+
 .cd-top.cd-fade-out {
   /* if the user keeps scrolling down, the button is out of focus and becomes less visible */
   opacity: .5;
 }
+
 .no-touch .cd-top:hover {
   background-color: #0D0D0D;
   opacity: 1;
 }
 
-	/* Custom scrollbar for Google Chrome*/
-	::-webkit-scrollbar-thumb:vertical {
-		width: 10px; background: #181818;
-		}
-	::-webkit-scrollbar-thumb:horizontal {
-		height: 10px; background: #181818;
-		}
-	::-webkit-scrollbar {
-		width: 10px; background: #e1e1e1;
-		}
+/* Custom scrollbar for Google Chrome*/
+::-webkit-scrollbar-thumb:vertical {
+  width: 10px;
+  background: #181818;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+  height: 10px;
+  background: #181818;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background: #e1e1e1;
+}
