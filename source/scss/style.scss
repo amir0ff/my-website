@@ -29,6 +29,86 @@ body {
   color: #FFFFFF;
 }
 
+@keyframes float {
+  0% {
+    box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
+    transform: translatey(0px);
+  }
+  50% {
+    box-shadow: 0 25px 15px 0px rgba(0, 0, 0, 0.2);
+    transform: translatey(-8px);
+  }
+  100% {
+    box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
+    transform: translatey(0px);
+  }
+}
+
+.card-deck {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+  .card {
+    box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
+    width: 32%;
+    &:hover {
+      animation: float 1.25s ease-in-out infinite;
+    }
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+    @media (max-width: 767px) {
+      width: 100%;
+      margin: 8px;
+    }
+    background-color: #0d0d0d;
+    padding: 0;
+    margin: 0 18px 18px 0;
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-clip: border-box;
+    border: 1px solid #0d0d0d;
+    border-radius: .25rem;
+    .card-header {
+      padding: 0 0 8px 0;
+      margin-bottom: 0;
+      background-color: rgba(0, 0, 0, .03);
+      border-bottom: 1px solid rgb(32, 32, 32);
+      h5 {
+        font-weight: 700;
+      }
+    }
+    .card-body {
+      -ms-flex: 1 1 auto;
+      flex: 1 1 auto;
+      padding: 1.25rem;
+      .card-text {
+        user-select: none;
+      }
+      a {
+        &:hover {
+          text-decoration: none !important;
+        }
+      }
+      .badge {
+        background-color: #4caf50;
+        position: absolute;
+        right: 8px;
+        top: 8px;
+        user-select: none;
+      }
+    }
+  }
+}
+
 #home {
   background-image: url("../images/background6.jpg");
   width: 100%;
@@ -285,13 +365,13 @@ article {
 
 /* Article showcasing some of my designs */
 
-#designs {
+#portfolio {
   background: #202020;
   margin: 0;
   position: relative;
 }
 
-#designs:after {
+#portfolio:after {
   top: 100%;
   left: 50%;
   border: solid transparent;
@@ -307,8 +387,7 @@ article {
   z-index: 1;
 }
 
-#designs .row {
-  margin-top: 50px;
+#portfolio .row {
   color: #D9D9D9;
   font-size: 1.2em;
 }
@@ -317,14 +396,25 @@ article {
   opacity: 0;
 }
 
-#designs .row a {
+#portfolio .row a {
   text-decoration: none;
   color: #fff;
   font-weight: 400;
 }
 
-#designs .row a:hover {
+#portfolio .row a:hover {
   text-decoration: underline;
+}
+
+#portfolio .github-section {
+  margin-top: 100px;
+  .github-img {
+    width: 60%;
+    margin-bottom: 20px;
+  }
+  .row {
+    margin-top: 50px;
+  }
 }
 
 /* Article with more personal info about me */
@@ -528,7 +618,7 @@ footer .row {
     max-width: 340px;
     max-height: 340px;
   }
-  #designs .container {
+  #portfolio .container {
     padding-left: 0;
     padding-right: 0;
   }
@@ -538,11 +628,11 @@ footer .row {
     padding-right: 0;
   }
 
-  #designs .image-container {
+  #portfolio .image-container {
     margin-top: 30px;
   }
 
-  #designs .col-sm-5 {
+  #portfolio .col-sm-5 {
     text-align: center !important;
     margin-bottom: 0;
   }
@@ -612,10 +702,10 @@ footer .row {
     padding-right: 5px;
     padding-left: 5px;
   }
-  #profile .row, #designs .row, #info .row {
+  #profile .row, #portfolio .row, #info .row {
     font-size: 1.2em;
   }
-  #designs, #info {
+  #portfolio, #info {
     padding: 60px 0px;
   }
   #profile {
@@ -630,10 +720,10 @@ footer .row {
   .image-container {
     text-align: center;
   }
-  #designs .row {
+  #portfolio .row {
     margin-top: 0;
   }
-  #designs h2 {
+  #portfolio h2 {
     margin-bottom: 30px;
   }
 }
@@ -683,10 +773,10 @@ footer .row {
   .col-md-4.text-right:not(.submit), .col-md-4.text-left, .col-md-3.text-right, .col-md-3.text-left {
     text-align: center;
   }
-  #profile .row, #designs .row, #info .row {
+  #profile .row, #portfolio .row, #info .row {
     font-size: 1.2em;
   }
-  #designs, #info {
+  #portfolio, #info {
     padding: 80px 0px;
   }
   #profile {
@@ -717,7 +807,7 @@ footer .row {
   .myFace {
     height: 150px;
   }
-  #profile .row, #designs .row, #info .row {
+  #profile .row, #portfolio .row, #info .row {
     font-size: 1.2em;
   }
   .v-center-container {
@@ -728,7 +818,7 @@ footer .row {
     display: table-cell;
     vertical-align: middle;
   }
-  #designs, #info {
+  #portfolio, #info {
     padding: 80px 0px;
   }
   #profile {
@@ -748,7 +838,7 @@ footer .row {
     display: table-cell;
     vertical-align: middle;
   }
-  #designs, #info {
+  #portfolio, #info {
     padding: 100px 0px 100px 0px;
   }
   #profile {

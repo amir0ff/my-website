@@ -16,7 +16,7 @@ const del = require('del');
 const pkg = require('./package.json');
 
 // Check Build Environment
-let devBuild = false,
+let devBuild = true,
 
     // Files Locations
     source = 'source/',

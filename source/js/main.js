@@ -68,6 +68,22 @@ $(function () {
 // Sending email script
 $(document).ready(function () {
 
+    function getRepos() {
+        let url = "https://api.github.com/users/ameer157/repos?callback=allow";
+        $.getJSON(url + '&callback=?', (data) => {
+            addRepos(data);
+        })
+    }
+
+    function addRepos(data) {
+        $.each(data.data, (index, repos) => {
+            let repo = $('<div class="card"><div class="card-body"><span class="badge badge-pill badge-info">' + repos.language + '</span><a href=" ' + repos.html_url +' " target="_blank"><div class="card-header text-left"><h5>' + repos.name + '</h5></a></div><p class="card-text text-left small">' + repos.description + '</p></div></div>');
+            repo.prependTo('#repositories');
+        })
+    }
+
+    getRepos();
+
     $('#submit').click(function (e) {
         e.preventDefault();
 
