@@ -69,7 +69,7 @@ body {
     }
     @media (max-width: 767px) {
       width: 100%;
-      margin: 8px;
+      margin: 16px;
     }
     background-color: #0d0d0d;
     padding: 0;
@@ -439,9 +439,15 @@ article {
   .github-img {
     width: 60%;
     margin-bottom: 20px;
+    @media (max-width: 767px) {
+      width: 90%;
+    }
   }
   .row {
     margin-top: 50px;
+    @media (max-width: 767px) {
+      margin-top: 0;
+    }
   }
 }
 
@@ -639,8 +645,9 @@ footer .row {
     margin-bottom: 0;
   }
   #home {
-    margin-top: -70px;
+    margin-top: -90px;
     z-index: -1;
+    padding-bottom: 40px;
   }
   .round-image {
     max-width: 160px;
@@ -673,19 +680,21 @@ footer .row {
 }
 
 @media(max-width: 767px) {
-
   h2 {
     font-size: 20px;
   }
   .navbar {
-    padding: 10px;
+    padding-top: 8px !important;
   }
-  .navbar-default .navbar-toggle .icon-bar {
-    background-color: #fff;
+  .navbar-default .navbar-toggle {
+    border-color: transparent;
+    .icon-bar {
+      background-color: #fff;
+    }
   }
   .navbar ul {
-    background: rgb(13, 13, 13);
-    border-radius: 5px;
+    background: #141414;
+    box-shadow: rgb(2, 2, 2) 0 2px 2px 0;
   }
   .navbar .nav > li > a {
     text-align: center;
