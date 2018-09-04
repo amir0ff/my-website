@@ -62,14 +62,14 @@ body {
     box-shadow: 0 3px 13px 0 rgba(0, 0, 0, 0.6);
     width: 31%;
     &:hover {
-      animation: floatRepos 0.5s ease-in-out forwards;
+      animation: floatRepos 0.4s ease-in-out forwards;
     }
     &:nth-child(3n) {
       margin-right: 0;
     }
     @media (max-width: 767px) {
       width: 100%;
-      margin: 16px;
+      margin: 16px !important;
     }
     background-color: #0d0d0d;
     padding: 0;
@@ -101,6 +101,7 @@ body {
         user-select: none;
       }
       a {
+        color: white;
         &:hover {
           text-decoration: none !important;
         }
@@ -410,7 +411,7 @@ article {
   opacity: 0;
 }
 
-#portfolio .row a {
+#portfolio .row:not(.card-deck) a {
   text-decoration: none;
   color: #fff;
   font-weight: 400;
@@ -453,6 +454,11 @@ article {
     margin-top: 50px;
     @media (max-width: 767px) {
       margin-top: 0;
+    }
+  }
+  .footer {
+    p {
+      margin-right: 16px;
     }
   }
 }
