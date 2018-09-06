@@ -1,9 +1,9 @@
 let currentScroll = 0;
 let canScroll = true; // if false, blocks browser from scrolling - used for non-touch devices and desktops (touch devices ignore this)
 let smallDevice = window.matchMedia("only screen and (max-width: 760px)");
-let designs1Shown = false;
-let designs2Shown = false;
-let designs3Shown = false;
+let portfolio1Shown = false;
+let portfolio2Shown = false;
+let portfolio3Shown = false;
 
 function isElementInViewport(el) {
 
@@ -68,21 +68,41 @@ $(function () {
 // Sending email script
 $(document).ready(function () {
 
-    function getRepos() {
-        let url = "https://api.github.com/users/ameer157/repos?callback=allow";
-        $.getJSON(url + '&callback=?', (data) => {
-            addRepos(data);
+    function getGitHubRepos() {
+        let reposURL = "https://api.github.com/users/ameer157/repos?callback=allow";
+        $.getJSON(reposURL + '&callback=?', (data) => {
+            addGitHubRepos(data);
         })
     }
 
-    function addRepos(data) {
+    function addGitHubRepos(data) {
         $.each(data.data, (index, repos) => {
-            let repo = $('<div class="card"><div class="card-body"><span class="badge badge-pill badge-info">' + repos.language + '</span><a href=" ' + repos.html_url +' " target="_blank"><div class="card-header text-left"><h5>' + repos.name + '</h5></div></a><p class="card-text text-left small">' + repos.description + '</p></div></div>');
+            let repo = $('<div class="card"><div class="card-body"><span class="badge badge-pill badge-info">' + repos.language + '</span><a href=" ' + repos.html_url + ' " target="_blank"><div class="card-header text-left"><h5>' + repos.name + '</h5></div></a><p class="card-text text-left small">' + repos.description + '</p></div></div>');
             repo.prependTo('#repositories');
         })
     }
 
-    getRepos();
+    getGitHubRepos();
+
+    function getBlogPosts() {
+        jQuery(function ($) {
+            let feedURL = "https://medium.com/feed/@ameer157";
+            $("#rss-feeds").rss(feedURL,
+                {
+                    ssl: true,
+                    limit: 8,
+                    filterLimit: 8,
+                    filter: (entry) => {
+                        // Filter out comments and print only blog posts
+                        return entry.categories.length > 1
+                    },
+                    layoutTemplate: '<div class="row card-deck">{entries}</div>',
+                    entryTemplate: '<div class="card"><div class="card-body"><a href="{url}" target="_blank"><div class="cover">{teaserImage}</div><h5>{title}</h5></a><div class="card-text"><p>{shortBodyPlain}</p></div></div></div>'
+                })
+        })
+    }
+
+    getBlogPosts();
 
     $('#submit').click(function (e) {
         e.preventDefault();
@@ -134,14 +154,14 @@ $(document).ready(function () {
 
     // do not auto scroll for mobile
     if (smallDevice.matches || Modernizr.touch) {
-        designs1Shown = true;
-        $('#showcase-row-1').css('opacity', 1);
+        portfolio1Shown = true;
+        $('#portfolio-row-1').css('opacity', 1);
 
-        designs2Shown = true;
-        $('#showcase-row-2').css('opacity', 1);
+        portfolio2Shown = true;
+        $('#portfolio-row-2').css('opacity', 1);
 
-        designs3Shown = true;
-        $('#showcase-row-3').css('opacity', 1);
+        portfolio3Shown = true;
+        $('#portfolio-row-3').css('opacity', 1);
     }
 
 
@@ -160,31 +180,29 @@ $(document).ready(function () {
             return false;
         }
 
-        // show designs section when it's in viewport
-        if (!designs1Shown && isElementInViewport($('#showcase-row-1 img'))) {
-            designs1Shown = true;
-            $('#showcase-row-1').animate({opacity: 1}, 1000);
+        // show portfolio section when it's in viewport
+        if (!portfolio1Shown && isElementInViewport($('#portfolio-row-1 img'))) {
+            portfolio1Shown = true;
+            $('#portfolio-row-1').animate({opacity: 1}, 1000);
         }
 
-        if (!designs2Shown && isElementInViewport($('#showcase-row-2 img'))) {
-            designs2Shown = true;
-            $('#showcase-row-2').animate({opacity: 1}, 1000);
+        if (!portfolio2Shown && isElementInViewport($('#portfolio-row-2 img'))) {
+            portfolio2Shown = true;
+            $('#portfolio-row-2').animate({opacity: 1}, 1000);
         }
 
-        if (!designs3Shown && isElementInViewport($('#showcase-row-3 img'))) {
-            designs3Shown = true;
-            $('#showcase-row-3').animate({opacity: 1}, 1000);
+        if (!portfolio3Shown && isElementInViewport($('#portfolio-row-3 img'))) {
+            portfolio3Shown = true;
+            $('#portfolio-row-3').animate({opacity: 1}, 1000);
         }
 
 
         // if user starts scrolling and we're at the top, auto scroll to the first section
         if ((canScroll) && (currentScroll == 0)) {
             canScroll = false;
-            $('.navbar').animate({'padding-top': "0px"}, 500);
-            $('.navbar').css('background', '#0D0D0D');
-            $('.navbar').css('box-shadow', '0px 1px 2px #020202');
+            $('.navbar').animate({'padding-top': "0px"}, 500).css('background', '#0D0D0D').css('box-shadow', '0px 1px 2px #020202');
             $('html, body').animate({
-                scrollTop: $("#profile").offset().top - $(".navbar").height() + 5
+                scrollTop: $("#profile").offset().top - $(".navbar").height()
             }, 500, function () {
                 canScroll = true;
             });

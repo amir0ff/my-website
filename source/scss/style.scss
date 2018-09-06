@@ -11,6 +11,12 @@ html, html a {
   -webkit-font-smoothing: antialiased !important;
   -moz-osx-font-smoothing: grayscale !important;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004) !important;
+  color: white;
+  text-decoration: none;
+  &:hover, &:focus {
+    color: white;
+    text-decoration: none;
+  }
 }
 
 body {
@@ -61,16 +67,6 @@ body {
   .card {
     box-shadow: 0 3px 13px 0 rgba(0, 0, 0, 0.6);
     width: 31%;
-    &:hover {
-      animation: floatRepos 0.4s ease-in-out forwards;
-    }
-    &:nth-child(3n) {
-      margin-right: 0;
-    }
-    @media (max-width: 767px) {
-      width: 100%;
-      margin: 16px !important;
-    }
     background-color: #0d0d0d;
     padding: 0;
     margin: 0 26px 26px 0;
@@ -84,6 +80,16 @@ body {
     background-clip: border-box;
     border: 1px solid #0d0d0d;
     border-radius: .25rem;
+    &:hover {
+      animation: floatRepos 0.4s ease-in-out forwards;
+    }
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+    @media (max-width: 767px) {
+      width: 100%;
+      margin: 16px !important;
+    }
     .card-header {
       padding: 0 0 8px 0;
       margin-bottom: 0;
@@ -99,6 +105,9 @@ body {
       padding: 1.25rem;
       .card-text {
         user-select: none;
+        p {
+          margin: 0;
+        }
       }
       a {
         color: white;
@@ -407,7 +416,7 @@ article {
   font-size: 1.2em;
 }
 
-#showcase-row-1, #showcase-row-2, #showcase-row-3 {
+#portfolio-row-1, #portfolio-row-2, #portfolio-row-3 {
   opacity: 0;
 }
 
@@ -442,9 +451,9 @@ article {
 }
 
 #portfolio .github-section {
-  margin-top: 100px;
+  margin-top: 90px;
   .github-img {
-    width: 60%;
+    width: 70%;
     margin-bottom: 20px;
     @media (max-width: 767px) {
       width: 90%;
@@ -463,7 +472,84 @@ article {
   }
 }
 
-/* Article with more personal info about me */
+#blog {
+  background: #2b2b2b;
+  margin: 0;
+  position: relative;
+  &:after {
+    top: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(0, 0, 0, 0);
+    border-top-color: #2b2b2b;
+    border-width: 30px;
+    margin-left: -30px;
+    z-index: 1;
+  }
+  #rss-feeds {
+    margin-top: 50px;
+    .card-deck {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      margin-right: -15px;
+      margin-left: -15px;
+      .card {
+        .card-body {
+          padding: 0;
+          .card-text {
+            padding: 1.25rem;
+            text-align: justify;
+          }
+        }
+        box-shadow: 0 3px 13px 0 rgba(0, 0, 0, 0.6);
+        width: 31%;
+        background-color: #0d0d0d;
+        padding: 0;
+        margin: 0 26px 26px 0;
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-clip: border-box;
+        border: 1px solid #0d0d0d;
+        border-radius: .30rem;
+        user-select: none;
+        h5 {
+          font-weight: 700;
+          letter-spacing: 1px;
+          padding: 0 0 1.25rem 0;
+          border-bottom: 1px solid #202020;
+          margin: 1.25rem 1.25rem 0 1.25rem;
+        }
+        &:nth-child(3n) {
+          margin-right: 0;
+        }
+        @media (max-width: 767px) {
+          width: 100%;
+          margin: 16px !important;
+        }
+        .cover {
+          img {
+            border-top-left-radius: .30rem;
+            border-top-right-radius: .30rem;
+            width: 100%;
+            height: 170px;
+          }
+        }
+      }
+    }
+  }
+}
 
 #info {
   background: #141414;
@@ -893,7 +979,7 @@ footer .row {
     display: table-cell;
     vertical-align: middle;
   }
-  #portfolio, #info {
+  #portfolio, #info, #blog {
     padding: 100px 0px 100px 0px;
   }
   #profile {
