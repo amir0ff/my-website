@@ -64,16 +64,14 @@ $(function () {
     });
 });
 
-
-// Sending email script
 $(document).ready(function () {
 
-    function getGitHubRepos() {
+    (function getGitHubRepos() {
         let reposURL = "https://api.github.com/users/ameer157/repos?callback=allow";
         $.getJSON(reposURL + '&callback=?', (data) => {
             addGitHubRepos(data);
         })
-    }
+    })();
 
     function addGitHubRepos(data) {
         $.each(data.data, (index, repos) => {
@@ -82,9 +80,8 @@ $(document).ready(function () {
         })
     }
 
-    getGitHubRepos();
 
-    function getBlogPosts() {
+    (function getBlogPosts() {
         jQuery(function ($) {
             let feedURL = "https://medium.com/feed/@ameer157";
             $("#rss-feeds").rss(feedURL,
@@ -97,12 +94,11 @@ $(document).ready(function () {
                         return entry.categories.length > 1
                     },
                     layoutTemplate: '<div class="row card-deck">{entries}</div>',
-                    entryTemplate: '<div class="card"><div class="card-body"><a href="{url}" target="_blank"><div class="cover">{teaserImage}</div><h5>{title}</h5></a><div class="card-text"><p>{shortBodyPlain}</p></div></div></div>'
+                    entryTemplate: '<div class="card"><div class="card-body"><a href="{url}" target="_blank"><div class="cover"><i class="fa fa-book-open fa-4x"></i>{teaserImage}</div><h5>{title}</h5></a><div class="card-text"><p>{shortBodyPlain}</p></div></div></div>'
                 })
         })
-    }
+    })();
 
-    getBlogPosts();
 
     $('#submit').click(function (e) {
         e.preventDefault();
