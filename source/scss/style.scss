@@ -1,8 +1,7 @@
-// Importing Remote Fonts
+// Importing Remote Fonts and Assets
 @import url(//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800);
 @import url(//fonts.googleapis.com/css?family=Roboto:300,400,500);
 @import url(//fonts.googleapis.com/css?family=Damion);
-// Importing CSS Module Dependencies
 @import url(//use.fontawesome.com/releases/v5.3.1/css/all.css);
 @import url(//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css);
 
@@ -117,11 +116,28 @@ body {
       }
       .badge {
         background-color: #217925;
+        color: #fff;
+        font-weight: 300;
         letter-spacing: 0;
         position: absolute;
         right: 8px;
         top: 8px;
         user-select: none;
+        &.javascript {
+          background-color: #f1e05a;
+        }
+        &.typescript {
+          background-color: #2b7489;
+        }
+        &.python {
+          background-color: #3572A5;
+        }
+        &.c\+\+ {
+          background-color: #f34b7d;
+        }
+        &.html {
+          background-color: #e34c26;
+        }
       }
     }
   }
@@ -394,11 +410,6 @@ article {
   h3 {
     position: relative;
     font-size: 21px;
-    .fa-link {
-      position: absolute;
-      left: -24px;
-      top: 4px;
-    }
   }
   &:after {
     top: 100%;

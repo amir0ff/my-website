@@ -75,7 +75,7 @@ $(document).ready(function () {
 
     function addGitHubRepos(data) {
         $.each(data.data, (index, repos) => {
-            let repo = $('<div class="card"><div class="card-body"><span class="badge badge-pill badge-info">' + repos.language + '</span><a href=" ' + repos.html_url + ' " target="_blank"><div class="card-header text-left"><h5>' + repos.name + '</h5></div></a><p class="card-text text-left small">' + repos.description + '</p></div></div>');
+            let repo = $('<div class="card"><div class="card-body"><span class="badge badge-pill badge-info ' + repos.language.toLocaleLowerCase() + '">' + repos.language + '</span><a href=" ' + repos.html_url + ' " target="_blank"><div class="card-header text-left"><h5>' + repos.name + '</h5></div></a><p class="card-text text-left small">' + repos.description + '</p></div></div>');
             repo.prependTo('#repositories');
         })
     }
