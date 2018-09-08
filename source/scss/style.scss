@@ -119,7 +119,7 @@ body {
         font-weight: 300;
         letter-spacing: 0;
         position: absolute;
-        right: 6px;
+        right: 2px;
         top: 6px;
         background-color: transparent;
         user-select: none;
@@ -568,15 +568,18 @@ article {
           position: relative;
           padding: 0;
           .card-text {
-            padding: 1.25rem;
+            padding: 1.25rem 1.25rem 3rem 1.25rem;
             text-align: justify;
           }
           .date {
-            font-size: 11px;
+            font-size: 12px;
             position: absolute;
-            bottom: 0;
-            right: 4px;
+            bottom: 2px;
+            right: 6px;
             color: #959595;
+            .fa-clock {
+              margin-right: 3px;
+            }
           }
         }
         .cover {

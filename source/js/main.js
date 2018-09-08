@@ -95,7 +95,7 @@ $(document).ready(function () {
                     },
                     dateFormat: 'MMM D, YYYY',
                     layoutTemplate: '<div class="row card-deck">{entries}</div>',
-                    entryTemplate: '<div class="card"><div class="card-body"><span class="date">{date}</span><a href="{url}" target="_blank"><div class="cover"><i class="fa fa-book-open fa-4x"></i>{teaserImage}</div><h5>{title}</h5></a><div class="card-text"><p>{shortBodyPlain}</p></div></div></div>'
+                    entryTemplate: '<div class="card"><div class="card-body"><span class="date"><i class="fas fa-clock"></i>{date}</span><a href="{url}" target="_blank"><div class="cover"><i class="fa fa-book-open fa-4x"></i>{teaserImage}</div><h5>{title}</h5></a><div class="card-text"><p>{shortBodyPlain}</p></div></div></div>'
                 })
         })
     })();
