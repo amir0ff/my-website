@@ -26,6 +26,7 @@ let devBuild = true,
     npm = {
         jquery: node_modules + 'jquery/dist/jquery.js',
         bootstrap: node_modules + 'bootstrap/dist/js/bootstrap.js',
+        moment: node_modules +  'moment/moment.js',
         modernizr: 'source/js/modernizr.js'
     },
     images = {
@@ -130,6 +131,7 @@ gulp.task('js', function () {
         return gulp.src([npm.jquery,
             npm.modernizr,
             npm.bootstrap,
+            npm.moment,
             js.src,
             'source/js/smooth-scroll.js',
             'source/js/back-to-top.js',
@@ -145,6 +147,7 @@ gulp.task('js', function () {
         return gulp.src([npm.jquery,
             npm.modernizr,
             npm.bootstrap,
+            npm.moment,
             js.src,
             'source/js/smooth-scroll.js',
             'source/js/back-to-top.js',

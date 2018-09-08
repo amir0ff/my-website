@@ -115,28 +115,41 @@ body {
         }
       }
       .badge {
-        background-color: #217925;
-        color: #fff;
+        color: #959595;
         font-weight: 300;
         letter-spacing: 0;
         position: absolute;
-        right: 8px;
-        top: 8px;
+        right: 6px;
+        top: 6px;
+        background-color: transparent;
         user-select: none;
-        &.javascript {
-          background-color: #f1e05a;
-        }
-        &.typescript {
-          background-color: #2b7489;
-        }
-        &.python {
-          background-color: #3572A5;
-        }
-        &.c\+\+ {
-          background-color: #f34b7d;
-        }
-        &.html {
-          background-color: #e34c26;
+        border-radius: 0;
+        .repo-lang-color {
+          position: relative;
+          top: 1px;
+          right: 2px;
+          display: inline-block;
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          &.javascript {
+            background-color: #f1e05a;
+          }
+          &.typescript {
+            background-color: #2b7489;
+          }
+          &.python {
+            background-color: #3572A5;
+          }
+          &.c\+\+ {
+            background-color: #f34b7d;
+          }
+          &.html {
+            background-color: #e34c26;
+          }
+          &.arduino {
+            background-color: #ededed;
+          }
         }
       }
     }
@@ -485,6 +498,7 @@ article {
   .footer {
     p {
       margin-right: 16px;
+      color: #959595;
     }
   }
 }
@@ -551,10 +565,18 @@ article {
           margin: 16px !important;
         }
         .card-body {
+          position: relative;
           padding: 0;
           .card-text {
             padding: 1.25rem;
             text-align: justify;
+          }
+          .date {
+            font-size: 11px;
+            position: absolute;
+            bottom: 0;
+            right: 4px;
+            color: #959595;
           }
         }
         .cover {
@@ -585,6 +607,12 @@ article {
           animation: none;
         }
       }
+    }
+  }
+  .footer {
+    p {
+      margin-right: 16px;
+      color: #959595;
     }
   }
 }
