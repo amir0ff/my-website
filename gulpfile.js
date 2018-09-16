@@ -18,24 +18,24 @@ const del = require('del');
 const pkg = require('./package.json');
 
 // Check build environment
-const args = minimist(process.argv.slice(2));
+let args = minimist(process.argv.slice(2));
 
 // Main directories
-const sourceDir = 'source/';
-const buildDir = 'build/';
+let sourceDir = 'source/';
+let buildDir = 'build/';
 
-const npm = {
+let npm = {
     jquery: 'node_modules/jquery/dist/jquery.js',
     bootstrap: 'node_modules/bootstrap/dist/js/bootstrap.js',
     moment: 'node_modules/moment/moment.js',
     modernizr: 'source/js/modernizr.js'
 };
-const images = {
+let images = {
     src: sourceDir + 'images/**/*.*',
     bld: buildDir + 'images/'
 };
 
-const css = {
+let css = {
     src: sourceDir + 'scss/**/*.scss',
     watch: [sourceDir + 'scss/**/*'],
     bld: buildDir + 'css/',
@@ -56,12 +56,12 @@ const css = {
     }
 };
 
-const js = {
+let js = {
     src: sourceDir + 'js/main.js',
     bld: buildDir + 'js/',
 };
 
-const syncOpts = {
+let syncOpts = {
     server: {
         baseDir: buildDir,
         index: 'index.html'
@@ -70,7 +70,7 @@ const syncOpts = {
     notify: true
 };
 
-const html = {
+let html = {
     src: sourceDir + '*.html',
     watch: [sourceDir + '*.html'],
     bld: buildDir,
