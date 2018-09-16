@@ -1,0 +1,17 @@
+language: node_js
+
+node_js:
+- node
+
+branches:
+  only:
+  - master
+
+before_script:
+- npm install -g --silent
+
+script: # the build step
+- gulp build --prod
+
+after_success:
+- gulp deploy --user $FTP_USER --password $FTP_PASSWORD

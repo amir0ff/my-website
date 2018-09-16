@@ -1,6 +1,8 @@
 // Include Gulp.js and Plugins
 const gulp = require('gulp');
 const newer = require('gulp-newer');
+const ftp = require('vinyl-ftp');
+const minimist = require('minimist');
 const htmlclean = require('gulp-htmlclean');
 const imagemin = require('gulp-imagemin');
 const sizediff = require('gulp-sizediff');
@@ -16,72 +18,71 @@ const del = require('del');
 const pkg = require('./package.json');
 
 // Check Build Environment
-let devBuild = true,
+let args = minimist(process.argv.slice(2));
 
-    // Files Locations
-    source = 'source/',
-    build = 'build/',
-    node_modules = 'node_modules/',
+// Files Locations
+let source = 'source/';
+let buildDir = 'build/';
 
-    npm = {
-        jquery: node_modules + 'jquery/dist/jquery.js',
-        bootstrap: node_modules + 'bootstrap/dist/js/bootstrap.js',
-        moment: node_modules +  'moment/moment.js',
-        modernizr: 'source/js/modernizr.js'
+let npm = {
+    jquery: 'node_modules/jquery/dist/jquery.js',
+    bootstrap: 'node_modules/bootstrap/dist/js/bootstrap.js',
+    moment: 'node_modules/moment/moment.js',
+    modernizr: 'source/js/modernizr.js'
+};
+let images = {
+    src: source + 'images/**/*.*',
+    bld: buildDir + 'images/'
+};
+
+let css = {
+    src: source + 'scss/**/*.scss',
+    watch: [source + 'scss/**/*'],
+    bld: buildDir + 'css/',
+    sassOpts: {
+        outputStyle: 'nested',
+        precision: 3,
+        errLogToConsole: true
     },
-    images = {
-        src: source + 'images/**/*.*',
-        bld: build + 'images/'
-    },
-
-    css = {
-        src: source + 'scss/**/*.scss',
-        watch: [source + 'scss/**/*'],
-        bld: build + 'css/',
-        sassOpts: {
-            outputStyle: 'nested',
-            precision: 3,
-            errLogToConsole: true
+    pleeeaseOpts: {
+        out: 'main.min.css',
+        autoprefixer: {
+            browsers: ['last 2 versions', '> 2%']
         },
-        pleeeaseOpts: {
-            out: 'main.min.css',
-            autoprefixer: {
-                browsers: ['last 2 versions', '> 2%']
-            },
-            rem: ['16px'],
-            pseudoElements: true,
-            mqpacker: true,
-            minifier: !devBuild
-        }
-    },
+        rem: ['16px'],
+        pseudoElements: true,
+        mqpacker: true,
+        minifier: args.prod
+    }
+};
 
-    js = {
-        src: source + 'js/main.js',
-        bld: build + 'js/',
-    },
+let js = {
+    src: source + 'js/main.js',
+    bld: buildDir + 'js/',
+};
 
-    syncOpts = {
-        server: {
-            baseDir: build,
-            index: 'index.html'
-        },
-        open: false,
-        notify: true
+let syncOpts = {
+    server: {
+        baseDir: build,
+        index: 'index.html'
     },
+    open: false,
+    notify: true
+};
 
-    html = {
-        src: source + '*.html',
-        watch: [source + '*.html'],
-        bld: build,
-        context: {
-            devBuild: devBuild,
-        }
-    };
+let html = {
+    src: source + '*.html',
+    watch: [source + '*.html'],
+    bld: buildDir,
+    context: {
+        devBuild: !args.prod,
+    }
+};
 
 // Cleanup Build Folder
 gulp.task('cleanup', function () {
     del([
-        build + '*'
+        buildDir + '*'
     ]);
 });
 
@@ -90,7 +91,7 @@ gulp.task('html', function () {
     let page = gulp.src(html.src).pipe(preprocess({
         context: html.context
     }));
-    if (!devBuild) {
+    if (args.prod) {
         page = page
             .pipe(sizediff.start())
             .pipe(htmlclean())
@@ -127,7 +128,7 @@ gulp.task('sass', function () {
 
 // Build JavaScript
 gulp.task('js', function () {
-    if (devBuild) {
+    if (!args.prod) {
         return gulp.src([npm.jquery,
             npm.modernizr,
             npm.bootstrap,
@@ -142,7 +143,7 @@ gulp.task('js', function () {
             .pipe(gulp.dest(js.bld));
     } else {
         del([
-            build + 'js/*'
+            buildDir + 'js/*'
         ]);
         return gulp.src([npm.jquery,
             npm.modernizr,
@@ -169,23 +170,37 @@ gulp.task('browsersync', function () {
     browsersync(syncOpts);
 });
 
-// Default Gulp.js Task
-gulp.task('default', ['html', 'images', 'sass', 'js', 'browsersync'], function () {
+gulp.task('deploy', function() {
+    let remotePath = '/amiroffme/';
+    let conn = ftp.create({
+        host: 'ftp.amiroff.me',
+        user: args.user,
+        password: args.password
+    });
+    gulp.src(buildDir)
+        .pipe(conn.newer(remotePath))
+        .pipe(conn.dest(remotePath));
+});
+
+// Gulp build task
+gulp.task('build', ['html', 'images', 'sass', 'js', 'browsersync'], function () {
 
     // Print Build Type
-    console.log(pkg.name + ' "' + pkg.description + '" v' + pkg.version + ', ' + (devBuild ? 'development' : 'production') + ' build');
+    console.log(pkg.name + ' "' + pkg.description + '" v' + pkg.version + ', ' + (args.prod ? 'production' : 'development') + ' build');
 
     // Check Dependencies Versions
-    ncu.run({
-        packageFile: 'package.json'
-    })
-        .then((upgraded) => {
-            if (Object.keys(upgraded).length === 0) {
-                console.log('All npm dependencies are up to date!');
-            } else {
-                console.log('The following npm dependencies need updates "ncu -a":', upgraded);
-            }
-        });
+    if (!args.prod) {
+        ncu.run({
+            packageFile: 'package.json'
+        })
+            .then((upgraded) => {
+                if (Object.keys(upgraded).length === 0) {
+                    console.log('All npm dependencies are up to date!');
+                } else {
+                    console.log('The following npm dependencies need updates "ncu -a":', upgraded);
+                }
+            });
+    }
 
     // Watch HTML
     gulp.watch(html.watch, ['html', browsersync.reload]);

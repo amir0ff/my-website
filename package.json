@@ -1,14 +1,11 @@
 {
   "name": "www.amiroff.me",
   "version": "1.0.0",
-  "description": "My portfolio Webpage",
+  "description": "My portfolio website",
   "main": "build/index.html",
   "author": "Amir Off",
   "license": "GPL-3.0",
-  "repository": "https://bitbucket.org/ameer157/www.amiroff.me",
-  "scripts": {
-    "gulp": "gulp"
-  },
+  "repository": "https://github.com/ameer157/my-website",
   "devDependencies": {
     "browser-sync": "^2.24.7",
     "del": "^3.0.0",
@@ -23,7 +20,9 @@
     "gulp-sizediff": "0.0.2",
     "gulp-strip-debug": "^3.0.0",
     "gulp-terser": "^1.0.1",
-    "npm-check-updates": "^2.14.2"
+    "minimist": "^1.2.0",
+    "npm-check-updates": "^2.14.2",
+    "vinyl-ftp": "^0.6.1"
   },
   "dependencies": {
     "bootstrap": "^4.1.3",
