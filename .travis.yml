@@ -3,14 +3,10 @@ language: node_js
 node_js:
 - node
 
-branches:
-  only:
-  - master
-
-install:
+before_script:
 - npm install -g --silent
 
-before_script:
+script:
 - gulp build --prod
 
 after_script:
