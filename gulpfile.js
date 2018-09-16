@@ -17,11 +17,11 @@ const ncu = require('npm-check-updates');
 const del = require('del');
 const pkg = require('./package.json');
 
-// Check build environment
+// Check Build Environment
 let args = minimist(process.argv.slice(2));
 
-// Main directories
-let sourceDir = 'source/';
+// Files Locations
+let source = 'source/';
 let buildDir = 'build/';
 
 let npm = {
@@ -31,13 +31,13 @@ let npm = {
     modernizr: 'source/js/modernizr.js'
 };
 let images = {
-    src: sourceDir + 'images/**/*.*',
+    src: source + 'images/**/*.*',
     bld: buildDir + 'images/'
 };
 
 let css = {
-    src: sourceDir + 'scss/**/*.scss',
-    watch: [sourceDir + 'scss/**/*'],
+    src: source + 'scss/**/*.scss',
+    watch: [source + 'scss/**/*'],
     bld: buildDir + 'css/',
     sassOpts: {
         outputStyle: 'nested',
@@ -57,7 +57,7 @@ let css = {
 };
 
 let js = {
-    src: sourceDir + 'js/main.js',
+    src: source + 'js/main.js',
     bld: buildDir + 'js/',
 };
 
@@ -71,22 +71,22 @@ let syncOpts = {
 };
 
 let html = {
-    src: sourceDir + '*.html',
-    watch: [sourceDir + '*.html'],
+    src: source + '*.html',
+    watch: [source + '*.html'],
     bld: buildDir,
     context: {
         devBuild: !args.prod,
     }
 };
 
-// Cleanup build folder
+// Cleanup Build Folder
 gulp.task('cleanup', function () {
     del([
         buildDir + '*'
     ]);
 });
 
-// HTML compression
+// HTML Compression
 gulp.task('html', function () {
     let page = gulp.src(html.src).pipe(preprocess({
         context: html.context
@@ -102,7 +102,7 @@ gulp.task('html', function () {
     return page.pipe(gulp.dest(html.bld));
 });
 
-// Images compression
+// Images Compression
 gulp.task('images', function () {
     return gulp.src(images.src)
         .pipe(newer(images.bld))
@@ -114,7 +114,7 @@ gulp.task('images', function () {
         .pipe(gulp.dest(images.bld));
 });
 
-// Build CSS files
+// Build CSS Files
 gulp.task('sass', function () {
     return gulp.src(css.src)
         .pipe(sizediff.start())
@@ -165,48 +165,55 @@ gulp.task('js', function () {
     }
 });
 
+// Browser Sync
 gulp.task('browsersync', function () {
     browsersync(syncOpts);
 });
 
-// Runs only on Travis CI
 gulp.task('deploy', function () {
-    const remotePath = '/amiroffme/';
-    const conn = ftp.create({
+    let remotePath = '/amiroffme/';
+    let conn = ftp.create({
         host: 'ftp.amiroff.me',
         user: args.user,
         password: args.password
     });
-    console.log('FTP connection successful!');
+    console.log('FTP connection successful');
     gulp.src('build/**/*.*')
         .pipe(conn.dest(remotePath));
 });
 
 gulp.task('production', function () {
-    console.log('This is a production build');
+
 });
 
 // Gulp build task
 gulp.task('build', ['html', 'images', 'sass', 'js', (args.prod ? 'production' : 'browsersync')], function () {
 
-    // Print build info
-    console.log(pkg.name + ' "' + pkg.description + '" v' + pkg.version);
+    // Print environment type
+    console.log(pkg.name + ' "' + pkg.description + '" v' + pkg.version + ', ' + (args.prod ? 'production' : 'development') + ' build');
 
-    // Run only in development environment
+    // Check environment
     if (!args.prod) {
-        console.log('This is a development build');
         ncu.run({
             packageFile: 'package.json'
-        }).then((upgraded) => {
-            if (Object.keys(upgraded).length === 0) {
-                console.log('All npm dependencies are up to date!');
-            } else {
-                console.log('The following npm dependencies need updates "ncu -a":', upgraded);
-            }
-        });
+        })
+            .then((upgraded) => {
+                if (Object.keys(upgraded).length === 0) {
+                    console.log('All npm dependencies are up to date!');
+                } else {
+                    console.log('The following npm dependencies need updates "ncu -a":', upgraded);
+                }
+            });
+        // Watch HTML
         gulp.watch(html.watch, ['html', browsersync.reload]);
+
+        // Watch images
         gulp.watch(images.src, ['images', browsersync.reload]);
+
+        // Watch sass
         gulp.watch(css.watch, ['sass', browsersync.reload]);
+
+        // Watch JavaScript
         gulp.watch(js.src, ['js', browsersync.reload]);
     }
 });
