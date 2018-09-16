@@ -10,8 +10,8 @@ branches:
 before_script:
 - npm install -g --silent
 
-script: # the build step
+script:
 - gulp build --prod
 
-after_success:
+after_script:
 - gulp deploy --user $FTP_USER --password $FTP_PASSWORD
