@@ -170,7 +170,7 @@ gulp.task('browsersync', function () {
     browsersync(syncOpts);
 });
 
-gulp.task('deploy', function() {
+gulp.task('deploy', function () {
     let remotePath = '/amiroffme/';
     let conn = ftp.create({
         host: 'ftp.amiroff.me',
@@ -178,7 +178,6 @@ gulp.task('deploy', function() {
         password: args.password
     });
     gulp.src(buildDir)
-        .pipe(conn.newer(remotePath))
         .pipe(conn.dest(remotePath));
 });
 
