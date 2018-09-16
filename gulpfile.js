@@ -17,7 +17,8 @@ const ncu = require('npm-check-updates');
 const del = require('del');
 const pkg = require('./package.json');
 
-// Check Build Environment
+// Check gulp task arguments
+// '$ gulp build --prod' for production build
 let args = minimist(process.argv.slice(2));
 
 // Files Locations
@@ -170,6 +171,8 @@ gulp.task('browsersync', function () {
     browsersync(syncOpts);
 });
 
+// Runs only on Travis CI
+// '$ gulp deploy --user $FTP_USER --password $FTP_PASSWORD'
 gulp.task('deploy', function () {
     let remotePath = '/amiroffme/';
     let conn = ftp.create({
@@ -177,7 +180,7 @@ gulp.task('deploy', function () {
         user: args.user,
         password: args.password
     });
-    console.log('FTP connection successful');
+    console.log('FTP connection successful!');
     gulp.src('build/**/*.*')
         .pipe(conn.dest(remotePath));
 });
@@ -189,10 +192,10 @@ gulp.task('production', function () {
 // Gulp build task
 gulp.task('build', ['html', 'images', 'sass', 'js', (args.prod ? 'production' : 'browsersync')], function () {
 
-    // Print environment type
+    // Print build info
     console.log(pkg.name + ' "' + pkg.description + '" v' + pkg.version);
 
-    // Check environment
+    // Execute only for development build
     if (!args.prod) {
         console.log('This is a development build');
         ncu.run({
