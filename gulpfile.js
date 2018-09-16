@@ -106,12 +106,12 @@ gulp.task('html', function () {
 // Images Compression
 gulp.task('images', function () {
     return gulp.src(images.src)
-        .pipe(newer(images.bld))
-        .pipe(sizediff.start())
-        .pipe(imagemin())
-        .pipe(sizediff.stop({
-            title: 'Images Compression'
-        }))
+    /*        .pipe(newer(images.bld))
+            .pipe(sizediff.start())
+            .pipe(imagemin())
+            .pipe(sizediff.stop({
+                title: 'Images Compression'
+            }))*/
         .pipe(gulp.dest(images.bld));
 });
 
