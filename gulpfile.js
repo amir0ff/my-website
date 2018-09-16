@@ -17,27 +17,27 @@ const ncu = require('npm-check-updates');
 const del = require('del');
 const pkg = require('./package.json');
 
-// Check Build Environment
-let args = minimist(process.argv.slice(2));
+// Check build environment
+const args = minimist(process.argv.slice(2));
 
-// Files Locations
-let source = 'source/';
-let buildDir = 'build/';
+// Main directories
+const sourceDir = 'source/';
+const buildDir = 'build/';
 
-let npm = {
+const npm = {
     jquery: 'node_modules/jquery/dist/jquery.js',
     bootstrap: 'node_modules/bootstrap/dist/js/bootstrap.js',
     moment: 'node_modules/moment/moment.js',
     modernizr: 'source/js/modernizr.js'
 };
-let images = {
-    src: source + 'images/**/*.*',
+const images = {
+    src: sourceDir + 'images/**/*.*',
     bld: buildDir + 'images/'
 };
 
-let css = {
-    src: source + 'scss/**/*.scss',
-    watch: [source + 'scss/**/*'],
+const css = {
+    src: sourceDir + 'scss/**/*.scss',
+    watch: [sourceDir + 'scss/**/*'],
     bld: buildDir + 'css/',
     sassOpts: {
         outputStyle: 'nested',
@@ -56,12 +56,12 @@ let css = {
     }
 };
 
-let js = {
-    src: source + 'js/main.js',
+const js = {
+    src: sourceDir + 'js/main.js',
     bld: buildDir + 'js/',
 };
 
-let syncOpts = {
+const syncOpts = {
     server: {
         baseDir: buildDir,
         index: 'index.html'
@@ -70,23 +70,23 @@ let syncOpts = {
     notify: true
 };
 
-let html = {
-    src: source + '*.html',
-    watch: [source + '*.html'],
+const html = {
+    src: sourceDir + '*.html',
+    watch: [sourceDir + '*.html'],
     bld: buildDir,
     context: {
         devBuild: !args.prod,
     }
 };
 
-// Cleanup Build Folder
+// Cleanup build folder
 gulp.task('cleanup', function () {
     del([
         buildDir + '*'
     ]);
 });
 
-// HTML Compression
+// HTML compression
 gulp.task('html', function () {
     let page = gulp.src(html.src).pipe(preprocess({
         context: html.context
@@ -102,7 +102,7 @@ gulp.task('html', function () {
     return page.pipe(gulp.dest(html.bld));
 });
 
-// Images Compression
+// Images compression
 gulp.task('images', function () {
     return gulp.src(images.src)
         .pipe(newer(images.bld))
@@ -114,7 +114,7 @@ gulp.task('images', function () {
         .pipe(gulp.dest(images.bld));
 });
 
-// Build CSS Files
+// Build CSS files
 gulp.task('sass', function () {
     return gulp.src(css.src)
         .pipe(sizediff.start())
@@ -165,55 +165,48 @@ gulp.task('js', function () {
     }
 });
 
-// Browser Sync
 gulp.task('browsersync', function () {
     browsersync(syncOpts);
 });
 
+// Runs only on Travis CI
 gulp.task('deploy', function () {
-    let remotePath = '/amiroffme/';
-    let conn = ftp.create({
+    const remotePath = '/amiroffme/';
+    const conn = ftp.create({
         host: 'ftp.amiroff.me',
         user: args.user,
         password: args.password
     });
-    console.log('FTP connection successful');
+    console.log('FTP connection successful!');
     gulp.src('build/**/*.*')
         .pipe(conn.dest(remotePath));
 });
 
 gulp.task('production', function () {
-
+    console.log('This is a production build');
 });
 
 // Gulp build task
 gulp.task('build', ['html', 'images', 'sass', 'js', (args.prod ? 'production' : 'browsersync')], function () {
 
-    // Print environment type
-    console.log(pkg.name + ' "' + pkg.description + '" v' + pkg.version + ', ' + (args.prod ? 'production' : 'development') + ' build');
+    // Print build info
+    console.log(pkg.name + ' "' + pkg.description + '" v' + pkg.version);
 
-    // Check environment
+    // Run only in development environment
     if (!args.prod) {
+        console.log('This is a development build');
         ncu.run({
             packageFile: 'package.json'
-        })
-            .then((upgraded) => {
-                if (Object.keys(upgraded).length === 0) {
-                    console.log('All npm dependencies are up to date!');
-                } else {
-                    console.log('The following npm dependencies need updates "ncu -a":', upgraded);
-                }
-            });
-        // Watch HTML
+        }).then((upgraded) => {
+            if (Object.keys(upgraded).length === 0) {
+                console.log('All npm dependencies are up to date!');
+            } else {
+                console.log('The following npm dependencies need updates "ncu -a":', upgraded);
+            }
+        });
         gulp.watch(html.watch, ['html', browsersync.reload]);
-
-        // Watch images
         gulp.watch(images.src, ['images', browsersync.reload]);
-
-        // Watch sass
         gulp.watch(css.watch, ['sass', browsersync.reload]);
-
-        // Watch JavaScript
         gulp.watch(js.src, ['js', browsersync.reload]);
     }
 });
