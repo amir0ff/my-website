@@ -14,6 +14,7 @@ const terser = require('gulp-terser');
 const concat = require('gulp-concat');
 const browsersync = require('browser-sync');
 const ncu = require('npm-check-updates');
+const del = require('del');
 const pkg = require('./package.json');
 
 // Check gulp task arguments
@@ -135,6 +136,9 @@ gulp.task('js', function () {
             .pipe(concat('main.js'))
             .pipe(gulp.dest(js.bld));
     } else {
+        del([
+            buildDir + '*'
+        ]);
         return gulp.src([npm.jquery,
             npm.modernizr,
             npm.bootstrap,
