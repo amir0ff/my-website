@@ -22,7 +22,7 @@ const pkg = require('./package.json');
 let args = minimist(process.argv.slice(2));
 
 // Files Locations
-let source = 'source/';
+let sourceDir = 'source/';
 let buildDir = 'build/';
 
 let npm = {
@@ -32,13 +32,13 @@ let npm = {
     modernizr: 'source/js/modernizr.js'
 };
 let images = {
-    src: source + 'images/**/*.*',
+    src: sourceDir + 'images/**/*.*',
     bld: buildDir + 'images/'
 };
 
 let css = {
-    src: source + 'scss/**/*.scss',
-    watch: [source + 'scss/**/*'],
+    src: sourceDir + 'scss/**/*.scss',
+    watch: [sourceDir + 'scss/**/*'],
     bld: buildDir + 'css/',
     sassOpts: {
         outputStyle: 'nested',
@@ -58,7 +58,7 @@ let css = {
 };
 
 let js = {
-    src: source + 'js/main.js',
+    src: sourceDir + 'js/main.js',
     bld: buildDir + 'js/',
 };
 
@@ -72,8 +72,8 @@ let syncOpts = {
 };
 
 let html = {
-    src: source + '*.html',
-    watch: [source + '*.html'],
+    src: sourceDir + '*.html',
+    watch: [sourceDir + '*.html'],
     bld: buildDir,
     context: {
         devBuild: !args.prod,
