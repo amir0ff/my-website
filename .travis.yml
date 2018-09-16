@@ -7,7 +7,7 @@ branches:
   only:
   - master
 
-before_script:
+install:
 - npm install -g --silent
 
 script:
