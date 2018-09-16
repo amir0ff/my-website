@@ -14,10 +14,10 @@ const terser = require('gulp-terser');
 const concat = require('gulp-concat');
 const browsersync = require('browser-sync');
 const ncu = require('npm-check-updates');
-const del = require('del');
 const pkg = require('./package.json');
 
-// Check build environment
+// Check gulp task arguments
+// '$ gulp build --prod' for production build
 const args = minimist(process.argv.slice(2));
 
 // Main directories
@@ -79,13 +79,6 @@ const html = {
     }
 };
 
-// Cleanup build folder
-gulp.task('cleanup', function () {
-    del([
-        buildDir + '*'
-    ]);
-});
-
 // HTML compression
 gulp.task('html', function () {
     let page = gulp.src(html.src).pipe(preprocess({
@@ -142,9 +135,6 @@ gulp.task('js', function () {
             .pipe(concat('main.js'))
             .pipe(gulp.dest(js.bld));
     } else {
-        del([
-            buildDir + 'js/*'
-        ]);
         return gulp.src([npm.jquery,
             npm.modernizr,
             npm.bootstrap,
@@ -170,6 +160,7 @@ gulp.task('browsersync', function () {
 });
 
 // Runs only on Travis CI
+// '$ gulp deploy --user $FTP_USER --password $FTP_PASSWORD'
 gulp.task('deploy', function () {
     const remotePath = '/amiroffme/';
     const conn = ftp.create({
@@ -192,7 +183,7 @@ gulp.task('build', ['html', 'images', 'sass', 'js', (args.prod ? 'production' : 
     // Print build info
     console.log(pkg.name + ' "' + pkg.description + '" v' + pkg.version);
 
-    // Run only in development environment
+    // Execute only for development build
     if (!args.prod) {
         console.log('This is a development build');
         ncu.run({
