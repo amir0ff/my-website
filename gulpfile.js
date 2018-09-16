@@ -181,13 +181,17 @@ gulp.task('deploy', function () {
         .pipe(conn.dest(remotePath));
 });
 
-// Gulp build task
-gulp.task('build', ['html', 'images', 'sass', 'js', 'browsersync'], function () {
+gulp.task('production', function () {
 
-    // Print Build Type
+});
+
+// Gulp build task
+gulp.task('build', ['html', 'images', 'sass', 'js', (args.prod ? 'production' : 'browsersync')], function () {
+
+    // Print environment type
     console.log(pkg.name + ' "' + pkg.description + '" v' + pkg.version + ', ' + (args.prod ? 'production' : 'development') + ' build');
 
-    // Check Dependencies Versions
+    // Check environment
     if (!args.prod) {
         ncu.run({
             packageFile: 'package.json'
@@ -199,18 +203,16 @@ gulp.task('build', ['html', 'images', 'sass', 'js', 'browsersync'], function () 
                     console.log('The following npm dependencies need updates "ncu -a":', upgraded);
                 }
             });
+        // Watch HTML
+        gulp.watch(html.watch, ['html', browsersync.reload]);
+
+        // Watch images
+        gulp.watch(images.src, ['images', browsersync.reload]);
+
+        // Watch sass
+        gulp.watch(css.watch, ['sass', browsersync.reload]);
+
+        // Watch JavaScript
+        gulp.watch(js.src, ['js', browsersync.reload]);
     }
-
-    // Watch HTML
-    gulp.watch(html.watch, ['html', browsersync.reload]);
-
-    // Watch Images
-    gulp.watch(images.src, ['images', browsersync.reload]);
-
-    // Watch Sass
-    gulp.watch(css.watch, ['sass', browsersync.reload]);
-
-    // Watch JavaScript
-    gulp.watch(js.src, ['js', browsersync.reload]);
-
 });
