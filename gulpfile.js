@@ -183,17 +183,18 @@ gulp.task('deploy', function () {
 });
 
 gulp.task('production', function () {
-
+    console.log('This is a production build');
 });
 
 // Gulp build task
 gulp.task('build', ['html', 'images', 'sass', 'js', (args.prod ? 'production' : 'browsersync')], function () {
 
     // Print environment type
-    console.log(pkg.name + ' "' + pkg.description + '" v' + pkg.version + ', ' + (args.prod ? 'production' : 'development') + ' build');
+    console.log(pkg.name + ' "' + pkg.description + '" v' + pkg.version);
 
     // Check environment
     if (!args.prod) {
+        console.log('This is a development build');
         ncu.run({
             packageFile: 'package.json'
         })
@@ -204,16 +205,9 @@ gulp.task('build', ['html', 'images', 'sass', 'js', (args.prod ? 'production' : 
                     console.log('The following npm dependencies need updates "ncu -a":', upgraded);
                 }
             });
-        // Watch HTML
         gulp.watch(html.watch, ['html', browsersync.reload]);
-
-        // Watch images
         gulp.watch(images.src, ['images', browsersync.reload]);
-
-        // Watch sass
         gulp.watch(css.watch, ['sass', browsersync.reload]);
-
-        // Watch JavaScript
         gulp.watch(js.src, ['js', browsersync.reload]);
     }
 });
