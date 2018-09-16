@@ -177,7 +177,8 @@ gulp.task('deploy', function () {
         user: args.user,
         password: args.password
     });
-    gulp.src(buildDir)
+    console.log('FTP connection successful');
+    gulp.src('build/**/*.*')
         .pipe(conn.dest(remotePath));
 });
 
