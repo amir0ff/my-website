@@ -63,7 +63,7 @@ let js = {
 
 let syncOpts = {
     server: {
-        baseDir: build,
+        baseDir: buildDir,
         index: 'index.html'
     },
     open: false,
