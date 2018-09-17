@@ -4,7 +4,7 @@ const newer = require('gulp-newer');
 const ftp = require('vinyl-ftp');
 const minimist = require('minimist');
 const htmlclean = require('gulp-htmlclean');
-const imagemin = require('gulp-imagemin');
+// const imagemin = require('gulp-imagemin');
 const sizediff = require('gulp-sizediff');
 const preprocess = require('gulp-preprocess');
 const sass = require('gulp-sass');
@@ -15,13 +15,14 @@ const concat = require('gulp-concat');
 const browsersync = require('browser-sync');
 const ncu = require('npm-check-updates');
 const del = require('del');
-const pkg = require('./package.json');
+const packageFile = require('./package.json');
 
-// Check gulp task arguments
-// '$ gulp build --prod' for production build
+// Check gulp build task arguments
+// "$ gulp build --prod" for production build
+// "$ gulp build" for development build
 let args = minimist(process.argv.slice(2));
 
-// Files Locations
+// Main build directories
 let sourceDir = 'source/';
 let buildDir = 'build/';
 
@@ -62,7 +63,7 @@ let js = {
     bld: buildDir + 'js/',
 };
 
-let syncOpts = {
+let browserSyncConfig = {
     server: {
         baseDir: buildDir,
         index: 'index.html'
@@ -80,15 +81,8 @@ let html = {
     }
 };
 
-// Cleanup Build Folder
-gulp.task('cleanup', function () {
-    del([
-        buildDir + '*'
-    ]);
-});
-
 // HTML Compression
-gulp.task('html', function () {
+gulp.task('html', () => {
     let page = gulp.src(html.src).pipe(preprocess({
         context: html.context
     }));
@@ -104,7 +98,7 @@ gulp.task('html', function () {
 });
 
 // Images Compression
-gulp.task('images', function () {
+gulp.task('images', () => {
     return gulp.src(images.src)
     /*        .pipe(newer(images.bld))
             .pipe(sizediff.start())
@@ -116,7 +110,7 @@ gulp.task('images', function () {
 });
 
 // Build CSS Files
-gulp.task('sass', function () {
+gulp.task('sass', () => {
     return gulp.src(css.src)
         .pipe(sizediff.start())
         .pipe(sass(css.sassOpts))
@@ -128,7 +122,7 @@ gulp.task('sass', function () {
 });
 
 // Build JavaScript
-gulp.task('js', function () {
+gulp.task('js', () => {
     if (!args.prod) {
         return gulp.src([npm.jquery,
             npm.modernizr,
@@ -167,13 +161,13 @@ gulp.task('js', function () {
 });
 
 // Browser Sync
-gulp.task('browsersync', function () {
-    browsersync(syncOpts);
+gulp.task('browsersync', () => {
+    browsersync(browserSyncConfig);
 });
 
 // Runs only on Travis CI
-// '$ gulp deploy --user $FTP_USER --password $FTP_PASSWORD'
-gulp.task('deploy', function () {
+// "$ gulp deploy --user $FTP_USER --password $FTP_PASSWORD"
+gulp.task('deploy', () => {
     let remotePath = '/amiroffme/';
     let conn = ftp.create({
         host: 'ftp.amiroff.me',
@@ -185,15 +179,15 @@ gulp.task('deploy', function () {
         .pipe(conn.dest(remotePath));
 });
 
-gulp.task('production', function () {
+gulp.task('production', () => {
     console.log('This is a production build');
 });
 
 // Gulp build task
-gulp.task('build', ['html', 'images', 'sass', 'js', (args.prod ? 'production' : 'browsersync')], function () {
+gulp.task('build', ['html', 'images', 'sass', 'js', (args.prod ? 'production' : 'browsersync')], () => {
 
     // Print build info
-    console.log(pkg.name + ' "' + pkg.description + '" v' + pkg.version);
+    console.log(packageFile.name + ' "' + packageFile.description + '" v' + packageFile.version);
 
     // Execute only for development build
     if (!args.prod) {
