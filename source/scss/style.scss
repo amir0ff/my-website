@@ -612,6 +612,18 @@ article {
       }
     }
   }
+  #blogError {
+    display: none;
+    width: 42%;
+    margin: 0 auto;
+    a {
+      color: #8a6d3b;
+      font-weight: 600;
+    }
+    @media (max-width: 991px) and (min-width: 768px) {
+      width: 100%;
+    }
+  }
   .footer {
     p {
       margin-right: 16px;

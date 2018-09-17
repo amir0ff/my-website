@@ -160,13 +160,7 @@ gulp.task('js', () => {
     }
 });
 
-// Browser Sync
-gulp.task('browsersync', () => {
-    browsersync(browserSyncConfig);
-});
-
 // Runs only on Travis CI
-// "$ gulp deploy --user $FTP_USER --password $FTP_PASSWORD"
 gulp.task('deploy', () => {
     let remotePath = '/amiroffme/';
     let conn = ftp.create({
@@ -179,8 +173,17 @@ gulp.task('deploy', () => {
         .pipe(conn.dest(remotePath));
 });
 
+// Browser Sync
+gulp.task('browsersync', () => {
+    console.log('This is a development build');
+    console.log('File changes will be watched and trigger a page reload');
+    browsersync(browserSyncConfig);
+});
+
 gulp.task('production', () => {
     console.log('This is a production build');
+    console.log('Please run the following script for deployment:');
+    console.log('gulp deploy --user $FTP_USER --password $FTP_PASSWORD');
 });
 
 // Gulp build task
@@ -191,7 +194,6 @@ gulp.task('build', ['html', 'images', 'sass', 'js', (args.prod ? 'production' : 
 
     // Execute only for development build
     if (!args.prod) {
-        console.log('This is a development build');
         ncu.run({
             packageFile: 'package.json'
         })
