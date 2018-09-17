@@ -5,7 +5,6 @@ const ftp = require('vinyl-ftp');
 const minimist = require('minimist');
 const htmlclean = require('gulp-htmlclean');
 // const imagemin = require('gulp-imagemin');
-var log = require('fancy-log');
 const sizediff = require('gulp-sizediff');
 const preprocess = require('gulp-preprocess');
 const sass = require('gulp-sass');
@@ -173,8 +172,7 @@ gulp.task('deploy', () => {
     let conn = ftp.create({
         host: 'ftp.amiroff.me',
         user: args.user,
-        password: args.password,
-        log: log(log)
+        password: args.password
     });
     console.log('FTP connection successful!');
     gulp.src('build/**/*.*')
