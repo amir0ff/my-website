@@ -173,13 +173,28 @@ gulp.task('deploy', () => {
         .pipe(conn.dest(remotePath));
 });
 
-// Browser Sync
-gulp.task('browsersync', () => {
+// Runs only for development build
+gulp.task('development', () => {
+    browsersync(browserSyncConfig);
     console.log('This is a development build');
     console.log('File changes will be watched and trigger a page reload');
-    browsersync(browserSyncConfig);
+    ncu.run({
+        packageFile: 'package.json'
+    })
+        .then((upgraded) => {
+            if (Object.keys(upgraded).length === 0) {
+                console.log('All npm dependencies are up to date!');
+            } else {
+                console.log('The following npm dependencies need updates "ncu -a":', upgraded);
+            }
+        });
+    gulp.watch(html.watch, ['html', browsersync.reload]);
+    gulp.watch(images.src, ['images', browsersync.reload]);
+    gulp.watch(css.watch, ['sass', browsersync.reload]);
+    gulp.watch(js.src, ['js', browsersync.reload]);
 });
 
+// Runs only for production build
 gulp.task('production', () => {
     console.log('This is a production build');
     console.log('Please run the following script for deployment:');
@@ -187,26 +202,9 @@ gulp.task('production', () => {
 });
 
 // Gulp build task
-gulp.task('build', ['html', 'images', 'sass', 'js', (args.prod ? 'production' : 'browsersync')], () => {
+gulp.task('build', ['html', 'images', 'sass', 'js', (args.prod ? 'production' : 'development')], () => {
 
     // Print build info
     console.log(packageFile.name + ' "' + packageFile.description + '" v' + packageFile.version);
 
-    // Execute only for development build
-    if (!args.prod) {
-        ncu.run({
-            packageFile: 'package.json'
-        })
-            .then((upgraded) => {
-                if (Object.keys(upgraded).length === 0) {
-                    console.log('All npm dependencies are up to date!');
-                } else {
-                    console.log('The following npm dependencies need updates "ncu -a":', upgraded);
-                }
-            });
-        gulp.watch(html.watch, ['html', browsersync.reload]);
-        gulp.watch(images.src, ['images', browsersync.reload]);
-        gulp.watch(css.watch, ['sass', browsersync.reload]);
-        gulp.watch(js.src, ['js', browsersync.reload]);
-    }
 });
