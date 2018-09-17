@@ -20,7 +20,7 @@ const packageFile = require('./package.json');
 // Check gulp build task arguments
 // "$ gulp build --prod" for production build
 // "$ gulp build" for development build
-let args = minimist(process.argv.slice(2));
+const args = minimist(process.argv.slice(2));
 
 // Main build directories
 let sourceDir = 'source/';
@@ -162,8 +162,8 @@ gulp.task('js', () => {
 
 // Runs only on Travis CI
 gulp.task('deploy', () => {
-    let remotePath = '/amiroffme/';
-    let conn = ftp.create({
+    const remotePath = '/amiroffme/';
+    const conn = ftp.create({
         host: 'ftp.amiroff.me',
         user: args.user,
         password: args.password
