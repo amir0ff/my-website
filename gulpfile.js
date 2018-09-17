@@ -17,10 +17,10 @@ const ncu = require('npm-check-updates');
 const del = require('del');
 const packageFile = require('./package.json');
 
-// Check gulp build task arguments
+// Parses build task arguments
+const args = minimist(process.argv.slice(2));
 // "$ gulp build --prod" for production build
 // "$ gulp build" for development build
-const args = minimist(process.argv.slice(2));
 
 // Main build directories
 let sourceDir = 'source/';
@@ -198,13 +198,11 @@ gulp.task('development', () => {
 gulp.task('production', () => {
     console.log('This is a production build');
     console.log('Please run the following script for deployment:');
-    console.log('gulp deploy --user $FTP_USER --password $FTP_PASSWORD');
+    console.log('$ gulp deploy --user $FTP_USER --password $FTP_PASSWORD');
 });
 
-// Gulp build task
+// Main build task
 gulp.task('build', ['html', 'images', 'sass', 'js', (args.prod ? 'production' : 'development')], () => {
-
     // Print build info
     console.log(packageFile.name + ' "' + packageFile.description + '" v' + packageFile.version);
-
 });
