@@ -19,7 +19,7 @@
     "gulp-sass": "^4.0.1",
     "gulp-sizediff": "0.0.2",
     "gulp-strip-debug": "^3.0.0",
-    "gulp-terser": "^1.0.1",
+    "gulp-terser": "^1.1.4",
     "minimist": "^1.2.0",
     "npm-check-updates": "^2.14.2",
     "vinyl-ftp": "^0.6.1"
