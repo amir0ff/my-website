@@ -10,7 +10,7 @@ const preprocess = require('gulp-preprocess');
 const sass = require('gulp-sass');
 const pleeease = require('gulp-pleeease');
 const stripdebug = require('gulp-strip-debug');
-const terser = require('gulp-terser');
+// const terser = require('gulp-terser');
 const concat = require('gulp-concat');
 const browsersync = require('browser-sync');
 const ncu = require('npm-check-updates');
@@ -152,7 +152,7 @@ gulp.task('js', () => {
             .pipe(concat('main.min.js'))
             .pipe(sizediff.start())
             .pipe(stripdebug())
-            .pipe(terser())
+            /*.pipe(terser())*/
             .pipe(sizediff.stop({
                 title: 'JavaScript Compression'
             }))
