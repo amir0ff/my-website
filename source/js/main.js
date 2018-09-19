@@ -87,8 +87,8 @@ $(document).ready(function () {
             $("#rss-feeds").rss(feedURL,
                 {
                     ssl: true,
-                    limit: 8,
-                    filterLimit: 8,
+                    limit: 24,
+                    filterLimit: 24,
                     filter: (entry) => {
                         // Filter out comments and print only blog posts
                         return entry.categories.length > 1
