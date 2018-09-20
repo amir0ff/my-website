@@ -5,6 +5,10 @@
   "main": "build/index.html",
   "author": "Amir Off",
   "license": "GPL-3.0",
+  "scripts": {
+    "serve": "gulp build",
+    "build": "gulp build --prod"
+  },
   "repository": "https://github.com/ameer157/my-website",
   "devDependencies": {
     "browser-sync": "^2.24.7",
@@ -27,7 +31,6 @@
   "dependencies": {
     "bootstrap": "^4.1.3",
     "jquery": "^3.3.1",
-    "jquery-rss": "^3.3.0",
     "moment": "^2.22.2"
   }
 }

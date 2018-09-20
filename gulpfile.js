@@ -130,8 +130,7 @@ gulp.task('js', () => {
             npm.moment,
             js.src,
             'source/js/smooth-scroll.js',
-            'source/js/back-to-top.js',
-            'source/js/jquery-rss.js'
+            'source/js/back-to-top.js'
         ])
             .pipe(newer(js.bld))
             .pipe(concat('main.js'))
@@ -146,8 +145,7 @@ gulp.task('js', () => {
             npm.moment,
             js.src,
             'source/js/smooth-scroll.js',
-            'source/js/back-to-top.js',
-            'source/js/jquery-rss.js'
+            'source/js/back-to-top.js'
         ])
             .pipe(concat('main.min.js'))
             .pipe(sizediff.start())

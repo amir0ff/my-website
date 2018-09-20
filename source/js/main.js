@@ -67,41 +67,36 @@ $(function () {
 $(document).ready(function () {
 
     (function getGitHubRepos() {
-        let reposURL = "https://api.github.com/users/ameer157/repos?callback=allow";
+        const reposURL = "https://api.github.com/users/ameer157/repos?callback=allow";
         $.getJSON(reposURL + '&callback=?', (data) => {
-            addGitHubRepos(data);
+            addGitHubRepos(data.data);
         })
     })();
 
     function addGitHubRepos(data) {
-        $.each(data.data, (index, repos) => {
-            let repo = $('<div class="card"><div class="card-body"><span class="badge"><span class="repo-lang-color ' + repos.language.toLocaleLowerCase() + '"></span> ' + repos.language + '</span><a href=" ' + repos.html_url + ' " target="_blank"><div class="card-header text-left"><h5>' + repos.name + '</h5></div></a><p class="card-text text-left small">' + repos.description + '</p></div></div>');
+        $.each(data, (index, repos) => {
+            const repo = $('<div class="card"><div class="card-body"><span class="badge"><span class="repo-lang-color ' + repos.language.toLocaleLowerCase() + '"></span> ' + repos.language + '</span><a href=" ' + repos.html_url + ' " target="_blank"><div class="card-header text-left"><h5>' + repos.name + '</h5></div></a><p class="card-text text-left small">' + repos.description + '</p></div></div>');
             repo.prependTo('#repositories');
         })
     }
 
 
     (function getBlogPosts() {
-        jQuery(function ($) {
-            let feedURL = "https://medium.com/feed/@ameer157";
-            $("#rss-feeds").rss(feedURL,
-                {
-                    ssl: true,
-                    limit: 24,
-                    filterLimit: 24,
-                    filter: (entry) => {
-                        // Filter out comments and print only blog posts
-                        return entry.categories.length > 1
-                    },
-                    error: () => {
-                        $('#blogError').fadeIn("slow");
-                    },
-                    dateFormat: 'MMM D, YYYY',
-                    layoutTemplate: '<div class="row card-deck">{entries}</div>',
-                    entryTemplate: '<div class="card"><div class="card-body"><span class="date"><i class="fas fa-clock"></i>{date}</span><a href="{url}" target="_blank"><div class="cover"><i class="fa fa-book-open fa-4x"></i>{teaserImage}</div><h5>{title}</h5></a><div class="card-text"><p>{shortBodyPlain}</p></div></div></div>'
-                })
+        let postsURL = "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2F%40ameer157&api_key=czrxuaauatap8cnstfrio4ewqjwklit3ijo2xaya&order_by=pubDate&order_dir=asc&count=12";
+        $.getJSON(postsURL, (data) => {
+            addBlogPosts(data.items);
         })
     })();
+
+    function addBlogPosts(data) {
+        let filteredPosts = data.filter(item => item.categories.length > 0);
+        $.each(filteredPosts, (index, post) => {
+            const momentDate = moment(post.pubDate).format('MMM D, YYYY');
+            const filteredDescription = post.content.replace(/(<img[^>]+?>|<img>|<\/img>|<p>|<\/p>|<blockquote>|<\/blockquote>)/img, "").substring(0, 135);
+            const repo = $('<div class="card"><div class="card-body"><span class="date"><i class="fas fa-clock"></i>' + momentDate + '</span><a href="' + post.link + '" target="_blank"><div class="cover"><i class="fa fa-book-open fa-4x"></i><img src="' + post.thumbnail + '"></div><h5>' + post.title + '</h5></a><div class="card-text">' + filteredDescription + '</div></div></div>');
+            repo.prependTo('#feeds');
+        })
+    }
 
 
     $('#submit').click(function (e) {
