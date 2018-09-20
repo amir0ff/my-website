@@ -92,7 +92,7 @@ $(document).ready(function () {
         let filteredPosts = data.filter(item => item.categories.length > 0);
         $.each(filteredPosts, (index, post) => {
             const momentDate = moment(post.pubDate).format('MMM D, YYYY');
-            const filteredDescription = post.content.replace(/(<img[^>]+?>|<img>|<\/img>|<p>|<\/p>|<blockquote>|<\/blockquote>)/img, "").substring(0, 135);
+            const filteredDescription = post.content.replace(/(<img[^>]+?>|<img>|<\/img>|<p>|<\/p>|<blockquote>|<\/blockquote>|<a[^>]*>|<strong>|<\/strong>)/img, "").substring(0, 135);
             const repo = $('<div class="card"><div class="card-body"><span class="date"><i class="fas fa-clock"></i>' + momentDate + '</span><a href="' + post.link + '" target="_blank"><div class="cover"><i class="fa fa-book-open fa-4x"></i><img src="' + post.thumbnail + '"></div><h5>' + post.title + '</h5></a><div class="card-text">' + filteredDescription + '</div></div></div>');
             repo.prependTo('#feeds');
         })
