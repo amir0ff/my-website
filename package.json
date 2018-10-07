@@ -11,7 +11,7 @@
   },
   "repository": "https://github.com/ameer157/my-website",
   "devDependencies": {
-    "browser-sync": "^2.24.7",
+    "browser-sync": "^2.26.0",
     "del": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
@@ -23,7 +23,7 @@
     "gulp-sass": "^4.0.1",
     "gulp-sizediff": "0.0.2",
     "gulp-strip-debug": "^3.0.0",
-    "gulp-terser": "^1.1.4",
+    "gulp-terser": "^1.1.5",
     "minimist": "^1.2.0",
     "npm-check-updates": "^2.14.2",
     "vinyl-ftp": "^0.6.1"

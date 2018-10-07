@@ -4,13 +4,13 @@ const newer = require('gulp-newer');
 const ftp = require('vinyl-ftp');
 const minimist = require('minimist');
 const htmlclean = require('gulp-htmlclean');
-// const imagemin = require('gulp-imagemin');
+const imagemin = require('gulp-imagemin');
 const sizediff = require('gulp-sizediff');
 const preprocess = require('gulp-preprocess');
 const sass = require('gulp-sass');
 const pleeease = require('gulp-pleeease');
 const stripdebug = require('gulp-strip-debug');
-// const terser = require('gulp-terser');
+const terser = require('gulp-terser');
 const concat = require('gulp-concat');
 const browsersync = require('browser-sync');
 const ncu = require('npm-check-updates');
@@ -100,12 +100,12 @@ gulp.task('html', () => {
 // Images Compression
 gulp.task('images', () => {
     return gulp.src(images.src)
-    /*        .pipe(newer(images.bld))
-            .pipe(sizediff.start())
-            .pipe(imagemin())
-            .pipe(sizediff.stop({
-                title: 'Images Compression'
-            }))*/
+        .pipe(newer(images.bld))
+        .pipe(sizediff.start())
+        .pipe(imagemin())
+        .pipe(sizediff.stop({
+            title: 'Images Compression'
+        }))
         .pipe(gulp.dest(images.bld));
 });
 
@@ -150,7 +150,7 @@ gulp.task('js', () => {
             .pipe(concat('main.min.js'))
             .pipe(sizediff.start())
             .pipe(stripdebug())
-            /*.pipe(terser())*/
+            .pipe(terser())
             .pipe(sizediff.stop({
                 title: 'JavaScript Compression'
             }))
