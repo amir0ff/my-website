@@ -164,7 +164,10 @@ gulp.task('deploy', () => {
     const conn = ftp.create({
         host: 'ftp.amiroff.me',
         user: args.user,
-        password: args.password
+        password: args.password,
+        port: 2222,
+        secure: true,
+        secureOptions: { rejectUnauthorized: false }
     });
     console.log('FTP connection successful!');
     gulp.src('build/**/*.*')
