@@ -159,7 +159,7 @@ gulp.task('js', () => {
 });
 
 // Runs only on Travis CI
-gulp.task('deploy', () => {
+gulp.task('deploy', (done) => {
     const remotePath = '/amiroffme/';
     const conn = ftp.create({
         host: 'ftp.amiroff.me',
@@ -167,11 +167,12 @@ gulp.task('deploy', () => {
         password: args.password,
         port: 2222,
         secure: true,
-        secureOptions: { rejectUnauthorized: false }
+        // Host using self-signed certificate
+        secureOptions: {rejectUnauthorized: false}
     });
-    console.log('FTP connection successful!');
     gulp.src('build/**/*.*')
         .pipe(conn.dest(remotePath));
+    done(console.log('FTP connection successful!'));
 });
 
 // Runs only for development build
