@@ -92,7 +92,7 @@ $(document).ready(function () {
         let filteredPosts = data.filter(item => item.categories.length > 0);
         $.each(filteredPosts, (index, posts) => {
             const momentDate = moment(posts.pubDate).format('MMM D, YYYY');
-            let formattedText = posts.content.replace(/(<img[^>]+?>|<img>|<\/img>|<p>|<\/p>|<h4>|<\/h4>|<blockquote>|<\/blockquote>|<a[^>]*>|<strong>|<\/strong>)/img, "").substring(0, 130);
+            let formattedText = posts.content.replace(/(<img[^>]+?>|<img>|<\/img>|<p>|<\/p>|<h4>|<\/h4>|<blockquote>|<\/blockquote>|<figcaption>|<\/figcaption>|<a[^>]*>|<strong>|<\/strong>)/img, "").substring(0, 130);
             formattedText += '...';
             const post = $('<div class="card"><div class="card-body"><span class="date"><i class="fas fa-clock"></i>' + momentDate + '</span><a href="' + posts.link + '" target="_blank"><div class="cover"><i class="fa fa-book-open fa-4x"></i><img src="' + posts.thumbnail + '"></div><h5>' + posts.title + '</h5></a><div class="card-text">' + formattedText + '</div></div></div>');
             post.prependTo('#feeds');
