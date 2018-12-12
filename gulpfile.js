@@ -200,7 +200,7 @@ gulp.task('development', () => {
 gulp.task('production', () => {
     console.log('This is a production build');
     console.log('Please run the following script for deployment:');
-    console.log('$ gulp deploy --user $FTP_USER --password $FTP_PASSWORD');
+    console.log('$ gulp deploy --user FTP_USER --password FTP_PASSWORD');
 });
 
 // Main build task
