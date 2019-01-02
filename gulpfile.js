@@ -190,10 +190,10 @@ gulp.task('development', () => {
                 console.log('The following npm dependencies need updates "ncu -a":', upgraded);
             }
         });
-    gulp.watch(html.watch, ['html', browsersync.reload]);
-    gulp.watch(images.src, ['images', browsersync.reload]);
-    gulp.watch(css.watch, ['sass', browsersync.reload]);
-    gulp.watch(js.src, ['js', browsersync.reload]);
+    gulp.watch(html.watch, gulp.series(['html', browsersync.reload]));
+    gulp.watch(images.src, gulp.series(['images', browsersync.reload]));
+    gulp.watch(css.watch, gulp.series(['sass', browsersync.reload]));
+    gulp.watch(js.src, gulp.series(['js', browsersync.reload]));
 });
 
 // Runs only for production build
@@ -204,7 +204,7 @@ gulp.task('production', () => {
 });
 
 // Main build task
-gulp.task('build', ['html', 'images', 'sass', 'js', (args.prod ? 'production' : 'development')], () => {
+gulp.task('build', gulp.series(gulp.parallel('html', 'images', 'sass', 'js', (args.prod ? 'production' : 'development'))), () => {
     // Print build info
     console.log(packageFile.name + ' "' + packageFile.description + '" v' + packageFile.version);
 });

@@ -105,6 +105,9 @@ body {
       flex: 1 1 auto;
       padding: 1.25rem;
       .card-text {
+        em {
+          font-style: normal;
+        }
         user-select: none;
         p {
           margin: 0;

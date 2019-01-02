@@ -25,7 +25,7 @@ function isElementInViewport(el) {
 // function to smooth scroll to elements on link clicks
 $(function () {
     $('a[href*=\\#]:not([href=\\#])').click(function () {
-        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+        if (location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') && location.hostname === this.hostname) {
             let target = $(this.hash);
 
             target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
@@ -92,7 +92,7 @@ $(document).ready(function () {
         let filteredPosts = data.filter(item => item.categories.length > 0);
         $.each(filteredPosts, (index, posts) => {
             const momentDate = moment(posts.pubDate).format('MMM D, YYYY');
-            let formattedText = posts.content.replace(/(<img[^>]+?>|<img>|<\/img>|<p>|<\/p>|<h4>|<\/h4>|<blockquote>|<\/blockquote>|<figcaption>|<\/figcaption>|<a[^>]*>|<strong>|<\/strong>)/img, "").substring(0, 130);
+            let formattedText = posts.content.replace(/(<img[^>]+?>|<img>|<\/img>|<p>|<\/p>|<h4>|<\/h4>|<blockquote>|<\/blockquote>|<figure>|<\/figure>|<figcaption>|<\/figcaption>|<a[^>]*>|<strong>|<\/strong>)/img, "").substring(0, 130);
             formattedText += '...';
             const post = $('<div class="card"><div class="card-body"><span class="date"><i class="fas fa-clock"></i>' + momentDate + '</span><a href="' + posts.link + '" target="_blank"><div class="cover"><i class="fa fa-book-open fa-4x"></i><img src="' + posts.thumbnail + '"></div><h5>' + posts.title + '</h5></a><div class="card-text">' + formattedText + '</div></div></div>');
             post.prependTo('#feeds');
@@ -109,13 +109,13 @@ $(document).ready(function () {
         let theEmail = $('#email').val();
         let theMessage = $('#message').val();
 
-        if (theName.length == 0) {
+        if (theName.length === 0) {
             $('#nameError').fadeIn("slow");
         }
-        else if (theEmail.length == 0) {
+        else if (theEmail.length === 0) {
             $('#emailError').fadeIn("slow");
         }
-        else if (theMessage.length == 0) {
+        else if (theMessage.length === 0) {
             $('#messageError').fadeIn("slow");
         }
         else {
@@ -194,7 +194,7 @@ $(document).ready(function () {
 
 
         // if user starts scrolling and we're at the top, auto scroll to the first section
-        if ((canScroll) && (currentScroll == 0)) {
+        if ((canScroll) && (currentScroll === 0)) {
             canScroll = false;
             $('.navbar').animate({'padding-top': "0px"}, 500).css('background', '#0D0D0D').css('box-shadow', '0px 1px 2px #020202');
             $('html, body').animate({
