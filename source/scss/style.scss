@@ -12,6 +12,7 @@ html, html a {
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004) !important;
   color: white;
   text-decoration: none;
+
   &:hover, &:focus {
     color: white;
     text-decoration: none;
@@ -63,6 +64,7 @@ body {
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px;
+
   .card {
     box-shadow: 0 3px 13px 0 rgba(0, 0, 0, 0.6);
     width: 31%;
@@ -79,46 +81,58 @@ body {
     background-clip: border-box;
     border: 1px solid #0d0d0d;
     border-radius: .25rem;
+
     &:hover {
       animation: floatRepos 0.4s ease-in-out forwards;
     }
+
     &:nth-child(3n) {
       margin-right: 0;
     }
+
     @media (max-width: 767px) {
       width: 100%;
       margin: 16px !important;
     }
+
     .card-header {
       padding: 0 0 8px 0;
       margin-bottom: 0;
       background-color: rgba(0, 0, 0, .03);
       border-bottom: 1px solid rgb(32, 32, 32);
+
       h5 {
         font-family: Roboto, sans-serif;
         font-weight: 500;
         text-transform: none;
       }
     }
+
     .card-body {
       -ms-flex: 1 1 auto;
       flex: 1 1 auto;
       padding: 1.25rem;
+
       .card-text {
         em {
           font-style: normal;
         }
+
         user-select: none;
+
         p {
           margin: 0;
         }
       }
+
       a {
         color: white;
+
         &:hover {
           text-decoration: none !important;
         }
       }
+
       .badge {
         color: #959595;
         font-weight: 300;
@@ -129,6 +143,7 @@ body {
         background-color: transparent;
         user-select: none;
         border-radius: 0;
+
         .repo-lang-color {
           position: relative;
           top: 1px;
@@ -137,21 +152,27 @@ body {
           width: 12px;
           height: 12px;
           border-radius: 50%;
+
           &.javascript {
             background-color: #f1e05a;
           }
+
           &.typescript {
             background-color: #2b7489;
           }
+
           &.python {
             background-color: #3572A5;
           }
+
           &.c\+\+ {
             background-color: #f34b7d;
           }
+
           &.html {
             background-color: #e34c26;
           }
+
           &.arduino {
             background-color: #ededed;
           }
@@ -167,8 +188,10 @@ body {
   height: 100vh;
   background-size: cover;
   background-position: center;
+
   .home-text-wrapper {
     border-top-color: #333132;
+
     &:after {
       top: 99.8%;
     }
@@ -425,10 +448,12 @@ article {
   background: #202020;
   margin: 0;
   position: relative;
+
   h3 {
     position: relative;
     font-size: 21px;
   }
+
   &:after {
     top: 100%;
     left: 50%;
@@ -443,6 +468,10 @@ article {
     border-width: 30px;
     margin-left: -30px;
     z-index: 1;
+  }
+
+  .gh-chart {
+    margin: 12px 0;
   }
 }
 
@@ -459,6 +488,7 @@ article {
   text-decoration: none;
   color: #fff;
   font-weight: 400;
+
   &:before {
     content: "";
     position: absolute;
@@ -477,6 +507,7 @@ article {
 
 #portfolio .row a:hover {
   text-decoration: none;
+
   &:before {
     visibility: visible;
     padding-bottom: 0px;
@@ -487,6 +518,7 @@ article {
 
 #portfolio .github-section {
   margin-top: 90px;
+
   .github-img {
     width: 70%;
     margin-bottom: 20px;
@@ -494,12 +526,14 @@ article {
       width: 90%;
     }
   }
+
   .row {
     margin-top: 50px;
     @media (max-width: 767px) {
       margin-top: 0;
     }
   }
+
   .footer {
     p {
       margin-right: 16px;
@@ -512,6 +546,7 @@ article {
   background: #2b2b2b;
   margin: 0;
   position: relative;
+
   &:after {
     top: 100%;
     left: 50%;
@@ -527,8 +562,10 @@ article {
     margin-left: -30px;
     z-index: 1;
   }
+
   #rss-feeds {
     margin-top: 50px;
+
     .card-deck {
       display: -ms-flexbox;
       display: flex;
@@ -536,6 +573,7 @@ article {
       flex-wrap: wrap;
       margin-right: -15px;
       margin-left: -15px;
+
       .card {
         box-shadow: 0 3px 13px 0 rgba(0, 0, 0, 0.6);
         width: 31%;
@@ -553,6 +591,7 @@ article {
         border: 1px solid #0d0d0d;
         border-radius: .30rem;
         user-select: none;
+
         h5 {
           font-weight: 700;
           letter-spacing: 1px;
@@ -562,40 +601,49 @@ article {
           line-height: 18px;
           text-transform: none;
         }
+
         &:nth-child(3n) {
           margin-right: 0;
         }
+
         @media (max-width: 767px) {
           width: 100%;
           margin: 16px !important;
         }
+
         .card-body {
           position: relative;
           padding: 0;
+
           .card-text {
             padding: 1.25rem 1.25rem 3rem 1.25rem;
             text-align: justify;
           }
+
           .date {
             font-size: 12px;
             position: absolute;
             bottom: 2px;
             right: 6px;
             color: #959595;
+
             .fa-clock {
               margin-right: 3px;
             }
           }
         }
+
         .cover {
           position: relative;
           transition: opacity 0.35s ease-in-out;
+
           img {
             border-top-left-radius: .30rem;
             border-top-right-radius: .30rem;
             width: 100%;
             height: 170px;
           }
+
           .fa-book-open {
             position: absolute;
             left: 42%;
@@ -604,31 +652,38 @@ article {
             color: black;
             transition: opacity 0.35s ease-in-out;
           }
+
           &:hover {
             opacity: 0.3;
+
             .fa-book-open {
               opacity: 1;
             }
           }
         }
+
         &:hover {
           animation: none;
         }
       }
     }
   }
+
   #blogError {
     display: none;
     width: 42%;
     margin: 0 auto;
+
     a {
       color: #8a6d3b;
       font-weight: 600;
     }
+
     @media (max-width: 991px) and (min-width: 768px) {
       width: 100%;
     }
   }
+
   .footer {
     p {
       margin-right: 16px;
@@ -707,6 +762,7 @@ article {
     filter: grayscale(100%);
     transition: all 0.3s ease-in;
   }
+
   &:hover {
     img {
       filter: none;
@@ -867,6 +923,7 @@ footer .row {
   }
   .navbar-default .navbar-toggle {
     border-color: transparent;
+
     .icon-bar {
       background-color: #fff;
     }
