@@ -1,7 +1,7 @@
 let currentScroll = 0;
 let canScroll = true; // if false, blocks browser from scrolling - used for non-touch devices and desktops (touch devices ignore this)
 let smallDevice = window.matchMedia("only screen and (max-width: 760px)");
-let portfolio1Shown = false;
+/*let portfolio1Shown = false;*/
 let portfolio2Shown = false;
 let portfolio3Shown = false;
 
@@ -89,9 +89,7 @@ $(document).ready(function () {
     })();
 
     function addBlogPosts(data) {
-        console.log('data', data);
         let filteredPosts = data.filter(item => item.categories.length > 0);
-        console.log('filteredPosts', filteredPosts);
         $.each(filteredPosts, (index, posts) => {
             const momentDate = moment(posts.pubDate).format('MMM D, YYYY');
             let formattedText = posts.content.replace(/(<img[^>]+?>|<img>|<\/img>|<p>|<\/p>|<h4>|<\/h4>|<blockquote>|<\/blockquote>|<figure>|<\/figure>|<figcaption>|<\/figcaption>|<a[^>]*>|<strong>|<\/strong>)/img, "").substring(0, 130);
@@ -153,8 +151,8 @@ $(document).ready(function () {
 
     // do not auto scroll for mobile
     if (smallDevice.matches || Modernizr.touch) {
-        portfolio1Shown = true;
-        $('#portfolio-row-1').css('opacity', 1);
+        /*portfolio1Shown = true;
+        $('#portfolio-row-1').css('opacity', 1);*/
 
         portfolio2Shown = true;
         $('#portfolio-row-2').css('opacity', 1);
@@ -180,10 +178,10 @@ $(document).ready(function () {
         }
 
         // show portfolio section when it's in viewport
-        if (!portfolio1Shown && isElementInViewport($('#portfolio-row-1 img'))) {
+        /*if (!portfolio1Shown && isElementInViewport($('#portfolio-row-1 img'))) {
             portfolio1Shown = true;
             $('#portfolio-row-1').animate({opacity: 1}, 1000);
-        }
+        }*/
 
         if (!portfolio2Shown && isElementInViewport($('#portfolio-row-2 img'))) {
             portfolio2Shown = true;
