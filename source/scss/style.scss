@@ -2,7 +2,7 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800);
 @import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500);
 @import url(https://fonts.googleapis.com/css?family=Damion);
-@import url(https://use.fontawesome.com/releases/v5.3.1/css/all.css);
+@import url(https://use.fontawesome.com/releases/v5.7.2/css/all.css);
 @import url(https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css);
 
 html, html a {
@@ -827,6 +827,11 @@ article {
 #contact #social i.fa-github-square:hover, #contact #social a.fa-github-square:focus {
   color: #4183C4 !important;
 }
+
+#contact #social i.fa-gitlab:hover, #contact #social a.fa-gitlab:focus {
+  color: #fa7035 !important;
+}
+
 
 #contact #social i.fa-stack-overflow:hover, #contact #social a.fa-stack-overflow:focus {
   color: #fe7a15 !important;
