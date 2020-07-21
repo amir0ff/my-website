@@ -67,7 +67,7 @@ $(function () {
 $(document).ready(function () {
 
     (function getGitHubRepos() {
-        const reposURL = "https://api.github.com/users/amiroffme/repos?callback=allow";
+        const reposURL = "https://api.github.com/users/amiroff157/repos?callback=allow";
         $.getJSON(reposURL + '&callback=?', (data) => {
             addGitHubRepos(data.data);
         })
@@ -82,7 +82,7 @@ $(document).ready(function () {
 
 
     (function getBlogPosts() {
-        let postsURL = "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2F%40amiroffme&api_key=czrxuaauatap8cnstfrio4ewqjwklit3ijo2xaya&order_by=pubDate&order_dir=asc&count=14";
+        let postsURL = "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2F%40amiroff157&api_key=pdu4dawprzidibowy69tc3yiaxl6v0hpzmuxiook&order_by=pubDate&order_dir=asc&count=14";
         $.getJSON(postsURL, (data) => {
             addBlogPosts(data.items);
         })
