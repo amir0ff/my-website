@@ -163,6 +163,8 @@ gulp.task('deploy', async (done) => {
     user: args.user,
     password: args.password,
     port: 2222,
+    reload: true,
+    log: (message => console.log('FTP Log:', message)),
     secure: true,
     // Host using self-signed certificate
     secureOptions: { rejectUnauthorized: false },
