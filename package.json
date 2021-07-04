@@ -9,28 +9,29 @@
     "serve": "gulp build",
     "build": "gulp build --prod"
   },
-  "repository": "https://github.com/amiroffme/my-website",
+  "repository": "https://github.com/amiroff157/my-website",
   "devDependencies": {
-    "browser-sync": "^2.26.7",
-    "del": "^5.0.0",
+    "browser-sync": "^2.27.4",
+    "del": "^6.0.0",
     "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",
     "gulp-htmlclean": "^2.7.22",
-    "gulp-imagemin": "^6.2.0",
+    "gulp-imagemin": "^7.1.0",
     "gulp-newer": "^1.4.0",
     "gulp-pleeease": "^2.0.2",
-    "gulp-preprocess": "^3.0.3",
-    "gulp-sass": "^4.0.2",
+    "gulp-preprocess": "^4.0.2",
+    "gulp-sass": "^5.0.0",
     "gulp-sizediff": "0.0.2",
-    "gulp-strip-debug": "^3.0.0",
-    "gulp-terser": "^1.2.0",
-    "minimist": "^1.2.0",
-    "npm-check-updates": "^4.0.1",
+    "gulp-strip-debug": "^4.0.0",
+    "gulp-terser": "^2.0.1",
+    "minimist": "^1.2.5",
+    "npm-check-updates": "^11.8.1",
     "vinyl-ftp": "^0.6.1"
   },
   "dependencies": {
-    "bootstrap": "^4.3.1",
-    "jquery": "^3.4.1",
-    "moment": "^2.24.0"
+    "bootstrap": "^4.6.0",
+    "jquery": "^3.6.0",
+    "moment": "^2.29.1",
+    "node-sass": "^6.0.1"
   }
 }
