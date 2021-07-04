@@ -156,9 +156,9 @@ gulp.task('js', () => {
 });
 
 // Runs only on Travis CI
-gulp.task('deploy', (done) => {
+gulp.task('deploy', async (done) => {
   const remotePath = '/amiroffme/';
-  const conn = ftp.create({
+  const conn = await ftp.create({
     host: 'ftp.amiroff.me',
     user: args.user,
     password: args.password,
@@ -167,9 +167,11 @@ gulp.task('deploy', (done) => {
     // Host using self-signed certificate
     secureOptions: { rejectUnauthorized: false },
   });
+  console.log('FTP connection successful!');
   gulp.src('build/**/*.*')
     .pipe(conn.dest(remotePath));
-  done(() => console.log('FTP connection successful!'));
+  console.log('Upload complete!');
+  done();
 });
 
 // Runs only for development build
@@ -194,14 +196,15 @@ gulp.task('development', () => {
 });
 
 // Runs only for production build
-gulp.task('production', () => {
+gulp.task('production', (done) => {
   console.log('This is a production build');
   console.log('Please run the following script for deployment:');
   console.log('$ gulp deploy --user FTP_USER --password FTP_PASSWORD');
+  done();
 });
 
 // Main build task
 gulp.task('build', gulp.series(gulp.parallel('html', 'images', 'sass', 'js', (args.prod ? 'production' : 'development'))), () => {
   // Print build info
-  console.log(packageFile.name + ' "' + packageFile.description + '" v' + packageFile.version);
+  return console.log('testttttttttttt' + packageFile.name + ' "' + packageFile.description + '" v' + packageFile.version);
 });
