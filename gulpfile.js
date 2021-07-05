@@ -14,7 +14,6 @@ const concat = require('gulp-concat');
 const browsersync = require('browser-sync');
 const ncu = require('npm-check-updates');
 const del = require('del');
-const packageFile = require('./package.json');
 
 // Parses build task arguments
 const args = minimist(process.argv.slice(2));
@@ -22,20 +21,20 @@ const args = minimist(process.argv.slice(2));
 // "$ gulp build" for development build
 
 // Main build directories
-let sourceDir = 'source/';
-let buildDir = 'build/';
+const sourceDir = 'source/';
+const buildDir = 'build/';
 
-let npm = {
+const npm = {
   jquery: 'node_modules/jquery/dist/jquery.js',
   bootstrap: 'node_modules/bootstrap/dist/js/bootstrap.js',
   moment: 'node_modules/moment/moment.js',
 };
-let images = {
+const images = {
   src: sourceDir + 'images/**/*.*',
   bld: buildDir + 'images/',
 };
 
-let css = {
+const css = {
   src: sourceDir + 'scss/**/*.scss',
   watch: [sourceDir + 'scss/**/*'],
   bld: buildDir + 'css/',
@@ -56,12 +55,12 @@ let css = {
   },
 };
 
-let js = {
+const js = {
   src: sourceDir + 'js/main.js',
   bld: buildDir + 'js/',
 };
 
-let php = {
+const php = {
   src: sourceDir + 'php/*.php',
   bld: buildDir + 'php/',
 };
