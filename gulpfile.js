@@ -1,6 +1,4 @@
-// Include Gulp.js and Plugins
 const gulp = require('gulp');
-const newer = require('gulp-newer');
 const minimist = require('minimist');
 const htmlclean = require('gulp-htmlclean');
 const imagemin = require('gulp-imagemin');
@@ -15,30 +13,34 @@ const browsersync = require('browser-sync');
 const ncu = require('npm-check-updates');
 const del = require('del');
 
-// Parses build task arguments
+/**
+ Parses build task arguments
+ "$ gulp build --prod" for production build
+ "$ gulp build" for development build
+ **/
 const args = minimist(process.argv.slice(2));
-// "$ gulp build --prod" for production build
-// "$ gulp build" for development build
+const buildType = args.prod ? 'production' : 'development';
+const buildMessage = buildType === 'production' ? 'Look at .github/workflows/node.js.yml for deployment build script.' : 'File changes will be watched and trigger a page reload.';
 
 // Main build directories
-const sourceDir = 'source/';
-const buildDir = 'build/';
+const sourceDir = './source/';
+const buildDir = './build/';
 
-const npm = {
-  jquery: 'node_modules/jquery/dist/jquery.js',
-  bootstrap: 'node_modules/bootstrap/dist/js/bootstrap.js',
-  moment: 'node_modules/moment/moment.js',
+const npm_modules = {
+  jquery: './node_modules/jquery/dist/jquery.js',
+  bootstrap: './node_modules/bootstrap/dist/js/bootstrap.js',
+  moment: './node_modules/moment/moment.js',
 };
 const images = {
-  src: sourceDir + 'images/**/*.*',
+  sourceDir: sourceDir + 'images/**/*.*',
   watchList: [sourceDir + 'images/**/*.*'],
-  bld: buildDir + 'images/',
+  buildDir: buildDir + 'images/',
 };
 
 const css = {
-  src: sourceDir + 'scss/**/*.scss',
+  sourceDir: sourceDir + 'scss/**/*.scss',
   watchList: [sourceDir + 'scss/**/*.scss'],
-  bld: buildDir + 'css/',
+  buildDir: buildDir + 'css/',
   sassOpts: {
     outputStyle: 'nested',
     precision: 3,
@@ -52,22 +54,22 @@ const css = {
     rem: ['16px'],
     pseudoElements: true,
     mqpacker: true,
-    minifier: args.prod,
+    minifier: buildType === 'production',
   },
 };
 
 const js = {
-  src: sourceDir + 'js/*.js',
+  sourceDir: sourceDir + 'js/*.js',
   watchList: [sourceDir + 'js/**/*.js'],
-  bld: buildDir + 'js/',
+  buildDir: buildDir + 'js/',
 };
 
 const php = {
-  src: sourceDir + 'php/**/*.php',
-  bld: buildDir + 'php/',
+  sourceDir: sourceDir + 'php/**/*.php',
+  buildDir: buildDir + 'php/',
 };
 
-let browserSyncConfig = {
+const browserSyncConfig = {
   server: {
     baseDir: buildDir,
     index: 'index.html',
@@ -76,84 +78,83 @@ let browserSyncConfig = {
   notify: true,
 };
 
-let html = {
-  src: sourceDir + '*.html',
+const html = {
+  sourceDir: sourceDir + '*.html',
   watchList: [sourceDir + '*.html'],
-  bld: buildDir,
+  buildDir: buildDir,
   context: {
-    devBuild: !args.prod,
+    devBuild: buildType === 'development',
   },
 };
 
 // HTML Compression
 gulp.task('html', () => {
-  let page = gulp.src(html.src).pipe(preprocess({
+  let page = gulp.src(html.sourceDir).pipe(preprocess({
     context: html.context,
   }));
-  if (args.prod) {
-    page = page
+  if (buildType === 'development') {
+    return page.pipe(gulp.dest(html.buildDir));
+  } else {
+    return page
       .pipe(sizediff.start())
       .pipe(htmlclean())
       .pipe(sizediff.stop({
         title: 'HTML Minification',
-      }));
+      }))
+      .pipe(gulp.dest(html.buildDir));
   }
-  return page.pipe(gulp.dest(html.bld));
 });
 
 // Images Compression
 gulp.task('images', () => {
-  return gulp.src(images.src)
-    .pipe(newer(images.bld))
+  return gulp.src(images.sourceDir)
     .pipe(sizediff.start())
     .pipe(imagemin())
     .pipe(sizediff.stop({
       title: 'Images Compression',
     }))
-    .pipe(gulp.dest(images.bld));
+    .pipe(gulp.dest(images.buildDir));
 });
 
 // Build CSS Files
 gulp.task('sass', () => {
-  return gulp.src(css.src)
+  return gulp.src(css.sourceDir)
     .pipe(sizediff.start())
     .pipe(sass(css.sassOpts))
     .pipe(pleeease(css.pleeeaseOpts))
     .pipe(sizediff.stop({
       title: 'CSS Compression',
     }))
-    .pipe(gulp.dest(css.bld));
+    .pipe(gulp.dest(css.buildDir));
 });
 
 
 // Just copy all php module files to build folder
 gulp.task('php', () => {
-  return gulp.src(php.src).pipe(gulp.dest(php.bld));
+  return gulp.src(php.sourceDir).pipe(gulp.dest(php.buildDir));
 });
 
 // Build JavaScript
 gulp.task('js', () => {
-  if (!args.prod) {
-    return gulp.src([npm.jquery,
-      npm.bootstrap,
-      npm.moment,
-      js.src,
-      'source/js/smooth-scroll.js',
-      'source/js/back-to-top.js',
-    ])
-      .pipe(newer(js.bld))
-      .pipe(concat('main.js'))
-      .pipe(gulp.dest(js.bld));
-  } else {
-    del([
-      buildDir + 'js/*',
-    ]);
+  if (buildType === 'development') {
     return gulp.src(
       [
-        npm.jquery,
-        npm.bootstrap,
-        npm.moment,
-        js.src,
+        npm_modules.jquery,
+        npm_modules.bootstrap,
+        npm_modules.moment,
+        js.sourceDir,
+        'source/js/smooth-scroll.js',
+        'source/js/back-to-top.js',
+      ])
+      .pipe(concat('main.js'))
+      .pipe(gulp.dest(js.buildDir));
+  } else {
+    return gulp.src(
+      [
+        npm_modules.jquery,
+        npm_modules.bootstrap,
+        npm_modules.moment,
+        js.sourceDir,
         'source/js/smooth-scroll.js',
         'source/js/back-to-top.js',
       ])
@@ -164,42 +165,46 @@ gulp.task('js', () => {
       .pipe(sizediff.stop({
         title: 'JavaScript Compression',
       }))
-      .pipe(gulp.dest(js.bld));
+      .pipe(gulp.dest(js.buildDir));
   }
 });
 
-gulp.task('ncu', () => {
-  let buildType = args.prod ? 'production' : 'development';
-  console.log('This is a ' + buildType + ' build');
-  if (buildType === 'development') console.log('File changes will be watched and trigger a page reload');
-  return ncu.run({
+// Clear build directory
+gulp.task('beforeScript', (done) => {
+  del([
+    buildDir + '/**/*',
+  ]);
+  done();
+});
+
+// Runs after all gulp.js build scripts are done
+gulp.task('afterScript', (done) => {
+  if (buildType === 'development') {
+    browsersync(browserSyncConfig);
+    gulp.watch(html.watchList, gulp.series(['html', browsersync.reload]));
+    gulp.watch(images.watchList, gulp.series(['images', browsersync.reload]));
+    gulp.watch(css.watchList, gulp.series(['sass', browsersync.reload]));
+    gulp.watch(js.watchList, gulp.series(['js', browsersync.reload]));
+  }
+  ncu.run({
     packageFile: 'package.json',
   })
     .then((upgraded) => {
+      console.log('-- End of build --');
+      console.log('This is a ' + buildType + ' build.');
+      console.log('');
+      console.log('Files generated and placed in the ' + buildDir + ' directory.');
+      console.log(buildMessage);
       if (Object.keys(upgraded).length === 0) {
         console.log('All npm dependencies are up to date!');
       } else {
         console.log('The following npm dependencies need updates "ncu -a":', upgraded);
       }
     });
-});
-
-
-// Runs only for development build
-gulp.task('development', () => {
-  browsersync(browserSyncConfig);
-  gulp.watch(html.watchList, gulp.series(['html', browsersync.reload]));
-  gulp.watch(images.watchList, gulp.series(['images', browsersync.reload]));
-  gulp.watch(css.watchList, gulp.series(['sass', browsersync.reload]));
-  gulp.watch(js.watchList, gulp.series(['js', browsersync.reload]));
-});
-
-// Runs only for production build
-gulp.task('production', (done) => {
   done();
 });
 
 // Main build task
-gulp.task('build', gulp.series('ncu', 'html', 'images', 'sass', 'js', 'php', (args.prod ? 'production' : 'development')), (done) => {
+gulp.task('build', gulp.series('beforeScript', 'html', 'images', 'sass', 'js', 'php', 'afterScript'), (done) => {
   done();
 });
