@@ -63,6 +63,11 @@ let js = {
   bld: buildDir + 'js/',
 };
 
+let php = {
+  src: sourceDir + 'php/*.php',
+  bld: buildDir + 'php/',
+};
+
 let browserSyncConfig = {
   server: {
     baseDir: buildDir,
@@ -121,6 +126,12 @@ gulp.task('sass', () => {
     .pipe(gulp.dest(css.bld));
 });
 
+
+// Just copy all php module files to build folder
+gulp.task('php', () => {
+  return gulp.src(php.src).pipe(gulp.dest(php.bld));
+});
+
 // Build JavaScript
 gulp.task('js', () => {
   if (!args.prod) {
@@ -138,13 +149,15 @@ gulp.task('js', () => {
     del([
       buildDir + 'js/*',
     ]);
-    return gulp.src([npm.jquery,
-      npm.bootstrap,
-      npm.moment,
-      js.src,
-      'source/js/smooth-scroll.js',
-      'source/js/back-to-top.js',
-    ])
+    return gulp.src(
+      [
+        npm.jquery,
+        npm.bootstrap,
+        npm.moment,
+        js.src,
+        'source/js/smooth-scroll.js',
+        'source/js/back-to-top.js',
+      ])
       .pipe(concat('main.min.js'))
       .pipe(sizediff.start())
       .pipe(stripdebug())
@@ -166,13 +179,8 @@ gulp.task('deploy', async (done) => {
     port: 21,
     localRoot: __dirname + '/build',
     remoteRoot: '/amiroffme/',
-    // include: ["*", "**/*"],      // this would upload everything except dot files
     include: ['*', '**/*'],
-    // e.g. exclude sourcemaps, and ALL files in node_modules (including dot files)
-    exclude: ['dist/**/*.map', 'node_modules/**', 'node_modules/**/.*', '.git/**'],
-    // delete ALL existing files at destination before uploading, if true
     deleteRemote: false,
-    // Passive mode is forced (EPSV command is not sent)
     forcePasv: true,
     sftp: false,
   };
@@ -218,6 +226,6 @@ gulp.task('production', (done) => {
 });
 
 // Main build task
-gulp.task('build', gulp.series(gulp.parallel('html', 'images', 'sass', 'js', (args.prod ? 'production' : 'development'))), (done) => {
+gulp.task('build', gulp.series(gulp.parallel('html', 'images', 'sass', 'js', 'php', (args.prod ? 'production' : 'development'))), (done) => {
   done();
 });
