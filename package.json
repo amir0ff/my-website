@@ -13,7 +13,6 @@
   "devDependencies": {
     "browser-sync": "^2.27.4",
     "del": "^6.0.0",
-    "basic-ftp": "^4.6.6",
     "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",
     "gulp-htmlclean": "^2.7.22",

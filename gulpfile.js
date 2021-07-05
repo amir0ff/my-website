@@ -1,7 +1,6 @@
 // Include Gulp.js and Plugins
 const gulp = require('gulp');
 const newer = require('gulp-newer');
-const ftp = require('basic-ftp');
 const minimist = require('minimist');
 const htmlclean = require('gulp-htmlclean');
 const imagemin = require('gulp-imagemin');
@@ -168,40 +167,9 @@ gulp.task('js', () => {
   }
 });
 
-// Runs only on Travis CI
-gulp.task('deploy', async (done) => {
-  const config = {
-    user: args.user,
-    password: args.password,
-    host: 'ftp.amiroff.me',
-    localBuildDir: __dirname + '/build',
-    remoteBuildDir: '/amiroffme/',
-  };
-
-  const client = new ftp.Client();
-  client.ftp.verbose = true;
-  try {
-    await client.access({
-      host: config.host,
-      user: config.user,
-      password: config.password,
-      secure: false,
-    });
-    console.log(await client.list());
-    await client.ensureDir(config.remoteBuildDir);
-    await client.uploadFromDir(config.localBuildDir);
-  } catch (err) {
-    console.log('FTP error: ', err);
-  }
-  client.close();
-  done();
-});
-
 // Runs only for development build
 gulp.task('development', () => {
   browsersync(browserSyncConfig);
-  // Print build info
-  console.log('Package Info: ', packageFile.name + ' "' + packageFile.description + '" v' + packageFile.version);
   console.log('This is a development build');
   console.log('File changes will be watched and trigger a page reload');
   ncu.run({
@@ -222,11 +190,7 @@ gulp.task('development', () => {
 
 // Runs only for production build
 gulp.task('production', (done) => {
-  // Print build info
-  console.log('Package Info: ', packageFile.name + ' "' + packageFile.description + '" v' + packageFile.version);
   console.log('This is a production build');
-  console.log('Please run the following script for deployment:');
-  console.log('$ gulp deploy --user $FTP_USER --password $FTP_PASSWORD');
   done();
 });
 
