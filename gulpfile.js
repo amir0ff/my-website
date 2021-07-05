@@ -1,8 +1,7 @@
 // Include Gulp.js and Plugins
 const gulp = require('gulp');
 const newer = require('gulp-newer');
-const FtpDeploy = require('ftp-deploy');
-const ftpDeploy = new FtpDeploy();
+const ftp = require('basic-ftp');
 const minimist = require('minimist');
 const htmlclean = require('gulp-htmlclean');
 const imagemin = require('gulp-imagemin');
@@ -171,24 +170,30 @@ gulp.task('js', () => {
 
 // Runs only on Travis CI
 gulp.task('deploy', async (done) => {
-
   const config = {
     user: args.user,
     password: args.password,
     host: 'ftp.amiroff.me',
-    port: 21,
-    localRoot: __dirname + '/build',
-    remoteRoot: '/amiroffme/',
-    include: ['*', '**/*'],
-    deleteRemote: false,
-    forcePasv: true,
-    sftp: false,
+    localBuildDir: __dirname + '/build',
+    remoteBuildDir: '/amiroffme/',
   };
 
-  await ftpDeploy
-    .deploy(config)
-    .then(res => console.log('FTP connection successful: ', res))
-    .catch(err => console.log('FTP error: ', err));
+  const client = new ftp.Client();
+  client.ftp.verbose = true;
+  try {
+    await client.access({
+      host: config.host,
+      user: config.user,
+      password: config.password,
+      secure: false,
+    });
+    console.log(await client.list());
+    await client.ensureDir(config.remoteBuildDir);
+    await client.uploadFromDir(config.localBuildDir);
+  } catch (err) {
+    console.log('FTP error: ', err);
+  }
+  client.close();
   done();
 });
 
