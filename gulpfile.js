@@ -31,12 +31,13 @@ const npm = {
 };
 const images = {
   src: sourceDir + 'images/**/*.*',
+  watchList: [sourceDir + 'images/**/*.*'],
   bld: buildDir + 'images/',
 };
 
 const css = {
   src: sourceDir + 'scss/**/*.scss',
-  watch: [sourceDir + 'scss/**/*'],
+  watchList: [sourceDir + 'scss/**/*.scss'],
   bld: buildDir + 'css/',
   sassOpts: {
     outputStyle: 'nested',
@@ -56,12 +57,13 @@ const css = {
 };
 
 const js = {
-  src: sourceDir + 'js/main.js',
+  src: sourceDir + 'js/*.js',
+  watchList: [sourceDir + 'js/**/*.js'],
   bld: buildDir + 'js/',
 };
 
 const php = {
-  src: sourceDir + 'php/*.php',
+  src: sourceDir + 'php/**/*.php',
   bld: buildDir + 'php/',
 };
 
@@ -76,7 +78,7 @@ let browserSyncConfig = {
 
 let html = {
   src: sourceDir + '*.html',
-  watch: [sourceDir + '*.html'],
+  watchList: [sourceDir + '*.html'],
   bld: buildDir,
   context: {
     devBuild: !args.prod,
@@ -181,10 +183,10 @@ gulp.task('development', () => {
         console.log('The following npm dependencies need updates "ncu -a":', upgraded);
       }
     });
-  gulp.watch(html.watch, gulp.series(['html', browsersync.reload]));
-  gulp.watch(images.src, gulp.series(['images', browsersync.reload]));
-  gulp.watch(css.watch, gulp.series(['sass', browsersync.reload]));
-  gulp.watch(js.src, gulp.series(['js', browsersync.reload]));
+  gulp.watch(html.watchList, gulp.series(['html', browsersync.reload]));
+  gulp.watch(images.watchList, gulp.series(['images', browsersync.reload]));
+  gulp.watch(css.watchList, gulp.series(['sass', browsersync.reload]));
+  gulp.watch(js.watchList, gulp.series(['js', browsersync.reload]));
 });
 
 // Runs only for production build
