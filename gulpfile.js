@@ -168,12 +168,11 @@ gulp.task('js', () => {
   }
 });
 
-// Runs only for development build
-gulp.task('development', () => {
-  browsersync(browserSyncConfig);
-  console.log('This is a development build');
-  console.log('File changes will be watched and trigger a page reload');
-  ncu.run({
+gulp.task('ncu', () => {
+  let buildType = args.prod ? 'production' : 'development';
+  console.log('This is a ' + buildType + ' build');
+  if (buildType === 'development') console.log('File changes will be watched and trigger a page reload');
+  return ncu.run({
     packageFile: 'package.json',
   })
     .then((upgraded) => {
@@ -183,6 +182,12 @@ gulp.task('development', () => {
         console.log('The following npm dependencies need updates "ncu -a":', upgraded);
       }
     });
+});
+
+
+// Runs only for development build
+gulp.task('development', () => {
+  browsersync(browserSyncConfig);
   gulp.watch(html.watchList, gulp.series(['html', browsersync.reload]));
   gulp.watch(images.watchList, gulp.series(['images', browsersync.reload]));
   gulp.watch(css.watchList, gulp.series(['sass', browsersync.reload]));
@@ -191,11 +196,10 @@ gulp.task('development', () => {
 
 // Runs only for production build
 gulp.task('production', (done) => {
-  console.log('This is a production build');
   done();
 });
 
 // Main build task
-gulp.task('build', gulp.series(gulp.parallel('html', 'images', 'sass', 'js', 'php', (args.prod ? 'production' : 'development'))), (done) => {
+gulp.task('build', gulp.series('ncu', 'html', 'images', 'sass', 'js', 'php', (args.prod ? 'production' : 'development')), (done) => {
   done();
 });
