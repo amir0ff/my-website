@@ -1,7 +1,8 @@
 // Include Gulp.js and Plugins
 const gulp = require('gulp');
 const newer = require('gulp-newer');
-const ftp = require('vinyl-ftp');
+const FtpDeploy = require('ftp-deploy');
+const ftpDeploy = new FtpDeploy();
 const minimist = require('minimist');
 const htmlclean = require('gulp-htmlclean');
 const imagemin = require('gulp-imagemin');
@@ -157,28 +158,37 @@ gulp.task('js', () => {
 
 // Runs only on Travis CI
 gulp.task('deploy', async (done) => {
-  const remotePath = '/amiroffme/';
-  const conn = await ftp.create({
-    host: 'ftp.amiroff.me',
+
+  const config = {
     user: args.user,
     password: args.password,
-    port: 2222,
-    reload: true,
-    log: (message => console.log('FTP Log:', message)),
-    secure: true,
-    // Host using self-signed certificate
-    secureOptions: { rejectUnauthorized: false },
-  });
-  console.log('FTP connection successful!');
-  gulp.src('build/**/*.*')
-    .pipe(conn.dest(remotePath));
-  console.log('Upload complete!');
+    host: 'ftp.amiroff.me',
+    port: 21,
+    localRoot: __dirname + '/build',
+    remoteRoot: '/amiroffme/',
+    // include: ["*", "**/*"],      // this would upload everything except dot files
+    include: ['*', '**/*'],
+    // e.g. exclude sourcemaps, and ALL files in node_modules (including dot files)
+    exclude: ['dist/**/*.map', 'node_modules/**', 'node_modules/**/.*', '.git/**'],
+    // delete ALL existing files at destination before uploading, if true
+    deleteRemote: false,
+    // Passive mode is forced (EPSV command is not sent)
+    forcePasv: true,
+    sftp: false,
+  };
+
+  await ftpDeploy
+    .deploy(config)
+    .then(res => console.log('FTP connection successful: ', res))
+    .catch(err => console.log('FTP error: ', err));
   done();
 });
 
 // Runs only for development build
 gulp.task('development', () => {
   browsersync(browserSyncConfig);
+  // Print build info
+  console.log('Package Info: ', packageFile.name + ' "' + packageFile.description + '" v' + packageFile.version);
   console.log('This is a development build');
   console.log('File changes will be watched and trigger a page reload');
   ncu.run({
@@ -199,14 +209,15 @@ gulp.task('development', () => {
 
 // Runs only for production build
 gulp.task('production', (done) => {
+  // Print build info
+  console.log('Package Info: ', packageFile.name + ' "' + packageFile.description + '" v' + packageFile.version);
   console.log('This is a production build');
   console.log('Please run the following script for deployment:');
-  console.log('$ gulp deploy --user FTP_USER --password FTP_PASSWORD');
+  console.log('$ gulp deploy --user $FTP_USER --password $FTP_PASSWORD');
   done();
 });
 
 // Main build task
-gulp.task('build', gulp.series(gulp.parallel('html', 'images', 'sass', 'js', (args.prod ? 'production' : 'development'))), () => {
-  // Print build info
-  return console.log('testttttttttttt' + packageFile.name + ' "' + packageFile.description + '" v' + packageFile.version);
+gulp.task('build', gulp.series(gulp.parallel('html', 'images', 'sass', 'js', (args.prod ? 'production' : 'development'))), (done) => {
+  done();
 });

@@ -14,4 +14,4 @@ script:
 - gulp build --prod
 
 after_script:
-- gulp deploy --user FTP_USER --password FTP_PASSWORD
+  - gulp deploy --user $FTP_USER --password $FTP_PASSWORD

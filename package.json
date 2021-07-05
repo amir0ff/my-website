@@ -13,6 +13,7 @@
   "devDependencies": {
     "browser-sync": "^2.27.4",
     "del": "^6.0.0",
+    "ftp-deploy": "^2.4.1",
     "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",
     "gulp-htmlclean": "^2.7.22",
@@ -25,8 +26,7 @@
     "gulp-strip-debug": "^4.0.0",
     "gulp-terser": "^2.0.1",
     "minimist": "^1.2.5",
-    "npm-check-updates": "^11.8.1",
-    "vinyl-ftp": "^0.6.1"
+    "npm-check-updates": "^11.8.1"
   },
   "dependencies": {
     "bootstrap": "^4.6.0",
