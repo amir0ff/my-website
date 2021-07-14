@@ -35,7 +35,7 @@ jobs:
       - name: 📂 Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@4.1.0
         with:
-          server: ftp.amiroff.me
+          server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./build/
