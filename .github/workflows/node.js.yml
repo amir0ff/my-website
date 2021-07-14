@@ -10,32 +10,34 @@ on:
     branches: [ master ]
 
 jobs:
-  build-and-deploy:
+  build_and_deploy:
 
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [ 14.x ]
 
     steps:
-    - name: 🚚 Get latest source code
-      uses: actions/checkout@v2
-    - name: 📦 Install npm packages and setup Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm install --silent
-    - name: 🏗️ Build using gulp.js
-      uses: actions/setup-node@v2
-    - run: npm run build
-    - name: 📂 Deploy via FTP
-      uses: SamKirkland/FTP-Deploy-Action@4.1.0
-      with:
-        server: ftp.amiroff.me
-        username: ${{ secrets.FTP_USER }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./build/
-        server-dir: amiroffme/
+      - name: 📥 Get latest source code
+        uses: actions/checkout@v2
+      - name: 🔄 Restore npm cahce
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: 📦 Install packages using npm
+        run: npm install --silent
+      - name: 🏗️ Build using gulp.js
+        run: npm run build
+      - name: 📂 Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@4.1.0
+        with:
+          server: ftp.amiroff.me
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./build/
+          server-dir: amiroffme/
         
