@@ -1,17 +1,20 @@
-const gulp = require('gulp');
-const minimist = require('minimist');
-const htmlclean = require('gulp-htmlclean');
-const imagemin = require('gulp-imagemin');
-const sizediff = require('gulp-sizediff');
-const preprocess = require('gulp-preprocess');
-const sass = require('gulp-sass')(require('node-sass'));
-const pleeease = require('gulp-pleeease');
-const stripdebug = require('gulp-strip-debug');
-const terser = require('gulp-terser');
-const concat = require('gulp-concat');
-const browsersync = require('browser-sync');
-const ncu = require('npm-check-updates');
-const del = require('del');
+import gulp from 'gulp';
+import imagemin from 'gulp-imagemin';
+import terser from 'gulp-terser';
+import sizediff from 'gulp-sizediff';
+import preprocess from 'gulp-preprocess';
+import pleeease from 'gulp-pleeease';
+import del from 'del';
+import ncu from 'npm-check-updates';
+import browsersync from 'browser-sync';
+import concat from 'gulp-concat';
+import stripdebug from 'gulp-strip-debug';
+import minimist from 'minimist';
+import htmlclean from 'gulp-htmlclean';
+import gulpSass from 'gulp-sass';
+import nodeSass from 'node-sass';
+
+const sass = gulpSass(nodeSass);
 
 /**
  Parses build task arguments
@@ -198,7 +201,7 @@ gulp.task('afterScript', (done) => {
       if (Object.keys(upgraded).length === 0) {
         console.log('All npm dependencies are up to date!');
       } else {
-        console.log('The following npm dependencies need updates "ncu -a":', upgraded);
+        console.log('The following npm dependencies need updates "ncu -u":', upgraded);
       }
     });
   done();
