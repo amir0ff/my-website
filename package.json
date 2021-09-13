@@ -14,8 +14,8 @@
     "url": "https://github.com/amiroff157/my-website"
   },
   "devDependencies": {
-    "@babel/core": "^7.15.0",
-    "@babel/preset-env": "^7.15.0",
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.6",
     "@babel/register": "^7.15.3",
     "browser-sync": "^2.27.5",
     "del": "^6.0.0",
@@ -31,7 +31,7 @@
     "gulp-terser": "^2.0.1",
     "minimist": "^1.2.5",
     "node-sass": "^6.0.1",
-    "npm-check-updates": "^11.8.3"
+    "npm-check-updates": "^11.8.5"
   },
   "dependencies": {
     "bootstrap": "^4.6.0",
