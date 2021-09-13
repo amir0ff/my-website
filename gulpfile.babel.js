@@ -13,7 +13,6 @@ import minimist from 'minimist';
 import htmlclean from 'gulp-htmlclean';
 import gulpSass from 'gulp-sass';
 import nodeSass from 'node-sass';
-
 const sass = gulpSass(nodeSass);
 
 /**
@@ -22,8 +21,11 @@ const sass = gulpSass(nodeSass);
  "$ gulp build" for development build
  **/
 const args = minimist(process.argv.slice(2));
+
 const buildType = args.prod ? 'production' : 'development';
-const buildMessage = buildType === 'production' ? 'Look at .github/workflows/node.js.yml for deployment build script.' : 'File changes will be watched and trigger a page reload.';
+const prodMessage = 'Look at .github/workflows/node.js.yml for deployment build script.'
+const devMessage = 'File changes will be watched and trigger a page reload.'
+const buildMessage = buildType === 'production' ? prodMessage : devMessage;
 
 // Main build directories
 const sourceDir = './source/';
@@ -119,7 +121,7 @@ gulp.task('images', () => {
     .pipe(gulp.dest(images.buildDir));
 });
 
-// Build CSS Files
+// Build CSS
 gulp.task('sass', () => {
   return gulp.src(css.sourceDir)
     .pipe(sizediff.start())
