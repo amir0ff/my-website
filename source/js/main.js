@@ -22,47 +22,47 @@ function isElementInViewport(el) {
   );
 }
 
-// function to smooth scroll to elements on link clicks
-$(function() {
-  $('a[href*=\\#]:not([href=\\#])').click(() => {
-    if (location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') && location.hostname === this.hostname) {
-      let target = $(this.hash);
+$(document).ready(()=> {
 
-      target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-      if (target.length) {
+  // function to smooth scroll to elements on link clicks
+  $(function() {
+    $('a[href*=\\#]:not([href=\\#])').click(function() {
+      if (location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') && location.hostname === this.hostname) {
+        let target = $(this.hash);
 
-        canScroll = false;
+        target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+        if (target.length) {
 
-        // determine where we'll scroll
-        let newScroll = 0;
-        if (!(smallDevice.matches)) {
-          newScroll = target.offset().top - $('.navbar').height();
-          // for desktops, we play with the nav bar padding
-          if (newScroll < ($('#profile').offset().top - $('.navbar').height() - 150)) {
-            $('.navbar').animate({ 'padding-top': '30px' }, 500);
-            $('.navbar').css('background', 'none');
-            $('.navbar').css('border-color', 'transparent');
+          canScroll = false;
+
+          // determine where we'll scroll
+          let newScroll = 0;
+          if (!(smallDevice.matches)) {
+            newScroll = target.offset().top - $('.navbar').height();
+            // for desktops, we play with the nav bar padding
+            if (newScroll < ($('#profile').offset().top - $('.navbar').height() - 150)) {
+              $('.navbar').animate({ 'padding-top': '30px' }, 500);
+              $('.navbar').css('background', 'none');
+              $('.navbar').css('border-color', 'transparent');
+            } else {
+              $('.navbar').animate({ 'padding-top': '0px' }, 500);
+              $('.navbar').css('background', '#0D0D0D');
+              $('.navbar').css('border-color', '#0A0A0A');
+            }
           } else {
-            $('.navbar').animate({ 'padding-top': '0px' }, 500);
-            $('.navbar').css('background', '#0D0D0D');
-            $('.navbar').css('border-color', '#0A0A0A');
+            newScroll = target.offset().top - $('.navbar-collapse:visible').height();
           }
-        } else {
-          newScroll = target.offset().top - $('.navbar-collapse:visible').height();
+
+          $('html,body').animate({
+            scrollTop: newScroll + 30,
+          }, 500, function() {
+            canScroll = true;
+          });
+          return false;
         }
-
-        $('html,body').animate({
-          scrollTop: newScroll + 30,
-        }, 500, function() {
-          canScroll = true;
-        });
-        return false;
       }
-    }
+    });
   });
-});
-
-$(document).ready(() => {
 
   (function getGitHubRepos() {
     const reposURL = 'https://api.github.com/users/amiroff157/repos?callback=allow';
@@ -81,7 +81,7 @@ $(document).ready(() => {
       let filteredPosts = data.items.filter(item => item.categories.length > 0);
       $.each(filteredPosts, (index, posts) => {
         const momentDate = moment(posts.pubDate).format('MMM D, YYYY');
-        let formattedText = posts.content.replace(/(<img[^>]+?>|<img>|<\/img>|<p>|<\/p>|<h4>|<\/h4>|<blockquote>|<\/blockquote>|<figure>|<\/figure>|<figcaption>|<\/figcaption>|<a[^>]*>|<strong>|<\/strong>)/img, '').substring(0, 130);
+        let formattedText = posts.content.replace(/(<img[^>]+?>|<img>|<\/img>|<p>|<\/p>|<h4>|<\/h4>|<h3>|<\/h3>|<blockquote>|<\/blockquote>|<figure>|<\/figure>|<figcaption>|<\/figcaption>|<a[^>]*>|<strong>|<\/strong>)/img, '').substring(0, 130);
         formattedText += '...';
         let postCoverImg = posts.thumbnail;
         const post = $('<div class="card"><div class="card-body"><span class="date"><i class="fas fa-clock"></i>' + momentDate + '</span><a href="' + posts.link + '" target="_blank"><div class="cover" style="height:170px;background: url(' + postCoverImg + ') no-repeat center center;background-size: cover;"><i class="fa fa-book-open fa-4x"></i></div><h5>' + posts.title + '</h5></a><div class="card-text">' + formattedText + '</div></div></div>');
