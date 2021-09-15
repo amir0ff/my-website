@@ -6,13 +6,14 @@ import preprocess from 'gulp-preprocess';
 import pleeease from 'gulp-pleeease';
 import del from 'del';
 import ncu from 'npm-check-updates';
-import browsersync from 'browser-sync';
+import browserSync from 'browser-sync';
 import concat from 'gulp-concat';
 import stripdebug from 'gulp-strip-debug';
 import minimist from 'minimist';
 import htmlclean from 'gulp-htmlclean';
 import gulpSass from 'gulp-sass';
 import nodeSass from 'node-sass';
+
 const sass = gulpSass(nodeSass);
 
 /**
@@ -23,8 +24,8 @@ const sass = gulpSass(nodeSass);
 const args = minimist(process.argv.slice(2));
 
 const buildType = args.prod ? 'production' : 'development';
-const prodMessage = 'Look at .github/workflows/node.js.yml for deployment build script.'
-const devMessage = 'File changes will be watched and trigger a page reload.'
+const prodMessage = 'Look at .github/workflows/node.js.yml for deployment build script.';
+const devMessage = 'File changes will be watched and trigger a page reload.';
 const buildMessage = buildType === 'production' ? prodMessage : devMessage;
 
 // Main build directories
@@ -79,7 +80,7 @@ const browserSyncConfig = {
     baseDir: buildDir,
     index: 'index.html',
   },
-  open: false,
+  open: true,
   notify: true,
 };
 
@@ -174,6 +175,11 @@ gulp.task('js', () => {
   }
 });
 
+gulp.task('browserSyncReload', (done) => {
+  browserSync.reload();
+  done();
+});
+
 // Clear build directory
 gulp.task('beforeScript', (done) => {
   del([
@@ -185,11 +191,11 @@ gulp.task('beforeScript', (done) => {
 // Runs after all gulp.js build scripts are done
 gulp.task('afterScript', (done) => {
   if (buildType === 'development') {
-    browsersync(browserSyncConfig);
-    gulp.watch(html.watchList, gulp.series(['html', browsersync.reload]));
-    gulp.watch(images.watchList, gulp.series(['images', browsersync.reload]));
-    gulp.watch(css.watchList, gulp.series(['sass', browsersync.reload]));
-    gulp.watch(js.watchList, gulp.series(['js', browsersync.reload]));
+    browserSync(browserSyncConfig);
+    gulp.watch(html.watchList, gulp.series('html', 'browserSyncReload'));
+    gulp.watch(images.watchList, gulp.series('images', 'browserSyncReload'));
+    gulp.watch(css.watchList, gulp.series('sass', 'browserSyncReload'));
+    gulp.watch(js.watchList, gulp.series('js', 'browserSyncReload'));
   }
   ncu.run({
     packageFile: 'package.json',
