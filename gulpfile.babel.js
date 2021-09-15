@@ -65,13 +65,14 @@ const css = {
 };
 
 const js = {
-  sourceDir: sourceDir + 'js/*.js',
+  sourceDir: sourceDir + 'js/**/*.js',
   watchList: [sourceDir + 'js/**/*.js'],
   buildDir: buildDir + 'js/',
 };
 
 const php = {
   sourceDir: sourceDir + 'php/**/*.php',
+  watchList: [sourceDir + 'php/**/*.php'],
   buildDir: buildDir + 'php/',
 };
 
@@ -196,6 +197,7 @@ gulp.task('afterScript', (done) => {
     gulp.watch(images.watchList, gulp.series('images', 'browserSyncReload'));
     gulp.watch(css.watchList, gulp.series('sass', 'browserSyncReload'));
     gulp.watch(js.watchList, gulp.series('js', 'browserSyncReload'));
+    gulp.watch(php.watchList, gulp.series('php', 'browserSyncReload'));
   }
   ncu.run({
     packageFile: 'package.json',
