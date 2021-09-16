@@ -22,7 +22,7 @@ function isElementInViewport(el) {
   );
 }
 
-$(document).ready(()=> {
+$(document).ready(() => {
 
   // function to smooth scroll to elements on link clicks
   $(function() {
@@ -67,7 +67,8 @@ $(document).ready(()=> {
   (function getGitHubRepos() {
     const reposURL = 'https://api.github.com/users/amiroff157/repos?callback=allow';
     $.getJSON(reposURL + '&callback=?', (data) => {
-      $.each(data.data, (index, repos) => {
+      const trueRepos = data.data.filter((repos) => repos.language !== null);
+      $.each(trueRepos, (index, repos) => {
         const repo = $('<div class="card"><div class="card-body"><span class="badge"><span class="repo-lang-color ' + repos.language.toLocaleLowerCase() + '"></span> ' + repos.language + '</span><a href=" ' + repos.html_url + ' " target="_blank"><div class="card-header text-left"><h5>' + repos.name + '</h5></div></a><p class="card-text text-left small">' + repos.description + '</p></div></div>');
         repo.prependTo('#repositories');
       });
