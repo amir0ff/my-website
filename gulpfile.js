@@ -149,9 +149,7 @@ gulp.task('js', () => {
         npm_modules.jquery,
         npm_modules.bootstrap,
         npm_modules.moment,
-        js.sourceDir,
-        'source/js/smooth-scroll.js',
-        'source/js/back-to-top.js',
+        js.sourceDir
       ])
       .pipe(concat('main.js'))
       .pipe(gulp.dest(js.buildDir));
@@ -161,14 +159,12 @@ gulp.task('js', () => {
         npm_modules.jquery,
         npm_modules.bootstrap,
         npm_modules.moment,
-        js.sourceDir,
-        'source/js/smooth-scroll.js',
-        'source/js/back-to-top.js',
+        js.sourceDir
       ])
       .pipe(concat('main.min.js'))
       .pipe(sizediff.start())
       .pipe(stripdebug())
-      .pipe(terser())
+      .pipe(terser({ format: { comments: false } }))
       .pipe(sizediff.stop({
         title: 'JavaScript Compression',
       }))
