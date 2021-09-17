@@ -21,6 +21,9 @@ jobs:
     steps:
       - name: 📥 Get latest source code
         uses: actions/checkout@v2
+        with:
+          submodules: recursive
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: 🔄 Restore npm cahce
         uses: actions/cache@v2
         with:
