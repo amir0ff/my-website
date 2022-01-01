@@ -22,7 +22,7 @@
     "gulp-imagemin": "^8.0.0",
     "gulp-pleeease": "^2.0.2",
     "gulp-preprocess": "^4.0.2",
-    "gulp-sass": "^5.0.0",
+    "gulp-sass": "^5.1.0",
     "gulp-sizediff": "0.0.2",
     "gulp-strip-debug": "^4.0.0",
     "gulp-terser": "^2.1.0",
