@@ -77,7 +77,7 @@ $(document).ready(() => {
 
 
   (function getBlogPosts() {
-    let postsURL = 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2F%40amiroff157&api_key=pdu4dawprzidibowy69tc3yiaxl6v0hpzmuxiook&order_by=pubDate&order_dir=asc&count=14';
+    let postsURL = 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2F%40amir0ff&api_key=pdu4dawprzidibowy69tc3yiaxl6v0hpzmuxiook&order_by=pubDate&order_dir=asc&count=14';
     $.getJSON(postsURL, (data) => {
       let filteredPosts = data.items.filter(item => item.categories.length > 0);
       $.each(filteredPosts, (index, posts) => {
