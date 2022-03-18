@@ -24,17 +24,21 @@ jobs:
         with:
           submodules: recursive
           token: ${{ secrets.GITHUB_TOKEN }}
-      - name: 🔄 Restore npm cahce
+      - name: 🗑️ Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: 🔄 Restore yarn cache
         uses: actions/cache@v2
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-node-
+            ${{ runner.os }}-yarn-
       - name: 📦 Install packages using npm
-        run: npm install --silent
+        run: yarn install
       - name: 🏗️ Build using gulp.js
-        run: npm run build
+        run: yarn run build
       - name: 📂 Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@4.1.0
         with:
