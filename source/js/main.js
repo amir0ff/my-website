@@ -65,7 +65,7 @@ $(document).ready(() => {
   });
 
   (function getGitHubRepos() {
-    const reposURL = 'https://api.github.com/users/amiroff157/repos?callback=allow';
+    const reposURL = 'https://api.github.com/users/amir0ff/repos?callback=allow';
     $.getJSON(reposURL + '&callback=?', (data) => {
       const trueRepos = data.data.filter((repos) => repos.language !== null);
       $.each(trueRepos, (index, repos) => {
@@ -82,7 +82,7 @@ $(document).ready(() => {
       let filteredPosts = data.items.filter(item => item.categories.length > 0);
       $.each(filteredPosts, (index, posts) => {
         const momentDate = moment(posts.pubDate).format('MMM D, YYYY');
-        let formattedText = posts.content.replace(/(<img[^>]+?>|<img>|<\/img>|<p>|<\/p>|<h4>|<\/h4>|<h3>|<\/h3>|<blockquote>|<\/blockquote>|<figure>|<\/figure>|<figcaption>|<\/figcaption>|<a[^>]*>|<strong>|<\/strong>)/img, '').substring(0, 130);
+        let formattedText = posts.content.replace(/(<img[^>]+?>|<img>|<\/img>|<p>|<\/p>|<h4>|<\/h4>|<h3>|<\/h3>|<blockquote>|<\/blockquote>|<figure>|<\/figure>|<figcaption>|<\/figcaption>|<a[^>]*>|<strong>|<\/strong>)/img, '').substring(0, 220);
         formattedText += '...';
         let postCoverImg = posts.thumbnail;
         const post = $('<div class="card"><div class="card-body"><span class="date"><i class="fas fa-clock"></i>' + momentDate + '</span><a href="' + posts.link + '" target="_blank"><div class="cover" style="height:170px;background: url(' + postCoverImg + ') no-repeat center center;background-size: cover;"><i class="fa fa-book-open fa-4x"></i></div><h5>' + posts.title + '</h5></a><div class="card-text">' + formattedText + '</div></div></div>');
