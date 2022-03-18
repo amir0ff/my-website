@@ -27,7 +27,7 @@
     "gulp-strip-debug": "^4.0.0",
     "gulp-terser": "^2.1.0",
     "minimist": "^1.2.5",
-    "node-sass": "^6.0.1",
+    "node-sass": "^7.0.1",
     "npm-check-updates": "^11.8.5"
   },
   "dependencies": {
