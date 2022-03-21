@@ -38,7 +38,7 @@ jobs:
       - name: 📦 Install packages using npm
         run: yarn install
       - name: 🏗️ Build using gulp.js
-        run: yarn run build
+        run: yarn build
       - name: 📂 Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@4.1.0
         with:

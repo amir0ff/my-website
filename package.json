@@ -14,7 +14,7 @@
     "url": "https://github.com/amir0ff/my-website"
   },
   "devDependencies": {
-    "browser-sync": "^2.27.5",
+    "browser-sync": "^2.27.9",
     "del": "^6.0.0",
     "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",
@@ -22,13 +22,13 @@
     "gulp-imagemin": "^8.0.0",
     "gulp-pleeease": "^2.0.2",
     "gulp-preprocess": "^4.0.2",
-    "gulp-sass": "^5.0.0",
+    "gulp-sass": "^5.1.0",
     "gulp-sizediff": "0.0.2",
     "gulp-strip-debug": "^4.0.0",
     "gulp-terser": "^2.1.0",
     "minimist": "^1.2.5",
-    "node-sass": "^6.0.1",
-    "npm-check-updates": "^11.8.5"
+    "node-sass": "^7.0.1",
+    "npm-check-updates": "^12.5.4"
   },
   "dependencies": {
     "bootstrap": "^4.6.0",
