@@ -26,9 +26,9 @@
     "gulp-sizediff": "0.0.2",
     "gulp-strip-debug": "^4.0.0",
     "gulp-terser": "^2.1.0",
-    "minimist": "^1.2.5",
+    "minimist": "^1.2.6",
     "node-sass": "^7.0.1",
-    "npm-check-updates": "^12.5.4"
+    "npm-check-updates": "^12.5.10"
   },
   "dependencies": {
     "bootstrap": "^4.6.0",
