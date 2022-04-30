@@ -12,9 +12,9 @@ import stripdebug from 'gulp-strip-debug';
 import minimist from 'minimist';
 import htmlclean from 'gulp-htmlclean';
 import gulpSass from 'gulp-sass';
-import nodeSass from 'node-sass';
+import dartSass from 'sass';
 
-const sass = gulpSass(nodeSass);
+const sass = gulpSass(dartSass);
 
 /**
  Parses build task arguments
@@ -48,7 +48,7 @@ const css = {
   watchList: [sourceDir + 'scss/**/*.scss'],
   buildDir: buildDir + 'css/',
   sassOpts: {
-    outputStyle: 'nested',
+    outputStyle: 'compressed',
     precision: 3,
     errLogToConsole: true,
   },
