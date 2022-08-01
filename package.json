@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "browser-sync": "^2.27.9",
-    "del": "^6.0.0",
+    "del": "^7.0.0",
     "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",
     "gulp-htmlclean": "^2.7.22",
