@@ -28,7 +28,7 @@
     "gulp-terser": "^2.1.0",
     "minimist": "^1.2.6",
     "sass": "^1.51.0",
-    "npm-check-updates": "^12.5.10"
+    "npm-check-updates": "^16.0.6"
   },
   "dependencies": {
     "bootstrap": "^4.6.0",
