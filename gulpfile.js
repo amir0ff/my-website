@@ -4,7 +4,7 @@ import terser from 'gulp-terser';
 import sizediff from 'gulp-sizediff';
 import preprocess from 'gulp-preprocess';
 import pleeease from 'gulp-pleeease';
-import del from 'del';
+import { deleteAsync } from 'del';
 import ncu from 'npm-check-updates';
 import browserSync from 'browser-sync';
 import concat from 'gulp-concat';
@@ -178,8 +178,8 @@ gulp.task('browserSyncReload', (done) => {
 });
 
 // Clear build directory
-gulp.task('beforeScript', (done) => {
-  del([
+gulp.task('beforeScript', async (done) => {
+  await deleteAsync([
     buildDir + '/**/*',
   ]);
   done();
