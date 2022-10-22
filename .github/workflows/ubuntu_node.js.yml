@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [ 16 ]
+        node-version: [ 12 ]
 
     steps:
       - name: 📥 Get latest source code
