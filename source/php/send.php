@@ -1,12 +1,13 @@
 <?php
 if ($_POST)
 {
-    $to = "ameer157@gmail.com";
+    $to = "inbox@amiroff.me";
     $sender = $_POST['name'];
-    $subject = "You have been contacted via your website by $sender";
     $email = $_POST['email'];
+    $subject = "You have been contacted via amiroff.me by ($sender / $email)";
     $message = $_POST['message'];
-    $headers = "From:  $email";
+    $headers = "From:  no-reply@amiroff.me";
+    
     mail($to, $subject, $message, $headers);
 }
 ?>
