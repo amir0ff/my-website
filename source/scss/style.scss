@@ -264,10 +264,14 @@ article {
   font-size: 100% !important;
 }
 
-.pgp {
+.pgp-btn {
   margin-top: 5px !important;
   font-size: 16px !important;
-  width: 100%;
+  width: 84px;
+}
+
+.send-btn {
+  min-width: 84px;
 }
 
 .text-right {
@@ -517,7 +521,7 @@ article {
 }
 
 #portfolio .github-section {
-  margin-top: 90px;
+  margin-top: 70px;
 
   .github-img {
     width: 70%;

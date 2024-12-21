@@ -69,4 +69,3 @@ modules/views/
 # vim Files
 # --------------------
 *.swp
-package-lock.json

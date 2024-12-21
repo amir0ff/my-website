@@ -77,14 +77,16 @@ $(document).ready(() => {
 
 
   (function getBlogPosts() {
-    let postsURL = 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2F%40amir0ff&api_key=pdu4dawprzidibowy69tc3yiaxl6v0hpzmuxiook&order_by=pubDate&order_dir=asc&count=14';
+    let postsURL = 'https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@amir0ff&api_key=czrxuaauatap8cnstfrio4ewqjwklit3ijo2xaya&order_by=pubDate&order_dir=asc&count=14';
     $.getJSON(postsURL, (data) => {
       let filteredPosts = data.items.filter(item => item.categories.length > 0);
       $.each(filteredPosts, (index, posts) => {
         const momentDate = moment(posts.pubDate).format('MMM D, YYYY');
         let formattedText = posts.content.replace(/(<img[^>]+?>|<img>|<\/img>|<p>|<\/p>|<h4>|<\/h4>|<h3>|<\/h3>|<blockquote>|<\/blockquote>|<figure>|<\/figure>|<figcaption>|<\/figcaption>|<a[^>]*>|<strong>|<\/strong>)/img, '').substring(0, 220);
         formattedText += '...';
-        let postCoverImg = posts.thumbnail;
+
+        let $description = $(posts.description);
+        let postCoverImg = $description.find('img').attr('src');
         const post = $('<div class="card"><div class="card-body"><span class="date"><i class="fas fa-clock"></i>' + momentDate + '</span><a href="' + posts.link + '" target="_blank"><div class="cover" style="height:170px;background: url(' + postCoverImg + ') no-repeat center center;background-size: cover;"><i class="fa fa-book-open fa-4x"></i></div><h5>' + posts.title + '</h5></a><div class="card-text">' + formattedText + '</div></div></div>');
         post.prependTo('#feeds');
       });
@@ -169,7 +171,7 @@ $(document).ready(() => {
     /*if (!portfolio1Shown && isElementInViewport($('#portfolio-row-1 img'))) {
         portfolio1Shown = true;
         $('#portfolio-row-1').animate({opacity: 1}, 1000);
-    }*/
+    }
 
     if (!portfolio2Shown && isElementInViewport($('#portfolio-row-2 img'))) {
       portfolio2Shown = true;
@@ -180,7 +182,7 @@ $(document).ready(() => {
       portfolio3Shown = true;
       $('#portfolio-row-3').animate({ opacity: 1 }, 1000);
     }
-
+*/
 
     // if user starts scrolling and we're at the top, auto scroll to the first section
     if ((canScroll) && (currentScroll === 0)) {

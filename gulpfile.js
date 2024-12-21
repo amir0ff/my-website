@@ -14,7 +14,7 @@ import htmlclean from 'gulp-htmlclean';
 import gulpSass from 'gulp-sass';
 import dartSass from 'sass';
 
-const sass = gulpSass(dartSass);
+const sassCompiler = gulpSass(dartSass);
 
 /**
  Parses build task arguments
@@ -49,8 +49,6 @@ const css = {
   buildDir: buildDir + 'css/',
   sassOpts: {
     outputStyle: 'compressed',
-    precision: 3,
-    errLogToConsole: true,
   },
   pleeeaseOpts: {
     out: 'main.min.css',
@@ -81,6 +79,7 @@ const browserSyncConfig = {
     baseDir: buildDir,
     index: 'index.html',
   },
+  port: 8080,
   open: true,
   notify: true,
 };
@@ -114,7 +113,7 @@ gulp.task('html', () => {
 
 // Images Compression
 gulp.task('images', () => {
-  return gulp.src(images.sourceDir)
+  return gulp.src(images.sourceDir, { encoding: false })
     .pipe(sizediff.start())
     .pipe(imagemin())
     .pipe(sizediff.stop({
@@ -127,7 +126,7 @@ gulp.task('images', () => {
 gulp.task('sass', () => {
   return gulp.src(css.sourceDir)
     .pipe(sizediff.start())
-    .pipe(sass(css.sassOpts))
+    .pipe(sassCompiler(css.sassOpts).on('error', sassCompiler.logError))
     .pipe(pleeease(css.pleeeaseOpts))
     .pipe(sizediff.stop({
       title: 'CSS Compression',
@@ -149,7 +148,7 @@ gulp.task('js', () => {
         npm_modules.jquery,
         npm_modules.bootstrap,
         npm_modules.moment,
-        js.sourceDir
+        js.sourceDir,
       ])
       .pipe(concat('main.js'))
       .pipe(gulp.dest(js.buildDir));
@@ -159,7 +158,7 @@ gulp.task('js', () => {
         npm_modules.jquery,
         npm_modules.bootstrap,
         npm_modules.moment,
-        js.sourceDir
+        js.sourceDir,
       ])
       .pipe(concat('main.min.js'))
       .pipe(sizediff.start())

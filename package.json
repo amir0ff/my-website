@@ -1,6 +1,6 @@
 {
   "name": "www.amiroff.me",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "My portfolio website",
   "type": "module",
   "author": "Amir Off",
@@ -14,25 +14,25 @@
     "url": "https://github.com/amir0ff/my-website"
   },
   "devDependencies": {
-    "browser-sync": "^2.27.11",
-    "del": "^7.0.0",
-    "gulp": "^4.0.2",
+    "browser-sync": "^3.0.3",
+    "del": "^8.0.0",
+    "gulp": "^5.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-htmlclean": "^2.7.22",
-    "gulp-imagemin": "^8.0.0",
+    "gulp-imagemin": "^9.1.0",
     "gulp-pleeease": "^2.0.2",
-    "gulp-preprocess": "^4.0.2",
-    "gulp-sass": "^5.1.0",
+    "gulp-preprocess": "^5.0.0",
+    "gulp-sass": "^6.0.0",
     "gulp-sizediff": "0.0.2",
-    "gulp-strip-debug": "^5.0.0",
+    "gulp-strip-debug": "^6.0.0",
     "gulp-terser": "^2.1.0",
-    "minimist": "^1.2.4",
-    "sass": "^1.57.1",
-    "npm-check-updates": "^16.2.1"
+    "minimist": "^1.2.8",
+    "npm-check-updates": "^17.1.12",
+    "sass": "^1.83.0"
   },
   "dependencies": {
-    "bootstrap": "^4.6.0",
+    "bootstrap": "5.0.0",
     "jquery": "^3.6.0",
-    "moment": "^2.29.3"
+    "moment": "^2.30.1"
   }
 }
