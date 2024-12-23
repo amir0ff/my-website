@@ -48,12 +48,12 @@ jobs:
       - name: 🏗️ Build using gulp.js
         run: npm run build
       
-      - name: 📂 Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      - name: 📂 Deploy via SFTP
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
+          username: 'root'
           server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          local-dir: ./build/
-          server-dir: amiroffme/
+          sftp_only: true
+          local_path: ./build/
+          remote_path: /home/amiroff/amiroff.me

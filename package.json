@@ -13,14 +13,19 @@
     "type": "git",
     "url": "https://github.com/amir0ff/my-website"
   },
+  "browserslist": [
+    "last 2 versions"
+  ],
   "devDependencies": {
+    "autoprefixer": "^10.4.20",
     "browser-sync": "^3.0.3",
+    "cssnano": "^7.0.6",
     "del": "^8.0.0",
     "gulp": "^5.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-htmlclean": "^2.7.22",
     "gulp-imagemin": "^9.1.0",
-    "gulp-pleeease": "^2.0.2",
+    "gulp-postcss": "^10.0.0",
     "gulp-preprocess": "^5.0.0",
     "gulp-sass": "^6.0.0",
     "gulp-sizediff": "0.0.2",
@@ -28,6 +33,7 @@
     "gulp-terser": "^2.1.0",
     "minimist": "^1.2.8",
     "npm-check-updates": "^17.1.12",
+    "postcss": "^8.4.49",
     "sass": "^1.83.0"
   },
   "dependencies": {

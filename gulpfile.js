@@ -3,7 +3,9 @@ import imagemin from 'gulp-imagemin';
 import terser from 'gulp-terser';
 import sizediff from 'gulp-sizediff';
 import preprocess from 'gulp-preprocess';
-import pleeease from 'gulp-pleeease';
+import postcss from 'gulp-postcss';
+import autoprefixer from 'autoprefixer';
+import cssnano from 'cssnano';
 import { deleteAsync } from 'del';
 import ncu from 'npm-check-updates';
 import browserSync from 'browser-sync';
@@ -50,16 +52,10 @@ const css = {
   sassOpts: {
     outputStyle: 'compressed',
   },
-  pleeeaseOpts: {
-    out: 'main.min.css',
-    autoprefixer: {
-      browsers: ['last 2 versions', '> 2%'],
-    },
-    rem: ['16px'],
-    pseudoElements: true,
-    mqpacker: true,
-    minifier: buildType === 'production',
-  },
+  plugins: [
+    autoprefixer(),
+    cssnano(),
+  ],
 };
 
 const js = {
@@ -124,10 +120,16 @@ gulp.task('images', () => {
 
 // Build CSS
 gulp.task('sass', () => {
+  const postcssPlugins = [];
+  if (buildType === 'production') {
+    postcssPlugins.push(...css.plugins);
+  }
+
   return gulp.src(css.sourceDir)
     .pipe(sizediff.start())
     .pipe(sassCompiler(css.sassOpts).on('error', sassCompiler.logError))
-    .pipe(pleeease(css.pleeeaseOpts))
+    .pipe(postcss(postcssPlugins))
+    .pipe(concat('main.min.css'))
     .pipe(sizediff.stop({
       title: 'CSS Compression',
     }))
