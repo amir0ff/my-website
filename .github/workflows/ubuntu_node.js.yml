@@ -21,33 +21,37 @@ jobs:
         with:
           submodules: recursive
           token: ${{ secrets.GITHUB_TOKEN }}
-      
+
       - name: 🐍 Set up Python 3
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
-      
+
       - name: 📦 Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-      
-      - name: 🔄 Restore npm cache
+
+      - name: 🧶 Enable Corepack
+        run: corepack enable
+
+      - name: 🧶 Set up Yarn
+        run: yarn set version stable
+
+      - name: 🔄 Restore Yarn cache
         uses: actions/cache@v3
-        id: npm-cache
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          path: .yarn/cache
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-node-
-      
-      - name: 📦 Install packages using npm
-        run: npm install
-      
+            ${{ runner.os }}-yarn-
+
+      - name: 📦 Install packages using Yarn
+        run: yarn install --immutable
+
       - name: 🏗️ Build using gulp.js
-        run: npm run build
-      
+        run: yarn build
+
       - name: 📂 Deploy via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:

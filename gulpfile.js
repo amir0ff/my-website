@@ -14,9 +14,9 @@ import stripdebug from 'gulp-strip-debug';
 import minimist from 'minimist';
 import htmlclean from 'gulp-htmlclean';
 import gulpSass from 'gulp-sass';
-import dartSass from 'sass';
+import * as sass from 'sass';
 
-const sassCompiler = gulpSass(dartSass);
+const sassCompiler = gulpSass(sass);
 
 /**
  Parses build task arguments

@@ -479,6 +479,12 @@ article {
   }
 }
 
+@media screen and (max-width: 430px) {
+  .gh-chart img {
+    width: 96%;
+  }
+}
+
 #portfolio .row {
   color: #D9D9D9;
   font-size: 1.2em;
