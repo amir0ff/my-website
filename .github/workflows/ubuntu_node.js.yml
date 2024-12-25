@@ -1,4 +1,4 @@
-name: Gulp.js CI build and deploy via FTP
+name: Gulp.js CI build and deploy via SFTP
 
 on:
   push:
