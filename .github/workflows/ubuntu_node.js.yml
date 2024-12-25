@@ -47,7 +47,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: 📦 Install packages using Yarn
-        run: yarn install --immutable
+        run: yarn install
 
       - name: 🏗️ Build using gulp.js
         run: yarn build
