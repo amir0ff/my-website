@@ -200,7 +200,7 @@ gulp.task('afterScript', (done) => {
     packageFile: 'package.json',
   })
     .then((upgraded) => {
-      console.log('-- End of build --');
+      console.log('--- End of build ---');
       console.log('This is a ' + buildType + ' build.');
       console.log('');
       console.log('Files generated and placed in the ' + buildDir + ' directory.');

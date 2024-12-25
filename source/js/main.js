@@ -190,7 +190,7 @@ $(document).ready(() => {
       $('.navbar').animate({ 'padding-top': '0px' }, 500).css('background', '#0D0D0D').css('box-shadow', '0px 1px 2px #020202');
       $('html, body').animate({
         scrollTop: $('#profile').offset().top - $('.navbar').height(),
-      }, 500, function() {
+      }, 550, function() {
         canScroll = true;
       });
     }
