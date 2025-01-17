@@ -48,7 +48,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           sftp_only: true
           local_path: './build/*'
-          remote_path: '/home/amiroff/amiroff.me'
+          remote_path: ${{ secrets.FTP_DIR }}
 
       - name: 🗑️ Purge Cloudflare Cache
         uses: jakejarvis/cloudflare-purge-action@master

@@ -201,14 +201,16 @@ gulp.task('afterScript', (done) => {
   })
     .then((upgraded) => {
       console.log('--- End of build ---');
-      console.log('This is a ' + buildType + ' build.');
       console.log('');
-      console.log('Files generated and placed in the ' + buildDir + ' directory.');
+      console.log('This was a ' + buildType + ' build.');
+      console.log('');
+      console.log('Files are generated in the ' + buildDir + ' directory.');
       console.log(buildMessage);
       if (Object.keys(upgraded).length === 0) {
         console.log('All npm dependencies are up to date!');
       } else {
-        console.log('The following npm dependencies need updates "ncu -u":', upgraded);
+        console.log('The following npm dependencies have updates');
+        console.log('To update npm dependencies, run the following command in your terminal:, `ncu -u`', upgraded);
       }
     });
   done();
