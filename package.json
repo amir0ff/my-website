@@ -24,7 +24,7 @@
     "gulp": "^5.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-htmlclean": "^2.7.22",
-    "gulp-imagemin": "^9.1.0",
+    "gulp-image": "^6.3.1",
     "gulp-postcss": "^10.0.0",
     "gulp-preprocess": "^5.0.0",
     "gulp-sass": "^6.0.0",
