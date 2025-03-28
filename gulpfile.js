@@ -1,5 +1,5 @@
 import gulp from 'gulp';
-import imagemin from 'gulp-imagemin';
+import image from 'gulp-image';
 import terser from 'gulp-terser';
 import sizediff from 'gulp-sizediff';
 import preprocess from 'gulp-preprocess';
@@ -111,7 +111,7 @@ gulp.task('html', () => {
 gulp.task('images', () => {
   return gulp.src(images.sourceDir, { encoding: false })
     .pipe(sizediff.start())
-    .pipe(imagemin())
+    .pipe(image())
     .pipe(sizediff.stop({
       title: 'Images Compression',
     }))
