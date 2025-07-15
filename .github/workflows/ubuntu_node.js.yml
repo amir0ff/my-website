@@ -30,7 +30,7 @@ jobs:
           restore-keys: |
             deps-${{ runner.os }}-
 
-      - name: 4e6 Install dependencies
+      - name: 📦 Install dependencies
         uses: pnpm/action-setup@v4
         with:
           version: 10
@@ -38,7 +38,7 @@ jobs:
             - recursive: true
               args: [--frozen-lockfile, --prefer-offline]
 
-      - name: 3df e0f Build using gulp.js
+      - name: 🏗️ Build using gulp.js
         run: pnpm run build
 
       - name: 📂 Deploy
@@ -46,8 +46,8 @@ jobs:
           rsync -av ./build/ /home/amiroff/htdocs/amiroff.me/
 
       - name: 🗑️ Purge Cloudflare Cache
-        uses: jakejarvis/cloudflare-purge-action@master
-        env:
+        uses: nathanvaughn/actions-cloudflare-purge@master
+        with:
           # Zone is required by both authentication methods
-          CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
-          CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
+          cf_zone: ${{ secrets.CLOUDFLARE_ZONE }}
+          cf_auth: ${{ secrets.CLOUDFLARE_TOKEN }}
