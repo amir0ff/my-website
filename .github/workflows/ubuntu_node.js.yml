@@ -1,4 +1,4 @@
-name: Gulp.js CI build and deploy via SFTP
+name: Gulp.js CI build and deploy
 
 on:
   push:
@@ -19,7 +19,7 @@ jobs:
       - name: 📥 Checkout repository
         uses: actions/checkout@v4
 
-      - name: 4be Restore pnpm cache
+      - name: 💾 Restore pnpm cache
         uses: actions/cache@v4
         with:
           path: |
