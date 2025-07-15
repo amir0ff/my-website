@@ -49,5 +49,5 @@ jobs:
         uses: aorfanos/cloudflare-purge-action@v1.0.3
         with:
           # Zone is required by both authentication methods
-          CF_ZONE_NAME: ${{ secrets.CLOUDFLARE_ZONE }}
-          CF_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
+          zone: ${{ secrets.CLOUDFLARE_ZONE }}
+          token: ${{ secrets.CLOUDFLARE_TOKEN }}
