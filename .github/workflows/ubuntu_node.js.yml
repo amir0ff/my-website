@@ -45,9 +45,11 @@ jobs:
         run: |
           rsync -av ./build/ /home/amiroff/htdocs/amiroff.me/
 
+      - name: Install Python requests
+        run: pip install requests
+
       - name: 🗑️ Purge Cloudflare Cache
         uses: aorfanos/cloudflare-purge-action@v1.0.3
-        with:
-          # Zone is required by both authentication methods
-          zone: ${{ secrets.CLOUDFLARE_ZONE }}
-          token: ${{ secrets.CLOUDFLARE_TOKEN }}
+        env:
+          CF_TOKEN: ${{ secrets.CF_TOKEN }}
+          CF_ZONE_NAME: ${{ secrets.CF_ZONE_NAME }}
