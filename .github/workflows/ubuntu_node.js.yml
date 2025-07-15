@@ -9,46 +9,41 @@ on:
 jobs:
   build_and_deploy:
 
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Linux, X64]
 
     strategy:
       matrix:
         node-version: [ 18 ]
 
     steps:
-      - name: 📥 Get latest source code
-        uses: actions/checkout@v3
-        with:
-          submodules: recursive
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
 
-      - name: 🗑️ Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
-
-      - name: 🔄 Restore yarn cache
+      - name: 4be Restore pnpm cache
         uses: actions/cache@v4
-        id: yarn-cache
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: |
+            ~/.local/share/pnpm/store/v3
+            node_modules
+            */node_modules
+          key: deps-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            deps-${{ runner.os }}-
 
-      - name: 📦 Install packages using yarn
-        run: yarn install
-      - name: 🏗️ Build using gulp.js
-        run: yarn build
-
-      - name: 📂 Deploy via SFTP
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+      - name: 4e6 Install dependencies
+        uses: pnpm/action-setup@v4
         with:
-          username: 'root'
-          server: ${{ secrets.FTP_SERVER }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          sftp_only: true
-          local_path: './build/*'
-          remote_path: ${{ secrets.FTP_DIR }}
+          version: 10
+          run_install: |
+            - recursive: true
+              args: [--frozen-lockfile, --prefer-offline]
+
+      - name: 3df e0f Build using gulp.js
+        run: pnpm run build
+
+      - name: 📂 Deploy
+        run: |
+          rsync -av ./build/ /home/amiroff/htdocs/amiroff.me/
 
       - name: 🗑️ Purge Cloudflare Cache
         uses: jakejarvis/cloudflare-purge-action@master

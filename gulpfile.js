@@ -122,11 +122,16 @@ htmlTask.displayName = 'html';
 //   Images Compression
 export const imagesTask = async () => {
   try {
-    const imagemin = (await import('gulp-imagemin')).default; //   Important: Access the default export
+    const imagemin = (await import('gulp-imagemin')).default;
+    const imageminPngquant = (await import('imagemin-pngquant')).default;
+    const imageminSvgo = (await import('imagemin-svgo')).default;
     await gulp
       .src(images.sourceDir, { encoding: false })
       .pipe(sizediff.start())
-      .pipe(imagemin())
+      .pipe(imagemin([
+        imageminPngquant(),
+        imageminSvgo(),
+      ]))
       .pipe(
         sizediff.stop({
           title: 'Images Compression',

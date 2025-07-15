@@ -31,6 +31,8 @@
     "gulp-sizediff": "0.0.2",
     "gulp-strip-debug": "^6.0.0",
     "gulp-terser": "^2.1.0",
+    "imagemin-pngquant": "^10.0.0",
+    "imagemin-svgo": "^11.0.1",
     "minimist": "^1.2.8",
     "npm-check-updates": "^17.1.18",
     "postcss": "^8.5.3",
