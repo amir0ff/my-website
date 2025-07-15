@@ -227,23 +227,23 @@ export const afterScript = (done) => {
     gulp.watch(css.watchList, gulp.series(sassTask, browserSyncReload));
     gulp.watch(js.watchList, gulp.series(jsTask, browserSyncReload));
     gulp.watch(php.watchList, gulp.series(phpTask, browserSyncReload));
+    ncu.run({
+      packageFile: 'package.json',
+    }).then((upgraded) => {
+      if (Object.keys(upgraded).length === 0) {
+        console.log('All npm dependencies are up to date!');
+      } else {
+        console.log('The following npm dependencies have updates');
+        console.log('To update npm dependencies, run the following command in your terminal:, `ncu -u`', upgraded);
+      }
+    });
   }
-  ncu.run({
-    packageFile: 'package.json',
-  }).then((upgraded) => {
-    console.log('--- End of build ---');
-    console.log('');
-    console.log('This was a ' + buildType + ' build.');
-    console.log('');
-    console.log('Files are generated in the ' + buildDir + ' directory.');
-    console.log(buildMessage);
-    if (Object.keys(upgraded).length === 0) {
-      console.log('All npm dependencies are up to date!');
-    } else {
-      console.log('The following npm dependencies have updates');
-      console.log('To update npm dependencies, run the following command in your terminal:, `ncu -u`', upgraded);
-    }
-  });
+  console.log('--- End of build ---');
+  console.log('');
+  console.log('This was a ' + buildType + ' build.');
+  console.log('');
+  console.log('Files are generated in the ' + buildDir + ' directory.');
+  console.log(buildMessage);
   done();
 };
 afterScript.displayName = 'afterScript';
