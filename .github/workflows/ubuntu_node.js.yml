@@ -45,9 +45,9 @@ jobs:
         run: |
           rsync -av ./build/ /home/amiroff/htdocs/amiroff.me/
 
-          - name: 🗑️ Purge Cloudflare Cache
-          run: |
-            curl -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE }}/purge_cache" \
-              -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_TOKEN }}" \
-              -H "Content-Type: application/json" \
-              --data '{"purge_everything":true}'
+      - name: 🗑️ Purge Cloudflare Cache
+        run: |
+          curl -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE }}/purge_cache" \
+            -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            --data '{"purge_everything":true}'
