@@ -51,5 +51,5 @@ jobs:
       - name: 🗑️ Purge Cloudflare Cache
         uses: aorfanos/cloudflare-purge-action@v1.0.3
         env:
-          CF_TOKEN: ${{ secrets.CF_TOKEN }}
-          CF_ZONE_NAME: ${{ secrets.CF_ZONE_NAME }}
+          CF_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN  }}
+          CF_ZONE_NAME: ${{ secrets.CLOUDFLARE_ZONE }}
