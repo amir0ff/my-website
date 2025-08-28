@@ -19,9 +19,9 @@
   "devDependencies": {
     "autoprefixer": "^10.4.21",
     "browser-sync": "^3.0.4",
-    "cssnano": "^7.0.6",
+    "cssnano": "^7.1.1",
     "del": "^8.0.0",
-    "gulp": "^5.0.0",
+    "gulp": "^5.0.1",
     "gulp-concat": "^2.6.1",
     "gulp-htmlclean": "^2.7.22",
     "gulp-imagemin": "^9.1.0",
@@ -34,9 +34,9 @@
     "imagemin-pngquant": "^10.0.0",
     "imagemin-svgo": "^11.0.1",
     "minimist": "^1.2.8",
-    "npm-check-updates": "^17.1.18",
-    "postcss": "^8.5.3",
-    "sass": "^1.86.3"
+    "npm-check-updates": "^18.0.3",
+    "postcss": "^8.5.6",
+    "sass": "^1.91.0"
   },
   "dependencies": {
     "bootstrap": "3.4.1",
