@@ -67,9 +67,22 @@ $(document).ready(() => {
   (function getGitHubRepos() {
     const reposURL = 'https://api.github.com/users/amir0ff/repos?callback=allow';
     $.getJSON(reposURL + '&callback=?', (data) => {
-      const trueRepos = data.data.filter((repos) => repos.language !== null);
-      $.each(trueRepos, (index, repos) => {
-        const repo = $('<div class="card"><div class="card-body"><span class="badge"><span class="repo-lang-color ' + repos.language.toLocaleLowerCase() + '"></span> ' + repos.language + '</span><a href=" ' + repos.html_url + ' " target="_blank"><div class="card-header text-left"><h5>' + repos.name + '</h5></div></a><p class="card-text text-left small">' + repos.description + '</p></div></div>');
+      // Filter out forked repos and the specific repo with clone_url "https://github.com/amir0ff/amir0ff.git"
+      const trueRepos = data.data.filter((repo) => 
+        !repo.fork && repo.clone_url !== "https://github.com/amir0ff/amir0ff.git"
+      );
+      // Sort repos by created_at, newest first
+      trueRepos.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+      $.each(trueRepos, (index, repoData) => {
+        // Only show language badge if language is present
+        let languageBadge = '';
+        if (repoData.language) {
+          languageBadge = '<span class="badge"><span class="repo-lang-color ' + repoData.language.toLocaleLowerCase() + '"></span> ' + repoData.language + '</span>';
+        }
+        const repo = $('<div class="card"><div class="card-body">' +
+          languageBadge +
+          '<a href="' + repoData.html_url + '" target="_blank"><div class="card-header text-left"><h5>' + repoData.name + '</h5></div></a>' +
+          '<p class="card-text text-left small">' + repoData.description + '</p></div></div>');
         repo.prependTo('#repositories');
       });
     });
