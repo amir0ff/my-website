@@ -6,7 +6,7 @@
   "author": "Amir Off",
   "license": "GPL-3.0",
   "scripts": {
-    "serve": "gulp build",
+    "start": "gulp build",
     "build": "gulp build --prod"
   },
   "repository": {

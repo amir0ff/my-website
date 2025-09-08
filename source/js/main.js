@@ -22,11 +22,11 @@ function isElementInViewport(el) {
   );
 }
 
-$(document).ready(() => {
+$(function() {
 
   // function to smooth scroll to elements on link clicks
   $(function() {
-    $('a[href*=\\#]:not([href=\\#])').click(function() {
+    $('a[href*=\\#]:not([href=\\#])').on('click', function() {
       if (location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') && location.hostname === this.hostname) {
         let target = $(this.hash);
 
@@ -100,14 +100,14 @@ $(document).ready(() => {
 
         let $description = $(posts.description);
         let postCoverImg = $description.find('img').attr('src');
-        const post = $('<div class="card"><div class="card-body"><span class="date"><i class="fas fa-clock"></i>' + momentDate + '</span><a href="' + posts.link + '" target="_blank"><div class="cover" style="height:170px;background: url(' + postCoverImg + ') no-repeat center center;background-size: cover;"><i class="fa fa-book-open fa-4x"></i></div><h5>' + posts.title + '</h5></a><div class="card-text">' + formattedText + '</div></div></div>');
+        const post = $('<div class="card"><div class="card-body"><span class="date"><i class="fas fa-clock"></i>' + momentDate + '</span><a href="' + posts.link + '" target="_blank"><div class="cover" style="height:208px;background: url(' + postCoverImg + ') no-repeat center center;background-size: cover;"><i class="fa fa-book-open fa-4x"></i></div><h5>' + posts.title + '</h5></a><div class="card-text">' + formattedText + '</div></div></div>');
         post.prependTo('#feeds');
       });
     });
   })();
 
 
-  $('#submit').click((event) => {
+  $('#submit').on('click', (event) => {
     event.preventDefault();
 
     $('.error').hide();
@@ -137,8 +137,8 @@ $(document).ready(() => {
   });
 
   // for collapsable nav bar, hide the menu when a link is clicked
-  $('.navbar-collapse ul li a').click(() => {
-    $('.navbar-toggle:visible').click();
+  $('.navbar-collapse ul li a').on('click', () => {
+    $('.navbar-toggle:visible').trigger('click');
   });
 
   // don't let user scroll if we are auto-scrolling
@@ -226,7 +226,7 @@ $(document).ready(() => {
 
 
   // if user clicks the logo, auto scroll to top of page
-  $('.navbar-brand').click((event) => {
+  $('.navbar-brand').on('click', (event) => {
     event.preventDefault();
     if (!(smallDevice.matches)) {
       $('.navbar').animate({ 'padding-top': '30px' }, 500);
