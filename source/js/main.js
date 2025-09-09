@@ -139,7 +139,7 @@ $(function() {
       // Check reCAPTCHA
       const recaptchaResponse = grecaptcha.getResponse();
       if (!recaptchaResponse) {
-        alert('Please complete the reCAPTCHA verification.');
+        $('#captchaError').fadeIn('slow');
         return;
       }
       
@@ -168,7 +168,7 @@ $(function() {
         })
         .catch((error) => {
           console.error('EmailJS Error:', error);
-          alert('Failed to send message. Please try again.');
+          $('#sendError').fadeIn('slow');
         })
         .finally(() => {
           $('#spinner').fadeOut();
