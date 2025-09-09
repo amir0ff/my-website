@@ -22,14 +22,16 @@ function isElementInViewport(el) {
   );
 }
 
-// reCAPTCHA callback functions
-function enableSubmit() {
+// reCAPTCHA callback functions - must be in global scope
+window.enableSubmit = function() {
+  console.log('reCAPTCHA verified - enabling submit button');
   document.getElementById('submit').disabled = false;
-}
+};
 
-function disableSubmit() {
+window.disableSubmit = function() {
+  console.log('reCAPTCHA expired - disabling submit button');
   document.getElementById('submit').disabled = true;
-}
+};
 
 $(function() {
   // Initialize EmailJS
@@ -139,6 +141,12 @@ $(function() {
       if (!recaptchaResponse) {
         alert('Please complete the reCAPTCHA verification.');
         return;
+      }
+      
+      // Fallback: enable submit button if reCAPTCHA is verified
+      if (recaptchaResponse && document.getElementById('submit').disabled) {
+        console.log('Fallback: enabling submit button');
+        document.getElementById('submit').disabled = false;
       }
 
       $('#spinner').fadeIn().css('display', 'inline-block');
