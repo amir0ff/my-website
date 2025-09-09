@@ -23,6 +23,8 @@ function isElementInViewport(el) {
 }
 
 $(function() {
+  // Initialize EmailJS
+  emailjs.init("uhViB6ixprFe7Rpvz"); // Replace with your actual Public Key from EmailJS dashboard
 
   // function to smooth scroll to elements on link clicks
   $(function() {
@@ -123,14 +125,36 @@ $(function() {
     } else if (message.length === 0) {
       $('#messageError').fadeIn('slow');
     } else {
-      $('#spinner').fadeIn().css('display', 'inline-block');
-      $.post('php/send.php', { name: sender, email: email, message: message })
-        .done(() => {
+      // Check reCAPTCHA
+      const recaptchaResponse = grecaptcha.getResponse();
+      if (!recaptchaResponse) {
+        alert('Please complete the reCAPTCHA verification.');
+        return;
+      }
 
+      $('#spinner').fadeIn().css('display', 'inline-block');
+      
+      // EmailJS integration
+      const templateParams = {
+        sender: sender,  // Changed from 'name' to 'sender' to match template
+        email: email,
+        message: message,
+        'g-recaptcha-response': recaptchaResponse
+      };
+
+      emailjs.send('service_jfz8aoo', 'template_j0y7amc', templateParams)
+        .then(() => {
           $('#form-container').fadeOut('slow', () => {
             $('#success').fadeIn();
           });
-
+          grecaptcha.reset(); // Reset reCAPTCHA after successful send
+        })
+        .catch((error) => {
+          console.error('EmailJS Error:', error);
+          alert('Failed to send message. Please try again.');
+        })
+        .finally(() => {
+          $('#spinner').fadeOut();
         });
     }
 
