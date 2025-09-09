@@ -22,6 +22,15 @@ function isElementInViewport(el) {
   );
 }
 
+// reCAPTCHA callback functions
+function enableSubmit() {
+  document.getElementById('submit').disabled = false;
+}
+
+function disableSubmit() {
+  document.getElementById('submit').disabled = true;
+}
+
 $(function() {
   // Initialize EmailJS
   emailjs.init("uhViB6ixprFe7Rpvz"); // Replace with your actual Public Key from EmailJS dashboard

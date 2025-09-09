@@ -287,13 +287,13 @@
 
       <div class="row">
         <div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-4 col-lg-offset-4 text-center">
-          <div class="g-recaptcha" data-sitekey="6LfdHcMrAAAAAANLhOI3lB9FkJ3cSI7yYJ62FXTs"></div>
+          <div class="g-recaptcha" data-sitekey="6LfdHcMrAAAAAANLhOI3lB9FkJ3cSI7yYJ62FXTs" data-callback="enableSubmit" data-expired-callback="disableSubmit"></div>
         </div>
       </div>
       
       <div class="row">
         <div class="col-md-1 col-md-offset-7 text-right submit">
-          <input id="submit" name="submit" type="submit" value="Send" class="btn btn-default send-btn">
+          <input id="submit" name="submit" type="submit" value="Send" class="btn btn-default send-btn" disabled>
           <i id="spinner" class="fas fa-sync-alt fa-spin fa-lg"></i>
         </div>
         <div class="col-md-1 col-md-offset-7 text-right">
