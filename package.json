@@ -17,26 +17,26 @@
     "last 2 versions"
   ],
   "devDependencies": {
-    "autoprefixer": "^10.4.21",
+    "autoprefixer": "^10.4.23",
     "browser-sync": "^3.0.4",
-    "cssnano": "^7.1.1",
-    "del": "^8.0.0",
+    "cssnano": "^7.1.2",
+    "del": "^8.0.1",
     "gulp": "^5.0.1",
     "gulp-concat": "^2.6.1",
     "gulp-htmlclean": "^2.7.22",
-    "gulp-imagemin": "^9.1.0",
+    "gulp-imagemin": "^9.2.0",
     "gulp-postcss": "^10.0.0",
     "gulp-preprocess": "^5.0.0",
     "gulp-sass": "^6.0.1",
     "gulp-sizediff": "0.0.2",
-    "gulp-strip-debug": "^6.0.0",
+    "gulp-strip-debug": "^7.0.0",
     "gulp-terser": "^2.1.0",
     "imagemin-pngquant": "^10.0.0",
     "imagemin-svgo": "^11.0.1",
     "minimist": "^1.2.8",
-    "npm-check-updates": "^18.0.3",
+    "npm-check-updates": "^19.2.0",
     "postcss": "^8.5.6",
-    "sass": "^1.91.0"
+    "sass": "^1.97.0"
   },
   "dependencies": {
     "bootstrap": "3.4.1",
