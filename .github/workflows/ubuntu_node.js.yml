@@ -19,6 +19,11 @@ jobs:
       - name: 📥 Checkout repository
         uses: actions/checkout@v4
 
+      - name: 🟩 Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
       - name: 💾 Restore pnpm cache
         uses: actions/cache@v4
         with:
@@ -43,6 +48,11 @@ jobs:
 
       - name: 📂 Deploy
         run: |
+          # Ensure PM2 is installed if needed for future tasks
+          if ! command -v pm2 &> /dev/null; then
+            echo "⚠️ PM2 not found. Installing globally..."
+            sudo npm install -g pm2
+          fi
           rsync -av ./build/ /home/amiroff/htdocs/amiroff.me/
 
       - name: 🗑️ Purge Cloudflare Cache
