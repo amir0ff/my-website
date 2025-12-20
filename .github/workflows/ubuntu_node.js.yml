@@ -48,11 +48,6 @@ jobs:
 
       - name: 📂 Deploy
         run: |
-          # Ensure PM2 is installed if needed for future tasks
-          if ! command -v pm2 &> /dev/null; then
-            echo "⚠️ PM2 not found. Installing globally..."
-            sudo npm install -g pm2
-          fi
           rsync -av ./build/ /home/amiroff/htdocs/amiroff.me/
 
       - name: 🗑️ Purge Cloudflare Cache
