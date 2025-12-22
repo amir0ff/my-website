@@ -1,4 +1,4 @@
-name: Gulp.js CI build and deploy
+name:  🚀 Gulp.js CI build and deploy
 
 on:
   push:
@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [ 18 ]
+        node-version: [ 20 ]
 
     steps:
       - name: 📥 Checkout repository
@@ -24,24 +24,13 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: 💾 Restore pnpm cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.local/share/pnpm/store/v3
-            node_modules
-            */node_modules
-          key: deps-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            deps-${{ runner.os }}-
-
-      - name: 📦 Install dependencies
+      - name: 📦 Install pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 10
-          run_install: |
-            - recursive: true
-              args: [--frozen-lockfile, --prefer-offline]
+
+      - name: 📥 Install dependencies
+        run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: 🏗️ Build using gulp.js
         run: pnpm run build
