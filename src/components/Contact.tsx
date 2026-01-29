@@ -2,13 +2,16 @@
 
 import { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { cn } from "@/lib/utils";
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
+  const turnstileRef = useRef<TurnstileInstance>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,6 +24,11 @@ export default function Contact() {
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
+      return;
+    }
+
+    if (!turnstileToken) {
+      alert("Please complete the verification challenge.");
       return;
     }
 
@@ -40,6 +48,8 @@ export default function Contact() {
     .then(() => {
       setStatus("success");
       setFormData({ name: "", email: "", message: "" });
+      setTurnstileToken(null);
+      turnstileRef.current?.reset();
     })
     .catch((err) => {
       console.error("EmailJS Error:", err);
@@ -96,17 +106,26 @@ export default function Contact() {
                     </div>
                 </div>
 
-                <div className="flex flex-col items-center space-y-4">
-                    {/* reCAPTCHA placeholder - Would need actual implementation for functional site */}
-                    <div className="bg-gray-200 p-2 text-xs text-gray-500">
-                        reCAPTCHA verification placeholder
-                    </div>
+                <div className="flex flex-col items-center space-y-6 mb-6">
+                    <Turnstile
+                        ref={turnstileRef}
+                        siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
+                        onSuccess={(token) => setTurnstileToken(token)}
+                        onExpire={() => setTurnstileToken(null)}
+                        onError={() => setTurnstileToken(null)}
+                        options={{
+                            theme: 'light',
+                        }}
+                    />
                     
                     <div className="flex space-x-4 w-full md:w-1/2 justify-center">
                         <button
                             type="submit"
-                            disabled={status === "sending"}
-                            className="bg-gray-800 text-white px-8 py-2 rounded hover:bg-black transition-colors min-w-[100px] flex items-center justify-center"
+                            disabled={status === "sending" || !turnstileToken}
+                            className={cn(
+                                "bg-gray-800 text-white px-8 py-2 rounded transition-colors min-w-[100px] flex items-center justify-center",
+                                (status === "sending" || !turnstileToken) ? "opacity-50 cursor-not-allowed" : "hover:bg-black cursor-pointer"
+                            )}
                         >
                             {status === "sending" ? <i className="fas fa-sync-alt fa-spin mr-2"></i> : "Send"}
                         </button>

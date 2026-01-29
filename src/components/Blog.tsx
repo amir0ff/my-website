@@ -97,7 +97,7 @@ export default function Blog() {
         </div>
         
         <div className="text-right mt-8">
-            <p className="text-[#959595] text-sm">Powered by <a href="https://medium.com/@amir0ff" target="_blank" className="hover:underline">Medium</a></p>
+            <p className="text-[#959595] text-sm font-roboto">Powered by <a href="https://medium.com/@amir0ff" target="_blank" className="hover:underline text-white font-medium">Medium</a></p>
         </div>
       </div>
 

@@ -138,6 +138,10 @@ export default function Portfolio() {
               </div>
             ))}
           </div>
+          
+          <div className="text-right mt-8 flex justify-end">
+            <p className="text-[#959595] text-sm font-roboto">Powered by <a href="https://github.com/amir0ff" target="_blank" className="hover:underline text-white">GitHub</a></p>
+          </div>
         </div>
       </div>
 
