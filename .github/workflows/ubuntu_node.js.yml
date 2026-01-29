@@ -42,7 +42,7 @@ jobs:
 
       - name: 📂 Deploy
         run: |
-          rsync -av ./out/ /home/amiroff/htdocs/amiroff.me/
+          rsync -av ./out/ /home/amiroff/htdocs/amiroff.org/
 
       - name: 🗑️ Purge Cloudflare Cache
         run: |
