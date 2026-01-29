@@ -30,6 +30,11 @@ export default function Blog() {
         const url = `https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@amir0ff&api_key=${apiKey}&order_by=pubDate&order_dir=asc&count=14`;
         const response = await fetch(url);
         const data = await response.json();
+        
+        if (!data || !data.items) {
+          throw new Error("Invalid response from RSS API");
+        }
+
         const filtered = data.items.filter((item: Post) => item.categories.length > 0);
         
         const processed = filtered.map((item: Post) => ({
