@@ -33,6 +33,7 @@ export default function Contact() {
     }
 
     setStatus("sending");
+    console.log("Sending with Turnstile Token:", turnstileToken);
 
     // Replace with your actual IDs from EmailJS
     emailjs.send(
