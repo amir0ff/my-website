@@ -42,6 +42,7 @@ export default function Contact() {
             sender: formData.name,
             email: formData.email,
             message: formData.message,
+            'g-recaptcha-response': turnstileToken,
         },
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || ''
     )
