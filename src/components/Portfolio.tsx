@@ -112,6 +112,21 @@ export default function Portfolio() {
             className="mx-auto mb-8 opacity-80"
           />
           <h2 className="text-3xl mb-12">My GitHub</h2>
+
+          <div className="flex justify-center mb-16 px-4">
+              <a 
+                href="https://github.com/amir0ff" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="bg-[#0d0d0d] p-4 rounded-md shadow-[0_3px_13px_0_rgba(0,0,0,0.6)] w-full max-w-[800px] overflow-hidden block hover:opacity-80 transition-opacity"
+              >
+                  <img 
+                    src="https://ghchart.rshah.org/amir0ff" 
+                    alt="amir0ff's Github chart" 
+                    className="w-full h-auto brightness-90 contrast-110"
+                  />
+              </a>
+          </div>
           
           <div className="flex flex-wrap -mx-4">
             {repos.map((repo) => (
