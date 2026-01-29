@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&family=Roboto:wght@300;400;500&family=Damion&display=swap');
+@import url('https://use.fontawesome.com/releases/v6.5.1/css/all.css');
+@import "tailwindcss";
+
+@theme {
+  --color-background: #141414;
+  --color-foreground: #ffffff;
+  --color-card-bg: #0d0d0d;
+  --color-portfolio-bg: #202020;
+  --color-blog-bg: #2b2b2b;
+  --color-contact-bg: #EDEDED;
+  --color-text-muted: #D9D9D9;
+  --color-text-small: #959595;
+  
+  --font-open-sans: 'Open Sans', sans-serif;
+  --font-roboto: 'Roboto', sans-serif;
+  --font-damion: 'Damion', cursive;
+}
+
+:root {
+  --background: #141414;
+  --foreground: #ffffff;
+}
+
+@layer base {
+  html, body {
+    @apply antialiased;
+    text-rendering: optimizeLegibility !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004) !important;
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-open-sans);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply uppercase tracking-[3px] font-light;
+  }
+
+  h3 {
+    @apply normal-case font-[family-name:var(--font-roboto)];
+  }
+
+  a {
+    @apply transition-all duration-300;
+  }
+}
+
+@layer utilities {
+  .img-circle {
+    @apply rounded-full shadow-[0_5px_15px_0_rgba(0,0,0,0.6)];
+  }
+
+  .justify {
+    @apply text-justify px-4;
+  }
+
+  .section-padding {
+    @apply py-[30px];
+  }
+
+  .triangle-decorator {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -30px;
+    width: 0;
+    height: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-top: 30px solid currentColor;
+    border-bottom: 0;
+    z-index: 5;
+    pointer-events: none;
+  }
+}
+
+@keyframes floatAvatar {
+  0% {
+    box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.6);
+    transform: translateY(0px);
+  }
+  50% {
+    box-shadow: 0 23px 13px 0 rgba(0, 0, 0, 0.2);
+    transform: translateY(-18px);
+  }
+  100% {
+    box-shadow: 0 3px 13px 0 rgba(0, 0, 0, 0.6);
+    transform: translateY(0px);
+  }
+}
+
+.img-avatar {
+  border: 5px white solid;
+  animation: floatAvatar 4.5s ease-in-out infinite;
+}
+
+@keyframes floatRepos {
+  100% {
+    box-shadow: 0 3px 13px 0 rgba(0, 0, 0, 0.6);
+    transform: translateY(-10px);
+  }
+}
+
+.repo-card-hover:hover {
+  animation: floatRepos 0.4s ease-in-out forwards;
+}
+
+::selection {
+  background: #000000;
+  color: #FFFFFF;
+}

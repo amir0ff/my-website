@@ -1,4 +1,4 @@
-name:  🚀 Next.js CI build and deploy
+name:  🚀 Gulp.js CI build and deploy
 
 on:
   push:
@@ -32,12 +32,12 @@ jobs:
       - name: 📥 Install dependencies
         run: pnpm install --frozen-lockfile --prefer-offline
 
-      - name: 🏗️ Build and Export Next.js
+      - name: 🏗️ Build using gulp.js
         run: pnpm run build
 
       - name: 📂 Deploy
         run: |
-          rsync -av ./out/ /home/amiroff/htdocs/amiroff.me/
+          rsync -av ./build/ /home/amiroff/htdocs/amiroff.me/
 
       - name: 🗑️ Purge Cloudflare Cache
         run: |

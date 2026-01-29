@@ -1,71 +1,41 @@
-# --------------------
-# OSX Files
-# --------------------
-.AppleDouble
-.LSOverride
-Icon
-._*
-.Spotlight-V100
-.Trashes
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# --------------------
-# Eclipse or Nodeclipse "Enide Studio" Files
-# --------------------
-# recommended to add to Git SCM
-# or generate with `nodeclipse -p` command
-.project
-.settings/
-.*.md.html
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
 
+# testing
+/coverage
 
-# --------------------
-# IntelliJ Files
-# --------------------
-*.iml
-*.ipr
-*.iws
-.idea/
+# next.js
+/.next/
+/out/
 
-# --------------------
-# Netbeans Files
-# --------------------
-nbproject/private/
-build/
-nbbuild/
-nbdist/
-nbactions.xml
-nb-configuration.xml
+# production
+/build
 
-# --------------------
-# Node Files
-# --------------------
-.nodemonignore
-npm-debug.log
-node_modules/
+# misc
+.DS_Store
+*.pem
 
-# --------------------
-# SASS Files
-# --------------------
-.sass-cache/
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
 
-# --------------------
-# Bower Files
-# --------------------
-.bower-*/
-bower_components
+# env files (can opt-in for committing if needed)
+.env*
 
-# --------------------
-# App Files
-# --------------------
-tests/results/**
-modules/public/
-modules/views/
-/public/build/
-/packages/contrib/
-/packages/**/**/public/assets/lib
+# vercel
+.vercel
 
-
-# --------------------
-# vim Files
-# --------------------
-*.swp
+# typescript
+*.tsbuildinfo
+next-env.d.ts

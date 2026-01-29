@@ -1,9 +1,3 @@
 ignoredBuiltDependencies:
-  - '@parcel/watcher'
-  - gifsicle
-  - optipng-bin
-  - pngquant-bin
-
-onlyBuiltDependencies:
-  - mozjpeg
-  - pngquant-bin
+  - sharp
+  - unrs-resolver
