@@ -141,7 +141,7 @@ export default function Contact() {
                 </div>
                 
                 {status === "error" && (
-                    <div className="bg-[#f2dede] border-[#ebccd1] text-[#a94442] p-4 rounded-md mt-8 text-center">
+                    <div className="bg-[#f2dede] border-[#ebccd1] text-[#a94442] p-4 rounded-md mt-8 text-center max-w-[500px] mx-auto">
                         Failed to send message. Please try again.
                     </div>
                 )}
