@@ -2,16 +2,16 @@
 
 import { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
-import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
+import ReCAPTCHA from "react-google-recaptcha";
 import { cn } from "@/lib/utils";
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
-  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
-  const turnstileRef = useRef<TurnstileInstance>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,15 +27,13 @@ export default function Contact() {
       return;
     }
 
-    if (!turnstileToken) {
-      alert("Please complete the verification challenge.");
+    if (!captchaToken) {
+      alert("Please complete the reCAPTCHA verification.");
       return;
     }
 
     setStatus("sending");
-    console.log("Sending with Turnstile Token:", turnstileToken);
 
-    // Replace with your actual IDs from EmailJS
     emailjs.send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '', 
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || '', 
@@ -43,15 +41,15 @@ export default function Contact() {
             sender: formData.name,
             email: formData.email,
             message: formData.message,
-            'g-recaptcha-response': turnstileToken,
+            'g-recaptcha-response': captchaToken,
         },
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || ''
     )
     .then(() => {
       setStatus("success");
       setFormData({ name: "", email: "", message: "" });
-      setTurnstileToken(null);
-      turnstileRef.current?.reset();
+      setCaptchaToken(null);
+      recaptchaRef.current?.reset();
     })
     .catch((err) => {
       console.error("EmailJS Error:", err);
@@ -109,24 +107,19 @@ export default function Contact() {
                 </div>
 
                 <div className="flex flex-col items-center space-y-6 mb-6">
-                    <Turnstile
-                        ref={turnstileRef}
-                        siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
-                        onSuccess={(token) => setTurnstileToken(token)}
-                        onExpire={() => setTurnstileToken(null)}
-                        onError={() => setTurnstileToken(null)}
-                        options={{
-                            theme: 'light',
-                        }}
+                    <ReCAPTCHA
+                        ref={recaptchaRef}
+                        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "6LfdHcMrAAAAAANLhOI3lB9FkJ3cSI7yYJ62FXTs"}
+                        onChange={(token) => setCaptchaToken(token)}
                     />
                     
                     <div className="flex space-x-4 w-full md:w-1/2 justify-center">
                         <button
                             type="submit"
-                            disabled={status === "sending" || !turnstileToken}
+                            disabled={status === "sending" || !captchaToken}
                             className={cn(
                                 "bg-gray-800 text-white px-8 py-2 rounded transition-colors min-w-[100px] flex items-center justify-center",
-                                (status === "sending" || !turnstileToken) ? "opacity-50 cursor-not-allowed" : "hover:bg-black cursor-pointer"
+                                (status === "sending" || !captchaToken) ? "opacity-50 cursor-not-allowed" : "hover:bg-black cursor-pointer"
                             )}
                         >
                             {status === "sending" ? <i className="fas fa-sync-alt fa-spin mr-2"></i> : "Send"}
