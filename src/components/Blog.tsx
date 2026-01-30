@@ -27,7 +27,7 @@ export default function Blog() {
     const fetchPosts = async () => {
       try {
         const apiKey = process.env.NEXT_PUBLIC_RSS2JSON_API_KEY || '';
-        const url = `https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@amir0ff&api_key=${apiKey}&order_by=pubDate&order_dir=asc&count=14`;
+        const url = `https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@amir0ff&api_key=${apiKey}&order_by=pubDate&order_dir=desc&count=14`;
         const response = await fetch(url);
         const data = await response.json();
         
@@ -42,7 +42,12 @@ export default function Blog() {
           thumbnail: item.thumbnail || extractImage(item.description) || extractImage(item.content)
         }));
 
-        setPosts(processed);
+        // Sort by date descending (newest first)
+        const sorted = processed.sort((a: Post, b: Post) => 
+          new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime()
+        );
+
+        setPosts(sorted);
       } catch (err) {
         console.error("Error fetching blog posts:", err);
         setError(true);
