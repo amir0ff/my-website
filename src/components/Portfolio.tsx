@@ -47,7 +47,6 @@ export default function Portfolio() {
           .filter((repo: Repo) => !repo.fork && repo.clone_url !== "https://github.com/amir0ff/amir0ff.git")
           .sort((a: Repo, b: Repo) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
         setRepos(filtered);
-        console.log(filtered)
       } catch (error) {
         console.error("Error fetching repos:", error);
       }
