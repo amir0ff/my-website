@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import moment from "moment";
-import { cn } from "@/lib/utils";
 
 interface Post {
   title: string;
@@ -26,7 +25,7 @@ export default function Blog() {
 
     const fetchPosts = async () => {
       try {
-        const apiKey = process.env.NEXT_PUBLIC_RSS2JSON_API_KEY || '';
+        const apiKey = import.meta.env.VITE_RSS2JSON_API_KEY || '';
         const url = `https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@amir0ff&api_key=${apiKey}&order_by=pubDate&order_dir=desc&count=14`;
         const response = await fetch(url);
         const data = await response.json();

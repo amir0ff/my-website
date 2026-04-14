@@ -8,14 +8,15 @@ This repository contains the source code for my modernized portfolio. In January
 ## 🛠 Stack
 The project was migrated from a **Legacy Stack (Bootstrap, jQuery, PHP, Gulp)** to a **Modern Ecosystem**:
 
-- **Framework**: [Next.js 15+](https://nextjs.org/) (App Router, Static Export)
+- **Framework**: [React 19](https://react.dev/) + [Vite 8](https://vite.dev/) (Single Page Application)
 - **Styling**: [Tailwind CSS 4](https://tailwindcss.com/) & Vanilla CSS
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Animations**: [Framer Motion](https://www.framer.com/motion/) & [Lenis Smooth Scroll](https://github.com/darkroomengineering/lenis)
+- **Language**: [TypeScript 6.0](https://www.typescriptlang.org/) (Strict Mode)
+- **Tooling**: [ESLint 10](https://eslint.org/) (Flat Config)
+- **Animations**: [Framer Motion 12](https://www.framer.com/motion/) & [Lenis Smooth Scroll](https://github.com/darkroomengineering/lenis)
 - **Deployment**: [GitHub Actions](https://github.com/features/actions) with automated Sync and Cache Purge
 
 ## 📁 Structure
-- `/src`: Modern Next.js application source.
+- `/src`: Modern React application source (Vite entry).
 - `/public`: Static assets (images, icons).
 - `/legacy`: The original legacy code preserved for historical reference and backup.
 

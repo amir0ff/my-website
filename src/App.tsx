@@ -1,12 +1,12 @@
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Portfolio from "@/components/Portfolio";
-import Blog from "@/components/Blog";
-import Contact from "@/components/Contact";
-import BackToTop from "@/components/BackToTop";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Portfolio from "./components/Portfolio";
+import Blog from "./components/Blog";
+import Contact from "./components/Contact";
+import BackToTop from "./components/BackToTop";
 
-export default function Home() {
+export default function App() {
   return (
     <main className="min-h-screen bg-[#141414]">
       <Navbar />

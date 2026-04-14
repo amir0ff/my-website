@@ -35,15 +35,15 @@ export default function Contact() {
     setStatus("sending");
 
     emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '', 
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || '', 
+        import.meta.env.VITE_EMAILJS_SERVICE_ID || '', 
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID || '', 
         {
             sender: formData.name,
             email: formData.email,
             message: formData.message,
             'g-recaptcha-response': captchaToken,
         },
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || ''
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY || ''
     )
     .then(() => {
       setStatus("success");
@@ -79,7 +79,7 @@ export default function Contact() {
                         <input
                             type="text"
                             placeholder="Name"
-                            className="w-full md:w-1/2 p-3 border border-gray-300 rounded text-base focus:outline-none focus:border-gray-500"
+                            className="w-full md:w-1/2 p-3 border border-gray-300 rounded text-base focus:outline-none focus:border-gray-500 bg-white"
                             value={formData.name}
                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         />
@@ -89,7 +89,7 @@ export default function Contact() {
                         <input
                             type="email"
                             placeholder="Email"
-                            className="w-full md:w-1/2 p-3 border border-gray-300 rounded text-base focus:outline-none focus:border-gray-500"
+                            className="w-full md:w-1/2 p-3 border border-gray-300 rounded text-base focus:outline-none focus:border-gray-500 bg-white"
                             value={formData.email}
                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         />
@@ -98,7 +98,7 @@ export default function Contact() {
                     <div className="flex flex-col items-center">
                         <textarea
                             placeholder="Message"
-                            className="w-full md:w-1/2 p-3 border border-gray-300 rounded text-base h-[200px] focus:outline-none focus:border-gray-500"
+                            className="w-full md:w-1/2 p-3 border border-gray-300 rounded text-base h-[200px] focus:outline-none focus:border-gray-500 bg-white"
                             value={formData.message}
                             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                         />
@@ -109,7 +109,7 @@ export default function Contact() {
                 <div className="flex flex-col items-center space-y-6 mb-6">
                     <ReCAPTCHA
                         ref={recaptchaRef}
-                        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "6LfdHcMrAAAAAANLhOI3lB9FkJ3cSI7yYJ62FXTs"}
+                        sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY || ''}
                         onChange={(token) => setCaptchaToken(token)}
                     />
                     

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
+
 import { cn } from "@/lib/utils";
 
 interface Repo {
@@ -34,6 +34,7 @@ export default function Portfolio() {
     fetchRepos();
   }, []);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const staticProjects = [
     {
       title: "Dropshipping Business",
@@ -81,7 +82,7 @@ export default function Portfolio() {
             <div key={project.title} className={cn("flex flex-col md:flex-row items-center", idx % 2 !== 0 && "md:flex-row-reverse")}>
               <div className="w-full md:w-1/2 flex justify-center md:justify-end px-8 group">
                 <div className="relative w-[190px] h-[190px] rounded-full overflow-hidden shadow-[0_5px_15px_0_rgba(0,0,0,0.6)] border-none">
-                  <Image
+                  <img
                     src={project.img}
                     alt={project.title}
                     width={190}
@@ -104,7 +105,7 @@ export default function Portfolio() {
 
         {/* GitHub Section */}
         <div className="text-center mt-24">
-          <Image 
+          <img 
             src="/images/hero-circuit-bg.svg" 
             alt="GitHub" 
             width={800} 
