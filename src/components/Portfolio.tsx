@@ -9,11 +9,31 @@ interface Repo {
   name: string;
   description: string;
   html_url: string;
-  language: string;
+  language: string | null;
   fork: boolean;
+  is_template?: boolean;
   clone_url: string;
   created_at: string;
 }
+
+const LANGUAGE_COLORS: Record<string, string> = {
+  javascript: "#f1e05a",
+  typescript: "#3178c6",
+  python: "#3572A5",
+  html: "#e34c26",
+  css: "#563d7c",
+  php: "#4f5d95",
+  java: "#b07219",
+  "c++": "#f34b7d",
+  "c#": "#178600",
+  go: "#00add8",
+  rust: "#dea584",
+  ruby: "#701516",
+  swift: "#ffac45",
+  shell: "#89e051",
+  vue: "#41b883",
+  react: "#61dafb",
+};
 
 export default function Portfolio() {
   const [repos, setRepos] = useState<Repo[]>([]);
@@ -27,6 +47,7 @@ export default function Portfolio() {
           .filter((repo: Repo) => !repo.fork && repo.clone_url !== "https://github.com/amir0ff/amir0ff.git")
           .sort((a: Repo, b: Repo) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
         setRepos(filtered);
+        console.log(filtered)
       } catch (error) {
         console.error("Error fetching repos:", error);
       }
@@ -136,15 +157,13 @@ export default function Portfolio() {
                   <a href={repo.html_url} target="_blank" className="block">
                     <div className="flex justify-between items-start mb-4">
                         <h5 className="text-white font-medium normal-case tracking-normal">{repo.name}</h5>
-                        {repo.language && (
+                        {(repo.language || repo.is_template) && (
                             <span className="text-[10px] text-[#959595] uppercase flex items-center">
-                                <span className={cn(
-                                    "w-2 h-2 rounded-full mr-1",
-                                    repo.language.toLowerCase() === 'javascript' ? "bg-[#f1e05a]" :
-                                    repo.language.toLowerCase() === 'typescript' ? "bg-[#2b7489]" :
-                                    repo.language.toLowerCase() === 'python' ? "bg-[#3572A5]" : "bg-gray-500"
-                                )}></span>
-                                {repo.language}
+                                <span 
+                                    className="w-2 h-2 rounded-full mr-1"
+                                    style={{ backgroundColor: LANGUAGE_COLORS[(repo.language || 'other').toLowerCase()] || "#8b8b8b" }}
+                                ></span>
+                                {repo.language || (repo.is_template ? "Template" : "Archive")}
                             </span>
                         )}
                     </div>
