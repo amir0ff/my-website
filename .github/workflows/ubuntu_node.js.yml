@@ -10,10 +10,12 @@ jobs:
   build_and_deploy:
 
     runs-on: [self-hosted, Linux, X64]
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     strategy:
       matrix:
-        node-version: [ 22 ]
+        node-version: [ 24 ]
 
     steps:
       - name: 📥 Checkout repository
