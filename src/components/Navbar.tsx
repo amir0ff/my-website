@@ -1,4 +1,4 @@
-"use client";
+
 
 import { useEffect, useState } from "react";
 import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
@@ -56,6 +56,7 @@ export default function Navbar() {
                     key={link.name}
                     href={link.to}
                     target="_blank"
+                    rel="noopener noreferrer"
                     className="px-[2px] mx-[13px] text-[1.1em] font-medium font-roboto uppercase text-white hover:text-white relative group"
                 >
                     {link.name}
@@ -97,6 +98,7 @@ export default function Navbar() {
                 <a
                   href={link.to}
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="text-white uppercase font-roboto text-lg block"
                   onClick={() => setIsOpen(false)}
                 >

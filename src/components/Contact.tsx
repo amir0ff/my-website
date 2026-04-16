@@ -1,4 +1,4 @@
-"use client";
+
 
 import { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
@@ -128,6 +128,7 @@ export default function Contact() {
                         <a 
                             href="https://keybase.io/amir0ff" 
                             target="_blank"
+                            rel="noopener noreferrer"
                             className="bg-[#f0ad4e] text-white px-4 py-2 rounded hover:bg-[#ec971f] transition-colors"
                         >
                             PGP <i className="fas fa-key ml-1"></i>
@@ -146,13 +147,13 @@ export default function Contact() {
         {/* Social Links */}
         <div id="social" className="mt-16">
             <div className="flex justify-center space-x-6">
-                <a href="https://www.linkedin.com/in/amir0ff" target="_blank" className="text-gray-600 hover:text-black transition-colors grayscale hover:grayscale-0">
+                <a href="https://www.linkedin.com/in/amir0ff" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-black transition-colors grayscale hover:grayscale-0">
                     <i className="fab fa-linkedin fa-2x"></i>
                 </a>
-                <a href="https://www.youtube.com/@amir0ff" target="_blank" className="text-gray-600 hover:text-black transition-colors grayscale hover:grayscale-0">
+                <a href="https://www.youtube.com/@amir0ff" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-black transition-colors grayscale hover:grayscale-0">
                     <i className="fab fa-youtube fa-2x"></i>
                 </a>
-                <a href="https://github.com/amir0ff" target="_blank" className="text-gray-600 hover:text-black transition-colors grayscale hover:grayscale-0">
+                <a href="https://github.com/amir0ff" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-black transition-colors grayscale hover:grayscale-0">
                     <i className="fab fa-github fa-2x"></i>
                 </a>
             </div>
