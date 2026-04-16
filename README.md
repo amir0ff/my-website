@@ -12,7 +12,7 @@ The project was migrated from a **Legacy Stack (Bootstrap, jQuery, PHP, Gulp)** 
 - **Styling**: [Tailwind CSS 4](https://tailwindcss.com/) & Vanilla CSS
 - **Language**: [TypeScript 6.0](https://www.typescriptlang.org/) (Strict Mode)
 - **Tooling**: [ESLint 10](https://eslint.org/) (Flat Config)
-- **Animations**: [Framer Motion 12](https://www.framer.com/motion/) & [Lenis Smooth Scroll](https://github.com/darkroomengineering/lenis)
+- **Animations**: [Lenis Smooth Scroll](https://github.com/darkroomengineering/lenis) (Native smooth scrolling)
 - **Deployment**: [GitHub Actions](https://github.com/features/actions) with automated Sync and Cache Purge
 
 ## 📁 Structure
