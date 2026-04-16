@@ -1,7 +1,4 @@
-"use client";
-
 import { useEffect, useState } from "react";
-import moment from "moment";
 
 interface Post {
   title: string;
@@ -16,6 +13,7 @@ interface Post {
 export default function Blog() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const extractImage = (description: string) => {
@@ -50,6 +48,8 @@ export default function Blog() {
       } catch (err) {
         console.error("Error fetching blog posts:", err);
         setError(true);
+      } finally {
+        setLoading(false);
       }
     };
     fetchPosts();
@@ -66,42 +66,60 @@ export default function Blog() {
 
         {error && (
             <div className="bg-[#fcf8e3] border-[#faebcc] text-[#8a6d3b] p-4 rounded-md mx-auto max-w-[500px] text-center mb-8">
-                Cannot fetch blog posts! For now, you can read them <a href="https://medium.com/@amir0ff" target="_blank" className="font-bold underline">here</a>.
+                Cannot fetch blog posts! For now, you can read them <a href="https://medium.com/@amir0ff" target="_blank" rel="noopener noreferrer" className="font-bold underline">here</a>.
             </div>
         )}
 
         <div className="flex flex-wrap -mx-4">
-          {posts.map((post) => (
-            <div key={post.title} className="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8">
-              <div className="bg-[#0d0d0d] rounded-md shadow-[0_3px_13px_0_rgba(0,0,0,0.6)] overflow-hidden group">
-                <a href={post.link} target="_blank" className="block">
-                  <div 
-                    className="h-[208px] bg-cover bg-center relative transition-opacity duration-350"
-                    style={{ backgroundImage: `url(${post.thumbnail})` }}
-                  >
-                    <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-30 transition-opacity duration-350 flex items-center justify-center">
-                        <i className="fa fa-book-open fa-4x text-black opacity-0 group-hover:opacity-100 transition-opacity duration-350"></i>
+          {loading ? (
+            Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8">
+                <div className="bg-[#0d0d0d] rounded-md shadow-[0_3px_13px_0_rgba(0,0,0,0.6)] overflow-hidden animate-pulse">
+                  <div className="h-[208px] bg-[#1a1a1a]"></div>
+                  <div className="p-5">
+                    <div className="h-4 bg-[#2a2a2a] rounded w-3/4 mb-5 pb-5 border-b border-[#202020]"></div>
+                    <div className="space-y-2">
+                      <div className="h-3 bg-[#2a2a2a] rounded w-full"></div>
+                      <div className="h-3 bg-[#2a2a2a] rounded w-full"></div>
+                      <div className="h-3 bg-[#2a2a2a] rounded w-1/2"></div>
                     </div>
                   </div>
-                  <div className="p-5 relative">
-                    <h5 className="text-white font-bold tracking-[1px] normal-case pb-5 border-b border-[#202020] mb-5 leading-[18px]">
-                      {post.title}
-                    </h5>
-                    <div className="text-[#D9D9D9] text-sm text-justify h-[100px] overflow-hidden">
-                        {post.content.replace(/(<[^>]+>)/ig, "").substring(0, 220)}...
-                    </div>
-                    <span className="absolute bottom-1 right-2 text-[12px] text-[#959595] flex items-center">
-                        <i className="fas fa-clock mr-1"></i> {moment(post.pubDate).format('MMM D, YYYY')}
-                    </span>
-                  </div>
-                </a>
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            posts.map((post) => (
+              <div key={post.title} className="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8">
+                <div className="bg-[#0d0d0d] rounded-md shadow-[0_3px_13px_0_rgba(0,0,0,0.6)] overflow-hidden group">
+                  <a href={post.link} target="_blank" rel="noopener noreferrer" className="block">
+                    <div 
+                      className="h-[208px] bg-cover bg-center relative transition-opacity duration-350"
+                      style={{ backgroundImage: `url(${post.thumbnail})` }}
+                    >
+                      <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-30 transition-opacity duration-350 flex items-center justify-center">
+                          <i className="fa fa-book-open fa-4x text-black opacity-0 group-hover:opacity-100 transition-opacity duration-350"></i>
+                      </div>
+                    </div>
+                    <div className="p-5 relative">
+                      <h5 className="text-white font-bold tracking-[1px] normal-case pb-5 border-b border-[#202020] mb-5 leading-[18px]">
+                        {post.title}
+                      </h5>
+                      <div className="text-[#D9D9D9] text-sm text-justify h-[100px] overflow-hidden">
+                          {post.content.replace(/(<[^>]+>)/ig, "").substring(0, 220)}...
+                      </div>
+                      <span className="absolute bottom-1 right-2 text-[12px] text-[#959595] flex items-center">
+                          <i className="fas fa-clock mr-1"></i> {new Date(post.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                      </span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            ))
+          )}
         </div>
         
         <div className="text-right mt-8">
-            <p className="text-[#959595] text-sm font-roboto">Powered by <a href="https://medium.com/@amir0ff" target="_blank" className="hover:underline text-white font-medium">Medium</a></p>
+            <p className="text-[#959595] text-sm font-roboto">Powered by <a href="https://medium.com/@amir0ff" target="_blank" rel="noopener noreferrer" className="hover:underline text-white font-medium">Medium</a></p>
         </div>
       </div>
 

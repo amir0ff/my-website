@@ -1,8 +1,8 @@
-"use client";
+
 
 import { useEffect, useState } from "react";
 
-import { cn } from "@/lib/utils";
+// import { cn } from "@/lib/utils"; // TODO: uncomment when staticProjects are restored
 
 interface Repo {
   id: number;
@@ -37,6 +37,8 @@ const LANGUAGE_COLORS: Record<string, string> = {
 
 export default function Portfolio() {
   const [repos, setRepos] = useState<Repo[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const fetchRepos = async () => {
@@ -49,6 +51,9 @@ export default function Portfolio() {
         setRepos(filtered);
       } catch (error) {
         console.error("Error fetching repos:", error);
+        setError(true);
+      } finally {
+        setLoading(false);
       }
     };
     fetchRepos();
@@ -149,32 +154,55 @@ export default function Portfolio() {
               </a>
           </div>
           
+          {error && (
+            <div className="bg-[#fcf8e3] border-[#faebcc] text-[#8a6d3b] p-4 rounded-md mx-auto max-w-[500px] text-center mb-8">
+                Cannot fetch repositories! You can view them on <a href="https://github.com/amir0ff" target="_blank" rel="noopener noreferrer" className="font-bold underline">GitHub</a>.
+            </div>
+          )}
+
           <div className="flex flex-wrap -mx-4">
-            {repos.map((repo) => (
-              <div key={repo.id} className="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8">
-                <div className="bg-[#0d0d0d] p-6 rounded-md shadow-[0_3px_13px_0_rgba(0,0,0,0.6)] repo-card-hover h-full text-left relative overflow-hidden group">
-                  <a href={repo.html_url} target="_blank" className="block">
+            {loading ? (
+              Array.from({ length: 6 }).map((_, i) => (
+                <div key={i} className="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8">
+                  <div className="bg-[#0d0d0d] p-6 rounded-md shadow-[0_3px_13px_0_rgba(0,0,0,0.6)] h-[120px] animate-pulse">
                     <div className="flex justify-between items-start mb-4">
-                        <h5 className="text-white font-medium normal-case tracking-normal">{repo.name}</h5>
-                        {(repo.language || repo.is_template) && (
-                            <span className="text-[10px] text-[#959595] uppercase flex items-center">
-                                <span 
-                                    className="w-2 h-2 rounded-full mr-1"
-                                    style={{ backgroundColor: LANGUAGE_COLORS[(repo.language || 'other').toLowerCase()] || "#8b8b8b" }}
-                                ></span>
-                                {repo.language || (repo.is_template ? "Template" : "Archive")}
-                            </span>
-                        )}
+                      <div className="h-4 bg-[#2a2a2a] rounded w-1/3"></div>
+                      <div className="h-3 bg-[#2a2a2a] rounded w-16"></div>
                     </div>
-                    <p className="text-[#959595] text-sm line-clamp-3">{repo.description}</p>
-                  </a>
+                    <div className="space-y-2">
+                      <div className="h-3 bg-[#2a2a2a] rounded w-full"></div>
+                      <div className="h-3 bg-[#2a2a2a] rounded w-2/3"></div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            ) : (
+              repos.map((repo) => (
+                <div key={repo.id} className="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8">
+                  <div className="bg-[#0d0d0d] p-6 rounded-md shadow-[0_3px_13px_0_rgba(0,0,0,0.6)] repo-card-hover h-full text-left relative overflow-hidden group">
+                    <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className="block">
+                      <div className="flex justify-between items-start mb-4">
+                          <h5 className="text-white font-medium normal-case tracking-normal">{repo.name}</h5>
+                          {(repo.language || repo.is_template) && (
+                              <span className="text-[10px] text-[#959595] uppercase flex items-center">
+                                  <span 
+                                      className="w-2 h-2 rounded-full mr-1"
+                                      style={{ backgroundColor: LANGUAGE_COLORS[(repo.language || 'other').toLowerCase()] || "#8b8b8b" }}
+                                  ></span>
+                                  {repo.language || (repo.is_template ? "Template" : "Archive")}
+                              </span>
+                          )}
+                      </div>
+                      <p className="text-[#959595] text-sm line-clamp-3">{repo.description}</p>
+                    </a>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
           
           <div className="text-right mt-8 flex justify-end">
-            <p className="text-[#959595] text-sm font-roboto">Powered by <a href="https://github.com/amir0ff" target="_blank" className="hover:underline text-white">GitHub</a></p>
+            <p className="text-[#959595] text-sm font-roboto">Powered by <a href="https://github.com/amir0ff" target="_blank" rel="noopener noreferrer" className="hover:underline text-white">GitHub</a></p>
           </div>
         </div>
       </div>
