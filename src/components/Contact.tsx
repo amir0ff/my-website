@@ -5,6 +5,8 @@ import emailjs from "@emailjs/browser";
 import ReCAPTCHA from "react-google-recaptcha";
 import { cn } from "@/lib/utils";
 
+const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || "";
+
 export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
@@ -12,6 +14,7 @@ export default function Contact() {
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const captchaConfigured = Boolean(RECAPTCHA_SITE_KEY);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,6 +27,11 @@ export default function Contact() {
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
+      return;
+    }
+
+    if (!captchaConfigured) {
+      alert("Contact form is not configured. Add VITE_RECAPTCHA_SITE_KEY to your .env file.");
       return;
     }
 
@@ -107,19 +115,25 @@ export default function Contact() {
                 </div>
 
                 <div className="flex flex-col items-center space-y-6 mb-6">
-                    <ReCAPTCHA
-                        ref={recaptchaRef}
-                        sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY || ''}
-                        onChange={(token) => setCaptchaToken(token)}
-                    />
+                    {captchaConfigured ? (
+                      <ReCAPTCHA
+                          ref={recaptchaRef}
+                          sitekey={RECAPTCHA_SITE_KEY}
+                          onChange={(token) => setCaptchaToken(token)}
+                      />
+                    ) : (
+                      <div className="bg-[#fcf8e3] border border-[#faebcc] text-[#8a6d3b] p-3 rounded-md text-sm text-center max-w-[400px]">
+                        reCAPTCHA is not configured. Copy <code>.env.example</code> to <code>.env</code> and set <code>VITE_RECAPTCHA_SITE_KEY</code>.
+                      </div>
+                    )}
                     
                     <div className="flex space-x-4 w-full md:w-1/2 justify-center">
                         <button
                             type="submit"
-                            disabled={status === "sending" || !captchaToken}
+                            disabled={status === "sending" || !captchaConfigured || !captchaToken}
                             className={cn(
                                 "bg-gray-800 text-white px-8 py-2 rounded transition-colors min-w-[100px] flex items-center justify-center",
-                                (status === "sending" || !captchaToken) ? "opacity-50 cursor-not-allowed" : "hover:bg-black cursor-pointer"
+                                (status === "sending" || !captchaConfigured || !captchaToken) ? "opacity-50 cursor-not-allowed" : "hover:bg-black cursor-pointer"
                             )}
                         >
                             {status === "sending" ? <i className="fas fa-sync-alt fa-spin mr-2"></i> : "Send"}
