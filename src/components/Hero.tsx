@@ -20,8 +20,8 @@ export default function Hero() {
             />
           </div>
           <h1 className="text-white text-[3em] sm:text-[4.8em] font-extrabold font-open-sans leading-tight [text-shadow:0px_0px_1px_#0D0D0D]">
-            Senior Front-End <br />
-            Developer
+            Senior Frontend & <br />
+            Full-Stack Engineer
           </h1>
         </div>
       </div>
