@@ -4,7 +4,9 @@ export default function Hero() {
     <article 
       id="home" 
       className="relative w-full h-screen min-h-[700px] bg-cover bg-center flex items-center justify-center"
-      style={{ backgroundImage: 'url("/images/background6_enhanced.jpeg")' }}
+      style={{
+        backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("/images/background6_enhanced.jpeg")',
+      }}
     >
       <div className="container mx-auto px-4 z-10">
         <div className="flex flex-col items-center text-center">
