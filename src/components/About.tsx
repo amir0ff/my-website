@@ -10,9 +10,23 @@ export default function About() {
 
         <div className="flex justify-center">
           <div className="w-full md:w-[60%] lg:w-[51%] text-[#D9D9D9] text-[1.2em] font-light leading-[1.8em] tracking-[1px] justify">
-            <span>
-              Hi, I'm Amir! A full-stack developer specializing in front-end development. I enjoy creating clean, accessible, and user-friendly web applications. My experience extends to back-end development, DevOps, and Linux system administration. Driven by a belief that AI will augment, not replace, developers, I actively use AI-powered tools to enhance my workflow, having spent the last year developing my prompt engineering skills. I am passionate about exploring how this technology will shape the future of user experiences by experimenting with building intelligent, AI-driven features. I’ve also explored software QA and earned an ISTQB certification, which helps me ensure the quality and reliability of my work. When I’m not working on web projects, you’ll find me diving into open-source hardware and IoT or geeking out about cybersecurity. If you share these interests or just want to chat tech, let’s connect!
-            </span>
+            <div className="space-y-5">
+              <p>
+                Hi, I'm Amir! I'm a Senior Frontend and Full-Stack Engineer who builds modern web applications and the infrastructure they run on.
+              </p>
+              <p>
+                With 7+ years of experience shipping production platforms for European startups and high-traffic web applications, I specialize in the React and Next.js ecosystems, combining clean, accessible UI architecture with solid systems thinking.
+              </p>
+              <p>
+                Beyond the browser, my background covers Linux server administration, network observability, and DevOps automation. I actively build and maintain open-source developer tooling and contribute to community projects.
+              </p>
+              <p>
+                I treat modern AI as an operational multiplier: building autonomous agent workflows, leveraging MCP, and integrating intelligent features that eliminate developer boilerplate and accelerate product delivery. With ISTQB certification in software testing, engineering quality and reliability are always baked into everything I build.
+              </p>
+              <p>
+                When I'm not writing code or tuning server telemetry, you'll find me experimenting with open-source hardware, IoT, and cybersecurity. If you want to collaborate, discuss architecture, or chat tech, let's connect!
+              </p>
+            </div>
           </div>
         </div>
       </div>
