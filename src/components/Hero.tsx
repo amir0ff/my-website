@@ -5,7 +5,7 @@ export default function Hero() {
       id="home" 
       className="relative w-full h-screen min-h-[700px] bg-cover bg-center flex items-center justify-center"
       style={{
-        backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("/images/background6_enhanced.jpeg")',
+        backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)), url("/images/background6_enhanced.jpeg")',
       }}
     >
       <div className="container mx-auto px-4 z-10">
