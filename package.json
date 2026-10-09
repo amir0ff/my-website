@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "fetch:medium": "node scripts/fetch-medium-feed.mjs",
+    "predev": "node scripts/fetch-medium-feed.mjs",
+    "prebuild": "node scripts/fetch-medium-feed.mjs",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",

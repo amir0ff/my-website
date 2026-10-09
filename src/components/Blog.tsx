@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import mediumFeed from "@/data/medium-posts.json";
 
 interface Post {
   title: string;
@@ -6,54 +6,15 @@ interface Post {
   link: string;
   description: string;
   thumbnail: string;
-  content: string;
   categories: string[];
 }
 
+const posts = [...(mediumFeed.posts as Post[])].sort(
+  (a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime(),
+);
+
 export default function Blog() {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const extractImage = (description: string) => {
-      const match = description.match(/<img[^>]+src="([^">]+)"/);
-      return match ? match[1] : "";
-    };
-
-    const fetchPosts = async () => {
-      try {
-        const apiKey = import.meta.env.VITE_RSS2JSON_API_KEY || '';
-        const url = `https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@amir0ff&api_key=${apiKey}&order_by=pubDate&order_dir=desc&count=14`;
-        const response = await fetch(url);
-        const data = await response.json();
-        
-        if (!data || !data.items) {
-          throw new Error("Invalid response from RSS API");
-        }
-
-        const filtered = data.items.filter((item: Post) => item.categories.length > 0);
-        
-        const processed = filtered.map((item: Post) => ({
-          ...item,
-          thumbnail: item.thumbnail || extractImage(item.description) || extractImage(item.content)
-        }));
-
-        // Sort by date descending (newest first)
-        const sorted = processed.sort((a: Post, b: Post) => 
-          new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime()
-        );
-
-        setPosts(sorted);
-      } catch (err) {
-        console.error("Error fetching blog posts:", err);
-        setError(true);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchPosts();
-  }, []);
+  const error = posts.length === 0;
 
   return (
     <article id="blog" className="bg-[#2b2b2b] section-padding relative">
@@ -65,61 +26,72 @@ export default function Blog() {
         <h2 className="text-center text-white text-3xl mb-12 mt-8">My Blog</h2>
 
         {error && (
-            <div className="bg-[#fcf8e3] border-[#faebcc] text-[#8a6d3b] p-4 rounded-md mx-auto max-w-[500px] text-center mb-8">
-                Cannot fetch blog posts! For now, you can read them <a href="https://medium.com/@amir0ff" target="_blank" rel="noopener noreferrer" className="font-bold underline">here</a>.
-            </div>
+          <div className="bg-[#fcf8e3] border-[#faebcc] text-[#8a6d3b] p-4 rounded-md mx-auto max-w-[500px] text-center mb-8">
+            Cannot load blog posts! For now, you can read them{" "}
+            <a
+              href="https://medium.com/@amir0ff"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold underline"
+            >
+              here
+            </a>
+            .
+          </div>
         )}
 
         <div className="flex flex-wrap -mx-4">
-          {loading ? (
-            Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8">
-                <div className="bg-[#0d0d0d] rounded-md shadow-[0_3px_13px_0_rgba(0,0,0,0.6)] overflow-hidden animate-pulse">
-                  <div className="h-[208px] bg-[#1a1a1a]"></div>
-                  <div className="p-5">
-                    <div className="h-4 bg-[#2a2a2a] rounded w-3/4 mb-5 pb-5 border-b border-[#202020]"></div>
-                    <div className="space-y-2">
-                      <div className="h-3 bg-[#2a2a2a] rounded w-full"></div>
-                      <div className="h-3 bg-[#2a2a2a] rounded w-full"></div>
-                      <div className="h-3 bg-[#2a2a2a] rounded w-1/2"></div>
+          {posts.map((post) => (
+            <div key={post.link} className="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8">
+              <div className="bg-[#0d0d0d] rounded-md shadow-[0_3px_13px_0_rgba(0,0,0,0.6)] overflow-hidden group">
+                <a
+                  href={post.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                >
+                  <div
+                    className="h-[208px] bg-cover bg-center relative transition-opacity duration-350"
+                    style={{ backgroundImage: `url(${post.thumbnail})` }}
+                  >
+                    <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-30 transition-opacity duration-350 flex items-center justify-center">
+                      <i className="fa fa-book-open fa-4x text-black opacity-0 group-hover:opacity-100 transition-opacity duration-350"></i>
                     </div>
                   </div>
-                </div>
-              </div>
-            ))
-          ) : (
-            posts.map((post) => (
-              <div key={post.title} className="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8">
-                <div className="bg-[#0d0d0d] rounded-md shadow-[0_3px_13px_0_rgba(0,0,0,0.6)] overflow-hidden group">
-                  <a href={post.link} target="_blank" rel="noopener noreferrer" className="block">
-                    <div 
-                      className="h-[208px] bg-cover bg-center relative transition-opacity duration-350"
-                      style={{ backgroundImage: `url(${post.thumbnail})` }}
-                    >
-                      <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-30 transition-opacity duration-350 flex items-center justify-center">
-                          <i className="fa fa-book-open fa-4x text-black opacity-0 group-hover:opacity-100 transition-opacity duration-350"></i>
-                      </div>
+                  <div className="p-5 relative">
+                    <h5 className="text-white font-bold tracking-[1px] normal-case pb-5 border-b border-[#202020] mb-5 leading-[18px]">
+                      {post.title}
+                    </h5>
+                    <div className="text-[#D9D9D9] text-sm text-justify h-[100px] overflow-hidden">
+                      {post.description.substring(0, 220)}...
                     </div>
-                    <div className="p-5 relative">
-                      <h5 className="text-white font-bold tracking-[1px] normal-case pb-5 border-b border-[#202020] mb-5 leading-[18px]">
-                        {post.title}
-                      </h5>
-                      <div className="text-[#D9D9D9] text-sm text-justify h-[100px] overflow-hidden">
-                          {post.content.replace(/(<[^>]+>)/ig, "").substring(0, 220)}...
-                      </div>
-                      <span className="absolute bottom-1 right-2 text-[12px] text-[#959595] flex items-center">
-                          <i className="fas fa-clock mr-1"></i> {new Date(post.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                      </span>
-                    </div>
-                  </a>
-                </div>
+                    <span className="absolute bottom-1 right-2 text-[12px] text-[#959595] flex items-center">
+                      <i className="fas fa-clock mr-1"></i>{" "}
+                      {new Date(post.pubDate).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric",
+                      })}
+                    </span>
+                  </div>
+                </a>
               </div>
-            ))
-          )}
+            </div>
+          ))}
         </div>
-        
+
         <div className="text-right mt-8">
-            <p className="text-[#959595] text-sm font-roboto">Powered by <a href="https://medium.com/@amir0ff" target="_blank" rel="noopener noreferrer" className="hover:underline text-white font-medium">Medium</a></p>
+          <p className="text-[#959595] text-sm font-roboto">
+            Powered by{" "}
+            <a
+              href="https://medium.com/@amir0ff"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:underline text-white font-medium"
+            >
+              Medium
+            </a>
+          </p>
         </div>
       </div>
 
