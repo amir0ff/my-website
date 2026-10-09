@@ -1,5 +1,4 @@
 
-
 import { useEffect, useState } from "react";
 import GitHubContributionGraph from "./GitHubContributionGraph";
 
@@ -8,6 +7,7 @@ import GitHubContributionGraph from "./GitHubContributionGraph";
 interface Repo {
   id: number;
   name: string;
+  full_name: string;
   description: string;
   html_url: string;
   language: string | null;
@@ -15,7 +15,21 @@ interface Repo {
   is_template?: boolean;
   clone_url: string;
   created_at: string;
+  owner: {
+    login: string;
+  };
 }
+
+const PERSONAL_OWNER = "amir0ff";
+const EXCLUDED_CLONE_URLS = new Set([
+  "https://github.com/amir0ff/amir0ff.git",
+]);
+
+/** Personal account + orgs whose public repos should appear in the grid. */
+const REPO_SOURCES = [
+  `https://api.github.com/users/${PERSONAL_OWNER}/repos?per_page=100`,
+  "https://api.github.com/orgs/DedSecLabs/repos?per_page=100",
+];
 
 const LANGUAGE_COLORS: Record<string, string> = {
   javascript: "#f1e05a",
@@ -34,7 +48,20 @@ const LANGUAGE_COLORS: Record<string, string> = {
   shell: "#89e051",
   vue: "#41b883",
   react: "#61dafb",
+  lua: "#000080",
 };
+
+async function fetchRepoSource(url: string): Promise<Repo[]> {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`GitHub API ${response.status} for ${url}`);
+  }
+  const data: unknown = await response.json();
+  if (!Array.isArray(data)) {
+    throw new Error(`Unexpected GitHub API payload for ${url}`);
+  }
+  return data as Repo[];
+}
 
 export default function Portfolio() {
   const [repos, setRepos] = useState<Repo[]>([]);
@@ -44,11 +71,36 @@ export default function Portfolio() {
   useEffect(() => {
     const fetchRepos = async () => {
       try {
-        const response = await fetch('https://api.github.com/users/amir0ff/repos');
-        const data = await response.json();
-        const filtered = data
-          .filter((repo: Repo) => !repo.fork && repo.clone_url !== "https://github.com/amir0ff/amir0ff.git")
-          .sort((a: Repo, b: Repo) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+        const results = await Promise.allSettled(
+          REPO_SOURCES.map((url) => fetchRepoSource(url)),
+        );
+
+        const merged = new Map<number, Repo>();
+        for (const result of results) {
+          if (result.status !== "fulfilled") {
+            console.error("Error fetching repos:", result.reason);
+            continue;
+          }
+          for (const repo of result.value) {
+            merged.set(repo.id, repo);
+          }
+        }
+
+        if (merged.size === 0) {
+          setError(true);
+          return;
+        }
+
+        const filtered = [...merged.values()]
+          .filter(
+            (repo) =>
+              !repo.fork && !EXCLUDED_CLONE_URLS.has(repo.clone_url),
+          )
+          .sort(
+            (a, b) =>
+              new Date(b.created_at).getTime() -
+              new Date(a.created_at).getTime(),
+          );
         setRepos(filtered);
       } catch (error) {
         console.error("Error fetching repos:", error);
@@ -146,7 +198,7 @@ export default function Portfolio() {
               </div>
           </div>
           
-          {error && (
+          {error && repos.length === 0 && (
             <div className="bg-[#fcf8e3] border-[#faebcc] text-[#8a6d3b] p-4 rounded-md mx-auto max-w-[500px] text-center mb-8">
                 Cannot fetch repositories! You can view them on <a href="https://github.com/amir0ff" target="_blank" rel="noopener noreferrer" className="font-bold underline">GitHub</a>.
             </div>
@@ -169,14 +221,25 @@ export default function Portfolio() {
                 </div>
               ))
             ) : (
-              repos.map((repo) => (
+              repos.map((repo) => {
+                const isOrgRepo = repo.owner.login !== PERSONAL_OWNER;
+                return (
                 <div key={repo.id} className="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8">
                   <div className="bg-[#0d0d0d] p-6 rounded-md shadow-[0_3px_13px_0_rgba(0,0,0,0.6)] repo-card-hover h-full text-left relative overflow-hidden group">
                     <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className="block">
-                      <div className="flex justify-between items-start mb-4">
-                          <h5 className="text-white font-medium normal-case tracking-normal">{repo.name}</h5>
+                      <div className="flex justify-between items-start mb-4 gap-3">
+                          <div className="min-w-0">
+                            {isOrgRepo && (
+                              <p className="text-[10px] text-[#959595] uppercase tracking-[1px] mb-1 truncate">
+                                {repo.owner.login}
+                              </p>
+                            )}
+                            <h5 className="text-white font-medium normal-case tracking-normal truncate">
+                              {repo.name}
+                            </h5>
+                          </div>
                           {(repo.language || repo.is_template) && (
-                              <span className="text-[10px] text-[#959595] uppercase flex items-center">
+                              <span className="text-[10px] text-[#959595] uppercase flex items-center shrink-0">
                                   <span 
                                       className="w-2 h-2 rounded-full mr-1"
                                       style={{ backgroundColor: LANGUAGE_COLORS[(repo.language || 'other').toLowerCase()] || "#8b8b8b" }}
@@ -189,12 +252,18 @@ export default function Portfolio() {
                     </a>
                   </div>
                 </div>
-              ))
+                );
+              })
             )}
           </div>
           
           <div className="text-right mt-8 flex justify-end">
-            <p className="text-[#959595] text-sm font-roboto">Powered by <a href="https://github.com/amir0ff" target="_blank" rel="noopener noreferrer" className="hover:underline text-white">GitHub</a></p>
+            <p className="text-[#959595] text-sm font-roboto">
+              Powered by{" "}
+              <a href="https://github.com/amir0ff" target="_blank" rel="noopener noreferrer" className="hover:underline text-white">GitHub</a>
+              {" · "}
+              <a href="https://github.com/DedSecLabs" target="_blank" rel="noopener noreferrer" className="hover:underline text-white">DedSecLabs</a>
+            </p>
           </div>
         </div>
       </div>
