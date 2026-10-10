@@ -6,7 +6,7 @@ import {
   GitHubIcon,
   KeyIcon,
   LinkedInIcon,
-  SyncIcon,
+  SpinnerIcon,
   YouTubeIcon,
 } from "./icons";
 
@@ -73,7 +73,7 @@ export default function Contact() {
   };
 
   return (
-    <article id="contact" className="bg-[#EDEDED] section-padding text-[#333]">
+    <article className="bg-[#EDEDED] section-padding text-[#333]">
       <div className="container mx-auto px-4">
         <div className="text-center mb-8 mt-8">
           <EnvelopeIcon size="3em" className="mx-auto" />
@@ -150,14 +150,17 @@ export default function Contact() {
                   type="submit"
                   disabled={status === "sending" || !captchaConfigured || !captchaToken}
                   className={cn(
-                    "bg-gray-800 text-white px-8 py-2 rounded transition-colors min-w-[100px] flex items-center justify-center",
+                    "bg-gray-800 text-white px-8 py-2 rounded transition-colors min-w-[100px] inline-flex items-center justify-center gap-2 text-base",
                     status === "sending" || !captchaConfigured || !captchaToken
                       ? "opacity-50 cursor-not-allowed"
                       : "hover:bg-black cursor-pointer",
                   )}
                 >
                   {status === "sending" ? (
-                    <SyncIcon size="1em" className="mr-2 animate-spin" />
+                    <>
+                      <SpinnerIcon size={18} className="shrink-0 animate-spin" />
+                      <span>Send</span>
+                    </>
                   ) : (
                     "Send"
                   )}
@@ -167,9 +170,10 @@ export default function Contact() {
                   href="https://keybase.io/amir0ff"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-[#8a5a00] text-white px-4 py-2 rounded hover:bg-[#6e4800] transition-colors"
+                  className="bg-[#f0ad4e] text-[#1a1a1a] px-4 py-2 rounded hover:bg-[#ec971f] transition-colors inline-flex items-center justify-center gap-2 text-base font-medium"
                 >
-                  PGP <KeyIcon size="1em" className="ml-1 inline align-[-0.1em]" />
+                  PGP
+                  <KeyIcon size={18} className="shrink-0" />
                 </a>
               </div>
             </div>

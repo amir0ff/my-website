@@ -15,7 +15,7 @@ export default function App() {
       <About />
       <Portfolio />
       <Blog />
-      <DeferredSection minHeight={640}>
+      <DeferredSection id="contact" minHeight={640}>
         <Contact />
       </DeferredSection>
 

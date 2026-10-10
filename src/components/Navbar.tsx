@@ -36,7 +36,12 @@ export default function Navbar() {
 
   const goToSection = (id: string) => {
     setIsOpen(false);
-    scrollToTarget(`#${id}`, { offset: NAV_OFFSET });
+    const hash = `#${id}`;
+    if (location.hash !== hash) {
+      history.pushState(null, "", hash);
+      window.dispatchEvent(new Event("hashchange"));
+    }
+    scrollToTarget(hash, { offset: NAV_OFFSET });
   };
 
   return (

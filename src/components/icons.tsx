@@ -62,7 +62,7 @@ export function ChevronUpIcon(props: IconProps) {
 export function KeyIcon(props: IconProps) {
   return (
     <Icon {...props}>
-      <path d="M12.65 10A5.99 5.99 0 0 0 7 4a6 6 0 1 0 1.88 11.7L10 17h2v2h2v2h4v-4.46l-3.12-3.12A6 6 0 0 0 12.65 10ZM7 10a2 2 0 1 1 0-4 2 2 0 0 1 0 4Z" />
+      <path d="M7 14a5 5 0 1 1 4.9-6H21v2.5h-2V14h-2.5v2.5H14v-1.1A5 5 0 0 1 7 14Zm0-2.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
     </Icon>
   );
 }
@@ -83,11 +83,33 @@ export function BookOpenIcon(props: IconProps) {
   );
 }
 
-export function SyncIcon(props: IconProps) {
+export function SpinnerIcon({ className, size = 18, ...props }: IconProps) {
   return (
-    <Icon {...props}>
-      <path d="M12 6V3L8 7l4 4V8a4 4 0 1 1-4 4H6a6 6 0 1 0 6-6Zm7.5 3.5A6 6 0 0 0 12 6v2a4 4 0 0 1 3.46 6H13l4 4 4-4h-2.54a6 6 0 0 0 1.04-4.5Z" />
-    </Icon>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+      className={className}
+      {...props}
+    >
+      <circle
+        cx="12"
+        cy="12"
+        r="9"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        strokeOpacity="0.25"
+      />
+      <path
+        d="M21 12a9 9 0 0 0-9-9"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+    </svg>
   );
 }
 
