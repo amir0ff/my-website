@@ -13,7 +13,7 @@ export default function Hero() {
           <div className="relative mb-8">
             <img
               src="/images/amir_glasses.jpg"
-              alt="Me!"
+              alt="Portrait of Amir Off"
               width={230}
               height={230}
               className="img-circle img-avatar object-cover"
