@@ -1,25 +1,24 @@
-name:  🚀 Vite CI build and deploy
+name: 🚀 Vite CI build and deploy
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build_and_deploy:
-
     runs-on: [self-hosted, Linux, X64]
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     strategy:
       matrix:
-        node-version: [ 24 ]
+        node-version: [24]
 
     steps:
       - name: 📥 Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: 🟩 Set up Node.js
         uses: actions/setup-node@v7
@@ -42,11 +41,14 @@ jobs:
           VITE_EMAILJS_PUBLIC_KEY: ${{ secrets.VITE_EMAILJS_PUBLIC_KEY }}
           VITE_RECAPTCHA_SITE_KEY: ${{ secrets.VITE_RECAPTCHA_SITE_KEY }}
 
+      # PRs build only — never rsync or purge production from a pull request.
       - name: 📂 Deploy
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         run: |
           rsync -av ./dist/ /home/amiroff/htdocs/amiroff.org/
 
       - name: 🗑️ Purge Cloudflare Cache
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         run: |
           curl -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE }}/purge_cache" \
             -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_TOKEN }}" \
