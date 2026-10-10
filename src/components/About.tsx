@@ -1,9 +1,11 @@
+import { UserIcon } from "./icons";
+
 export default function About() {
   return (
     <article id="profile" className="bg-[#141414] section-padding relative mt-[20%] sm:mt-[10%]">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-8 mt-8">
-          <i className="fas fa-user fa-3x text-white"></i>
+        <div className="text-center mb-8 mt-8 text-white">
+          <UserIcon size="3em" className="mx-auto" />
         </div>
 
         <h2 className="text-center text-white text-3xl mb-12 mt-8">About Me</h2>

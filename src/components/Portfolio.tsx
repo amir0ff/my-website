@@ -118,6 +118,8 @@ export default function Portfolio() {
             alt=""
             width={800}
             height={200}
+            loading="lazy"
+            decoding="async"
             className="mx-auto mb-8 opacity-80"
           />
           <h2 className="text-3xl mb-12">My GitHub</h2>
@@ -180,9 +182,9 @@ export default function Portfolio() {
                                   {repo.owner.login}
                                 </p>
                               )}
-                              <h5 className="text-white font-medium normal-case tracking-normal truncate">
+                              <h3 className="text-white font-medium normal-case tracking-normal truncate text-base">
                                 {repo.name}
-                              </h5>
+                              </h3>
                             </div>
                             {(repo.language || repo.is_template) && (
                               <span className="text-[10px] text-[#959595] uppercase flex items-center shrink-0">

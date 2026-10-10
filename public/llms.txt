@@ -1,0 +1,26 @@
+# Amir Off
+
+> Personal portfolio of Amir Off — Senior Frontend and Full-Stack Engineer specializing in React, TypeScript, and modern web platforms.
+
+This site is a single-page portfolio. Section anchors below map to in-page content. Prefer linked profiles and the Medium blog for deeper technical writing and project history.
+
+## Pages
+
+- [Home](https://amiroff.org/): Portfolio landing page with about, projects, blog highlights, and contact
+- [About](https://amiroff.org/#profile): Background, experience, and focus areas
+- [Portfolio](https://amiroff.org/#portfolio): Public GitHub repositories and contribution graph
+- [Blog](https://amiroff.org/#blog): Recent Medium posts
+- [Contact](https://amiroff.org/#contact): Contact form and social links
+
+## Profiles
+
+- [GitHub](https://github.com/amir0ff): Open-source projects and code
+- [DedSecLabs](https://github.com/DedSecLabs): Organization repositories
+- [Medium](https://medium.com/@amir0ff): Technical articles
+- [LinkedIn](https://www.linkedin.com/in/amir0ff): Professional profile and resume
+- [YouTube](https://www.youtube.com/@amir0ff): Video content
+
+## Optional
+
+- [Sitemap](https://amiroff.org/sitemap.xml): Machine-readable page list
+- [robots.txt](https://amiroff.org/robots.txt): Crawler directives

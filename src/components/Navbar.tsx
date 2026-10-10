@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { scrollToTarget } from "@/lib/lenis";
+import { BarsIcon, TimesIcon } from "./icons";
 
 const NAV_OFFSET = -70;
 
@@ -101,10 +102,7 @@ export default function Navbar() {
           aria-expanded={isOpen}
           aria-controls="mobile-nav"
         >
-          <i
-            className={cn("fas", isOpen ? "fa-times" : "fa-bars", "fa-lg")}
-            aria-hidden="true"
-          />
+          {isOpen ? <TimesIcon size="1.25em" /> : <BarsIcon size="1.25em" />}
         </button>
       </div>
 

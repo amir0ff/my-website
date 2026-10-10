@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { scrollToTarget } from "@/lib/lenis";
+import { ChevronUpIcon } from "./icons";
 
 export default function BackToTop() {
   const [isVisible, setIsVisible] = useState(false);
@@ -24,7 +25,7 @@ export default function BackToTop() {
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none",
       )}
     >
-      <i className="fas fa-chevron-up" aria-hidden="true" />
+      <ChevronUpIcon size="1.1em" />
     </button>
   );
 }

@@ -26,6 +26,14 @@ function extractImage(html) {
   return match?.[1] ?? "";
 }
 
+/** Prefer card-sized Medium CDN URLs so the blog grid stays light. */
+function cardThumbnail(url) {
+  if (!url) return url;
+  return url
+    .replace(/\/max\/\d+\//, "/max/640/")
+    .replace(/\/v2\/resize:fit:\d+\//, "/v2/resize:fit:640/");
+}
+
 function stripHtml(html) {
   return html
     .replace(/<[^>]+>/g, " ")
@@ -60,7 +68,7 @@ function parseFeed(xml) {
         link,
         pubDate,
         description,
-        thumbnail: extractImage(content),
+        thumbnail: cardThumbnail(extractImage(content)),
         categories,
       };
     })

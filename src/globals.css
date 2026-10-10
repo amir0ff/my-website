@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&family=Roboto:wght@300;400;500&family=Damion&display=swap');
-@import url('https://use.fontawesome.com/releases/v6.5.1/css/all.css');
 @import "tailwindcss";
 
 @theme {
@@ -94,6 +92,16 @@
 .img-avatar {
   border: 5px white solid;
   animation: floatAvatar 4.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .img-avatar {
+    animation: none;
+  }
+
+  .repo-card-hover:hover {
+    animation: none;
+  }
 }
 
 @keyframes floatRepos {
