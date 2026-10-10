@@ -60,6 +60,15 @@
         return target || null;
     }
 
+    function escapeHtml(value) {
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#39;");
+    }
+
     function fillColors(el, colors) {
         for (var l = 0; l <= 4; l++) {
             var rects = el.querySelectorAll(".ghgraph-l" + l);
@@ -81,10 +90,16 @@
         var lastMonth = -1;
         for (var i = 0; i < days.length; i++) {
             var d = days[i];
+            var count = Number(d.count);
+            if (!isFinite(count) || count < 0) count = 0;
+            var level = Number(d.level);
+            if (!isFinite(level)) level = 0;
+            level = Math.max(0, Math.min(4, Math.floor(level)));
             var pos = i + firstDow;
             var x = Math.floor(pos / 7) * step;
             var y = (pos % 7) * step + labelH;
-            var dt = new Date(d.date + "T00:00:00");
+            var dt = new Date(String(d.date) + "T00:00:00");
+            if (isNaN(dt.getTime())) continue;
             var m = dt.getMonth();
             /* label a month at its first full week */
             if (m !== lastMonth) {
@@ -97,16 +112,16 @@
                 lastMonth = m;
             }
             var label =
-                (d.count === 1
+                (count === 1
                     ? "1 contribution"
-                    : d.count + " contributions") +
+                    : count + " contributions") +
                 " on " + MONTHS[m] + " " + dt.getDate() + ", " +
                 dt.getFullYear();
             svg +=
                 '<rect x="' + x + '" y="' + y +
                 '" width="' + cell + '" height="' + cell +
-                '" rx="2" class="ghgraph-l' + d.level +
-                '" data-label="' + label + '"></rect>';
+                '" rx="2" class="ghgraph-l' + level +
+                '" data-label="' + escapeHtml(label) + '"></rect>';
         }
         return svg + "</svg>";
     }
@@ -202,11 +217,14 @@
                         ? data.total.lastYear
                         : null;
                 if (options.showTotal !== false && total != null) {
+                    var safeTotal = Number(total);
+                    if (!isFinite(safeTotal) || safeTotal < 0) safeTotal = 0;
                     html +=
-                        '<p class="ghgraph-caption">' + total +
+                        '<p class="ghgraph-caption">' +
+                        escapeHtml(safeTotal) +
                         ' contributions in the last year · <a href="' +
                         "https://github.com/" + encodeURIComponent(username) +
-                        '">github.com/' + username + "</a></p>";
+                        '">github.com/' + escapeHtml(username) + "</a></p>";
                 }
                 container.innerHTML = html;
                 fillColors(container, colors);
@@ -216,11 +234,10 @@
             })
             .catch(function () {
                 /* fall back to a static chart image */
+                var safeUser = encodeURIComponent(username);
                 container.innerHTML =
-                    '<a href="https://github.com/' +
-                    encodeURIComponent(username) + '">' +
-                    '<img src="https://ghchart.rshah.org/' +
-                    encodeURIComponent(username) + '" ' +
+                    '<a href="https://github.com/' + safeUser + '">' +
+                    '<img src="https://ghchart.rshah.org/' + safeUser + '" ' +
                     'alt="GitHub contribution graph" style="width:100%"></a>';
             });
     }

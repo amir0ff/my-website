@@ -38,5 +38,14 @@
     "typescript-eslint": "^8.71.1",
     "vite": "^8.3.4"
   },
+  "pnpm": {
+    "overrides": {
+      "postcss": "^8.5.23",
+      "source-map-js": "^1.2.2",
+      "brace-expansion": "^5.0.12",
+      "browserslist": "^4.28.7",
+      "baseline-browser-mapping": "^2.11.0"
+    }
+  },
   "type": "module"
 }
