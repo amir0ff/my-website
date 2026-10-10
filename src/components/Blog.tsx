@@ -21,7 +21,7 @@ export default function Blog() {
   const error = posts.length === 0;
 
   return (
-    <article id="blog" className="bg-[#2b2b2b] section-padding relative">
+    <article className="bg-[#2b2b2b] section-padding relative">
       <div className="container mx-auto px-4">
         <div className="text-center mb-8 mt-8 text-white">
           <MediumIcon size="4em" className="mx-auto" />

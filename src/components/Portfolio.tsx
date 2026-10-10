@@ -110,7 +110,7 @@ export default function Portfolio() {
   }, []);
 
   return (
-    <article id="portfolio" className="bg-[#202020] section-padding relative">
+    <article className="bg-[#202020] section-padding relative">
       <div className="container mx-auto px-4">
         <div className="text-center mt-24">
           <img

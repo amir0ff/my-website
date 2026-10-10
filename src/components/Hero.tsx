@@ -6,6 +6,16 @@ export default function Hero() {
     >
       <picture className="absolute inset-0">
         <source
+          media="(max-width: 767px)"
+          srcSet="/images/background6_enhanced-800.webp"
+          type="image/webp"
+        />
+        <source
+          media="(max-width: 1279px)"
+          srcSet="/images/background6_enhanced-1280.webp"
+          type="image/webp"
+        />
+        <source
           srcSet="/images/background6_enhanced.webp"
           type="image/webp"
         />

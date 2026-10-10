@@ -74,23 +74,21 @@
   }
 }
 
+/* Transform-only so the animation stays compositor-friendly (no box-shadow keyframes). */
 @keyframes floatAvatar {
-  0% {
-    box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.6);
-    transform: translateY(0px);
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
   }
   50% {
-    box-shadow: 0 23px 13px 0 rgba(0, 0, 0, 0.2);
-    transform: translateY(-18px);
-  }
-  100% {
-    box-shadow: 0 3px 13px 0 rgba(0, 0, 0, 0.6);
-    transform: translateY(0px);
+    transform: translate3d(0, -18px, 0);
   }
 }
 
 .img-avatar {
   border: 5px white solid;
+  box-shadow: 0 8px 18px 0 rgba(0, 0, 0, 0.55);
+  will-change: transform;
   animation: floatAvatar 4.5s ease-in-out infinite;
 }
 
