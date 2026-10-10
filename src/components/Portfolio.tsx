@@ -1,8 +1,5 @@
-
 import { useEffect, useState } from "react";
 import GitHubContributionGraph from "./GitHubContributionGraph";
-
-// import { cn } from "@/lib/utils"; // TODO: uncomment when staticProjects are restored
 
 interface Repo {
   id: number;
@@ -112,164 +109,133 @@ export default function Portfolio() {
     fetchRepos();
   }, []);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const staticProjects = [
-    {
-      title: "Dropshipping Business",
-      description: "I built and manage a Dropshipping business powered by Shopify that provides electronic components and tools for DIY electronics lovers. In there I also showcase things I build with the Arduino open-source hardware platform.",
-      link: "https://www.mrrobotelectronics.com/",
-      img: "/images/work-10.png"
-    },
-    {
-      title: "Music",
-      description: "A portfolio and biography website that exhibits the work and creations of a renowned artist. Built with a full responsive and interactive design.",
-      link: "https://www.kherfody.com",
-      img: "/images/work-3.png"
-    },
-    {
-      title: "Photography",
-      description: "A portfolio and biography website for a professional photographer and artist based on WordPress with optimized mobile display.",
-      link: "https://www.naderhawary.com",
-      img: "/images/work-7.png"
-    },
-    {
-      title: "Gaming",
-      description: "Built in 2007 using a french gaming CMS called 'Nuked-Klan'. Although every CMS comes with a pre-written code, I modified almost 70% of it using just a text editor at the time. It has four themes I designed using Photoshop.",
-      link: "/samples/thewowuniverse/",
-      img: "/images/work-5.png"
-    },
-    {
-      title: "Education",
-      description: "This one was the first serious project made for an educational insitution. It's a content management portal designed for teachers to create workshops for kids in kindergarten and elementary schools.",
-      link: "http://www.storykarev.com/",
-      img: "/images/work-11.png"
-    }
-  ];
-
   return (
     <article id="portfolio" className="bg-[#202020] section-padding relative">
       <div className="container mx-auto px-4">
-        {/* <div className="text-center mb-8 mt-8">
-          <i className="fas fa-book fa-3x text-white"></i>
-        </div> */}
-
-{/*         <h2 className="text-center text-white text-3xl mb-12">My Portfolio</h2>
- */}        {/* Static Projects */}
-        {/* <div className="space-y-16">
-          {staticProjects.map((project, idx) => (
-            <div key={project.title} className={cn("flex flex-col md:flex-row items-center", idx % 2 !== 0 && "md:flex-row-reverse")}>
-              <div className="w-full md:w-1/2 flex justify-center md:justify-end px-8 group">
-                <div className="relative w-[190px] h-[190px] rounded-full overflow-hidden shadow-[0_5px_15px_0_rgba(0,0,0,0.6)] border-none">
-                  <img
-                    src={project.img}
-                    alt={project.title}
-                    width={190}
-                    height={190}
-                    className="grayscale group-hover:grayscale-0 transition-all duration-300"
-                  />
-                </div>
-              </div>
-              <div className="w-full md:w-1/2 text-[#D9D9D9] text-[1.2em] font-light px-8 mt-6 md:mt-0 justify">
-                <h3 className="text-2xl mb-4">
-                  <a href={project.link} target="_blank" className="text-white hover:underline">
-                    {project.title}
-                  </a>
-                </h3>
-                <p>{project.description}</p>
-              </div>
-            </div>
-          ))}
-        </div> */}
-
-        {/* GitHub Section */}
         <div className="text-center mt-24">
-          <img 
-            src="/images/hero-circuit-bg.svg" 
-            alt="GitHub" 
-            width={800} 
+          <img
+            src="/images/hero-circuit-bg.svg"
+            alt=""
+            width={800}
             height={200}
             className="mx-auto mb-8 opacity-80"
           />
           <h2 className="text-3xl mb-12">My GitHub</h2>
 
           <div className="flex justify-center mb-16 px-4">
-              <div className="bg-[#0d0d0d] p-4 rounded-md shadow-[0_3px_13px_0_rgba(0,0,0,0.6)] w-full max-w-[800px] overflow-hidden">
-                <GitHubContributionGraph username="amir0ff" showLegend={false} />
-              </div>
+            <div className="bg-[#0d0d0d] p-4 rounded-md shadow-[0_3px_13px_0_rgba(0,0,0,0.6)] w-full max-w-[800px] overflow-hidden">
+              <GitHubContributionGraph username="amir0ff" showLegend={false} />
+            </div>
           </div>
-          
+
           {error && repos.length === 0 && (
             <div className="bg-[#fcf8e3] border-[#faebcc] text-[#8a6d3b] p-4 rounded-md mx-auto max-w-[500px] text-center mb-8">
-                Cannot fetch repositories! You can view them on <a href="https://github.com/amir0ff" target="_blank" rel="noopener noreferrer" className="font-bold underline">GitHub</a>.
+              Cannot fetch repositories! You can view them on{" "}
+              <a
+                href="https://github.com/amir0ff"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-bold underline"
+              >
+                GitHub
+              </a>
+              .
             </div>
           )}
 
           <div className="flex flex-wrap -mx-4">
-            {loading ? (
-              Array.from({ length: 6 }).map((_, i) => (
-                <div key={i} className="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8">
-                  <div className="bg-[#0d0d0d] p-6 rounded-md shadow-[0_3px_13px_0_rgba(0,0,0,0.6)] h-[120px] animate-pulse">
-                    <div className="flex justify-between items-start mb-4">
-                      <div className="h-4 bg-[#2a2a2a] rounded w-1/3"></div>
-                      <div className="h-3 bg-[#2a2a2a] rounded w-16"></div>
-                    </div>
-                    <div className="space-y-2">
-                      <div className="h-3 bg-[#2a2a2a] rounded w-full"></div>
-                      <div className="h-3 bg-[#2a2a2a] rounded w-2/3"></div>
-                    </div>
-                  </div>
-                </div>
-              ))
-            ) : (
-              repos.map((repo) => {
-                const isOrgRepo = repo.owner.login !== PERSONAL_OWNER;
-                return (
-                <div key={repo.id} className="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8">
-                  <div className="bg-[#0d0d0d] p-6 rounded-md shadow-[0_3px_13px_0_rgba(0,0,0,0.6)] repo-card-hover h-full text-left relative overflow-hidden group">
-                    <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className="block">
-                      <div className="flex justify-between items-start mb-4 gap-3">
-                          <div className="min-w-0">
-                            {isOrgRepo && (
-                              <p className="text-[10px] text-[#959595] uppercase tracking-[1px] mb-1 truncate">
-                                {repo.owner.login}
-                              </p>
-                            )}
-                            <h5 className="text-white font-medium normal-case tracking-normal truncate">
-                              {repo.name}
-                            </h5>
-                          </div>
-                          {(repo.language || repo.is_template) && (
-                              <span className="text-[10px] text-[#959595] uppercase flex items-center shrink-0">
-                                  <span 
-                                      className="w-2 h-2 rounded-full mr-1"
-                                      style={{ backgroundColor: LANGUAGE_COLORS[(repo.language || 'other').toLowerCase()] || "#8b8b8b" }}
-                                  ></span>
-                                  {repo.language || (repo.is_template ? "Template" : "Archive")}
-                              </span>
-                          )}
+            {loading
+              ? Array.from({ length: 6 }).map((_, i) => (
+                  <div key={i} className="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8">
+                    <div className="bg-[#0d0d0d] p-6 rounded-md shadow-[0_3px_13px_0_rgba(0,0,0,0.6)] h-[120px] animate-pulse">
+                      <div className="flex justify-between items-start mb-4">
+                        <div className="h-4 bg-[#2a2a2a] rounded w-1/3" />
+                        <div className="h-3 bg-[#2a2a2a] rounded w-16" />
                       </div>
-                      <p className="text-[#959595] text-sm line-clamp-3">{repo.description}</p>
-                    </a>
+                      <div className="space-y-2">
+                        <div className="h-3 bg-[#2a2a2a] rounded w-full" />
+                        <div className="h-3 bg-[#2a2a2a] rounded w-2/3" />
+                      </div>
+                    </div>
                   </div>
-                </div>
-                );
-              })
-            )}
+                ))
+              : repos.map((repo) => {
+                  const isOrgRepo = repo.owner.login !== PERSONAL_OWNER;
+                  return (
+                    <div
+                      key={repo.id}
+                      className="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8"
+                    >
+                      <div className="bg-[#0d0d0d] p-6 rounded-md shadow-[0_3px_13px_0_rgba(0,0,0,0.6)] repo-card-hover h-full text-left relative overflow-hidden group">
+                        <a
+                          href={repo.html_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block"
+                        >
+                          <div className="flex justify-between items-start mb-4 gap-3">
+                            <div className="min-w-0">
+                              {isOrgRepo && (
+                                <p className="text-[10px] text-[#959595] uppercase tracking-[1px] mb-1 truncate">
+                                  {repo.owner.login}
+                                </p>
+                              )}
+                              <h5 className="text-white font-medium normal-case tracking-normal truncate">
+                                {repo.name}
+                              </h5>
+                            </div>
+                            {(repo.language || repo.is_template) && (
+                              <span className="text-[10px] text-[#959595] uppercase flex items-center shrink-0">
+                                <span
+                                  className="w-2 h-2 rounded-full mr-1"
+                                  style={{
+                                    backgroundColor:
+                                      LANGUAGE_COLORS[
+                                        (repo.language || "other").toLowerCase()
+                                      ] || "#8b8b8b",
+                                  }}
+                                />
+                                {repo.language ||
+                                  (repo.is_template ? "Template" : "Archive")}
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-[#959595] text-sm line-clamp-3">
+                            {repo.description}
+                          </p>
+                        </a>
+                      </div>
+                    </div>
+                  );
+                })}
           </div>
-          
+
           <div className="text-right mt-8 flex justify-end">
             <p className="text-[#959595] text-sm font-roboto">
               Powered by{" "}
-              <a href="https://github.com/amir0ff" target="_blank" rel="noopener noreferrer" className="hover:underline text-white">GitHub</a>
+              <a
+                href="https://github.com/amir0ff"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline text-white"
+              >
+                GitHub
+              </a>
               {" · "}
-              <a href="https://github.com/DedSecLabs" target="_blank" rel="noopener noreferrer" className="hover:underline text-white">DedSecLabs</a>
+              <a
+                href="https://github.com/DedSecLabs"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline text-white"
+              >
+                DedSecLabs
+              </a>
             </p>
           </div>
         </div>
       </div>
 
-      {/* Triangle Decorator */}
-      <div className="triangle-decorator text-[#202020]"></div>
+      <div className="triangle-decorator text-[#202020]" />
     </article>
   );
 }
